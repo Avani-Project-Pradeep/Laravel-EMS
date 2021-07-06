@@ -22,6 +22,7 @@ class CreateEmployerPersonalDetailsTable extends Migration
             $table->string('last_name')->nullable();
  
             $table->text('image')->nullable();
+            
  
             $table->string('city');
             $table->string('state');

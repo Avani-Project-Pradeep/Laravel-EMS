@@ -43,7 +43,9 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
-    ];
+        /* Employer portal page check if employer is logged in or not */
+   'EmployerCheck'=>[\App\Http\Middleware\EmployerCheck::class],
+   ];
 
     /**
      * The application's route middleware.

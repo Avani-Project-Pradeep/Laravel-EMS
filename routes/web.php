@@ -3,6 +3,8 @@
 use App\Http\Controllers\Employer_RegistrationController;
 use App\Http\Controllers\Employer_LoginController;
 use App\Http\Controllers\Employer_portalController;
+use App\Http\Controllers\EditEmployerController;
+
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\employer_successfull_registration;
@@ -71,30 +73,50 @@ Route::get('/login', function()
 
  /* --------EMPLOYER PORTAL ROUTES------------------------ */
 
-
-
-//Home page
+  Route::group(['middleware'=>['EmployerCheck']],function()
+      {
+          //Home page
  Route::get('{company_name}/employer_portal/Home',[Employer_portalController::class,'allowemployerportal'])->name('employer_portal');
+
+
+ //Edit Employer Page
+
+ Route::get('{company_name}/employer_portal/edit',[EditEmployerController::class,'editemployer']);
+
+
+
+
+//edit action
+ 
+ Route::POST('editemployeraction',[EditEmployerController::class,'editemployeraction']);
+
 
  
 
-//Add Employee
- Route::get('/{company_name}/employer_portal/add_employee',[Employer_portalController::class,'add_employee']);
+ //Add Employee
+  Route::get('/{company_name}/employer_portal/add_employee',[Employer_portalController::class,'add_employee']);
+ 
+ 
+ 
+ //Manage Employee_view page
+ Route::get('/{company_name}/employer_portal/manage_employees/view',[Employer_portalController::class,'manage_employee_view']);
+ 
+ 
+
+ 
+  //Logout
+ 
+ Route::get('{company_name}/employer_portal/logout',[Employer_portalController::class,'employer_portal_logout'])->name('employer_logout');
+ 
+ 
+ 
+      }
+    );
 
 
 
-//Manage Employee_view page
-Route::get('/{company_name}/employer_portal/manage_employees/view',[Employer_portalController::class,'manage_employee_view']);
 
 
-
-
-
-
-
- //Logout
-
-Route::get('{company_name}/employer_portal/logout',[Employer_portalController::class,'employer_portal_logout'])->name('employer_logout');
 
 
 

@@ -14,7 +14,7 @@ class Employer_Personal_Detail extends Model
         return $this->belongsTo('App\Models\User');
     }
     
-    protected $table=['employer_personal_details'];
+    protected $table='employer_personal_details';
     protected $fillable = ['city','state','user_id'];
 
 }

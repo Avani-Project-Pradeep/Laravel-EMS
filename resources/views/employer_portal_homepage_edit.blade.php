@@ -33,7 +33,7 @@
 <section>
   <br><br><br>
 
-  <a href="/{{ $company_name }}/employer_portal/edit"> <i class="fa fa-edit" style="font-size:48px">EDIT</a></i>
+  
 <br><br>
   {{-- IMAGE SECTION --}}
 <img src="https://i.ibb.co/yNGW4gg/avatar.png" id="blah" alt="Avatar">
@@ -53,7 +53,9 @@
  <h2> PROFESSIONAL DETAILS</h2>
  <hr style="border: solid black;">
 
- <form>
+
+ <form action="/editemployeraction"  method="POST">
+  @csrf
    <table>
      <tr>
        <td>
@@ -65,19 +67,20 @@
         <label >Designation: </label>
       
 
-        <input  style="width: 100px;" type="text"  readonly placeholder="Designation " value={{ $pd->designation }}>
+        <input  style="width: 100px;" type="text"  name="designation" placeholder="Designation " value={{ $pd->designation }}>
       </td>
       <td style="width: 100px;">
         <label >Location: </label>
-        <input  style="width: 100px;" type="text" placeholder="Location" readonly value={{$pd->location}}>
+        <input  style="width: 100px;" type="text" placeholder="Location" name="location"  value={{$pd->location}}>
       </td>
       <td style="width: 150px;">
         <label>Company Name:</label>
-        <input style="width: 150px;" value={{$company_name}} type="text" placeholder="Company Name" readonly>
+        <input style="width: 150px;" value={{$company_name}} type="text" 
+          name= "company_name"placeholder="Company Name" >
       </td>
       <td style="width: 100px;">
         <label>Division: </label>
-        <input  style="width: 100px;"type="text" placeholder="Division" value={{ $pd->division }} readonly>
+        <input  style="width: 100px;"type="text"  name="division" placeholder="Division" value={{ $pd->division }} >
       </td>
      </tr>
      <tr>
@@ -85,12 +88,12 @@
        </td>
        <td>
         <label >Date_Of_Joining: </label>
-       <input type="date" value={{ $pd->doj }} readonly>
+       <input type="date"  name="doj" value={{ $pd->doj }}  >
        </td>
 
       <td colspan="3">
         <label >Work_Experience: </label>
-        <input type="text" placeholder="Work Experience" value={{ $pd->work_experience }} readonly>
+        <input type="text" placeholder="Work Experience" name="work_experience" value={{ $pd->work_experience }} >
        </td>
 <td>
 </tr>
@@ -99,7 +102,7 @@
   <td colspan="4">
       <label >Skills: </label>
       <br>
-      <input  type="text" placeholder="Skills" value={{ $pd->skills }} readonly>
+      <input  type="text" placeholder="Skills" name="skills" value={{ $pd->skills }} >
      </td>
 </tr>
 
@@ -107,13 +110,12 @@
   <td></td>
   <td colspan="4">
       <label >Bank Details: </label>
-      <input type="text" placeholder="Bank Details"  readonly value={{ $pd->bank_details  }}  >
+      <input type="text" placeholder="Bank Details" name="bank"  value={{ $pd->bank_details  }}  >
      </td>
 </tr>
 
 
    </table>
- </form>
 </ul>
 </td>
 </tr>
@@ -138,7 +140,7 @@
   <h2>PERSONAL DETAILS</h2>
   <hr style="border: solid black;">
   <ul>
-    <form>
+    
       <table>
         <tr>
           <td>
@@ -148,17 +150,17 @@
          
    
    
-           <input  style="width: 150px;" type="text" placeholder="First Name" readonly value={{ $per->first_name }} >
+           <input  style="width: 150px;" type="text" name="first_name" placeholder="First Name"  value={{ $per->first_name }} >
          </td>
          <td style="width: 150px;">
   
            <label >Last Name: </label>
-           <input  style="width: 150px;" type="text" placeholder="Last Name"
-           readonly value={{ $per->last_name }} >
+           <input  style="width: 150px;" type="text"  name="last_name" placeholder="Last Name"
+            value={{ $per->last_name }} >
          </td>
          <td>
            <label>DOB:</label>
-           <input  type="date"  readonly value={{ $per->dob }}>
+           <input  type="date" name="dob"   value={{ $per->dob }}>
          </td>
           </tr>
         <tr>
@@ -166,13 +168,32 @@
           </td>
           <td colspan="2">
            <label >Email: </label>
-          <input type="email" placeholder="Email" readonly
+          <input type="email" placeholder="Email" name="email"
            value={{ session('employer_email') }} >
+           <span style="color:red; font-size:12px;">
+            
+            @error('email')
+
+            {{ "*".$message }}
+            <br> 
+
+            @enderror
+           </span>
           </td>
    
          <td>
            <label >Phone Number: </label>
-           <input type="text" placeholder="Phone Number"readonly  value={{ $pd->phone }} >
+           <input type="text"     name="phone_number"  placeholder="Phone Number"   value={{ $pd->phone }} >
+           <span style="color:red; font-size:12px;">
+            
+            @error('phone_number')
+
+            {{ "*".$message }}
+            <br> 
+
+            @enderror
+           </span>
+
           </td>
    <td>
    </tr>
@@ -184,16 +205,16 @@
    
   
   
-     <input  style="width: 150px;" type="text" placeholder="City"  readonly value={{ $per->city }}>
+     <input  style="width: 150px;" type="text" placeholder="City" name="city"   value={{ $per->city }}>
    </td>
    <td style="width: 150px;">
   
      <label >State: </label>
-     <input  style="width: 150px;" type="text" placeholder="State"  readonly value={{ $per->state }}>
+     <input  style="width: 150px;" type="text" placeholder="State"  name="state"  value={{ $per->state }}>
    </td>
    <td>
      <label>Gender:</label>
-     <input  type="text" placeholder="Gender"  readonly value={{ $per->gender }}>
+     <input  type="text" placeholder="Gender"  name="gender"   value={{ $per->gender }}>
    </td>
     </tr>
   
@@ -201,25 +222,37 @@
      <td></td>
      <td colspan="2">
          <label >Address: </label>
-         <input type="text" placeholder="Address" readonly  value={{ $per->address }} >
+         <input type="text" placeholder="Address" name="address"  value={{ $per->address }} >
         </td>
         <td colspan="2">
           <label> Educational Details:</label>
-          <input type="text" placeholder="Educational Details" readonly
+          <input type="text" placeholder="Educational Details" name="education"
            value={{ $per->education }}  >
          </td>
    
    </tr>
    
-   
+
       </table>
-   
+<input type="submit"  
+ style="background-color: #4CAF50;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+"  value="edit">
     </form>
    
     </ul>
   </td>
   </tr>
   </table>
+
   </div>
     </div>
 

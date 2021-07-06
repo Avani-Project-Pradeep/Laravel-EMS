@@ -22,6 +22,8 @@ class CreateEmployerProfessionalDetailsTable extends Migration
             $table->text('docs');
             $table->string('phone');
             $table->string('location');
+            $table->string('designation')->nullable();
+
             $table->string('division')->nullable();
             $table->date('doj')->nullable();
  

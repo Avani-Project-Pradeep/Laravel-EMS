@@ -44,17 +44,25 @@ class Employer_LoginController extends Controller
                     //verify company name for given email id
         
                     $companydb = User::where('email', $request->email)->value('company_name');
-        
+             
+                    
                     if ($companydb == ($request->company_name)) {
         
                         //verify password 
                         if (Hash::check($request->password, $user->password)) {
                               
                             $logged_user_id=User::where('email', $request->email)->value('id');
+
+
                             
         
                             //go to function session for generating session
-                            $request->session()->put('employer',['employer_email'=>$request->email,'company_name'=>$companydb,'id'=>$logged_user_id]);
+                    $request->session()->put('employer', $logged_user_id);
+             $request->session()->put('employer_email',$request->email);
+             $request->session()->put('company_name',$companydb);
+
+
+                            
         
         
         
