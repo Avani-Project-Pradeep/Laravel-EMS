@@ -121,7 +121,7 @@
 </tr>
 
 
-
+@endforeach
 @foreach ($personal_details as $per )
 
 <tr>
@@ -183,7 +183,7 @@
    
          <td>
            <label >Phone Number: </label>
-           <input type="text"     name="phone_number"  placeholder="Phone Number"   value={{ $pd->phone }} >
+           <input type="text"     name="phone_number"  placeholder="Phone Number"   value={{ $per->phone }} >
            <span style="color:red; font-size:12px;">
             
             @error('phone_number')
@@ -218,6 +218,7 @@
    </td>
     </tr>
   
+    
    <tr>
      <td></td>
      <td colspan="2">
@@ -257,7 +258,6 @@ cursor: pointer;
     </div>
 
 
-@endforeach
 @endforeach
 
 

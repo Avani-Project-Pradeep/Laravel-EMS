@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Employer_Professional_Detail;
-use App\Models\Employer_Personal_Detail;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\employer_successfull_registration;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 
 class Employer_RegistrationController extends Controller
@@ -23,7 +22,7 @@ class Employer_RegistrationController extends Controller
         //VALIDATIONS
         $request->validate([
 
-            'company_name' => 'required|max:50|  unique:users,company_name',
+            'company_name' => 'required|max:50|string|unique:employer_professional_details,company_name',
 
             'company_website' => 'required|url',
 
@@ -31,7 +30,8 @@ class Employer_RegistrationController extends Controller
 
             'company_documents' => 'required|file|max:500|mimes:pdf',
 
-            'phone_number' => 'required|digits:10|unique:employer_professional_details,phone',
+            'phone_number' => 'required|digits:10|unique:employer_personal_details,phone',
+            
             'city' => 'required|max:50|',
             'state' => 'required|max:50|',
             'email' => 'required|email|unique:users,email',
@@ -44,53 +44,65 @@ class Employer_RegistrationController extends Controller
 
         ]);
 
-        //CREATING NEW  DATA OF USER MODEL
-        $user = User::create([
-            'company_name' => $request->input('company_name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password'))
+        //INSERT INTO USERS TABLE
+        DB::table('users')->insert([
+            'email' =>$request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'role'=>'employer'
+        ]);
+
+        //INSERT INTO EMPLOYER PROFESSIONAL DETAILS
+
+        DB::table('employer_professional_details')->insert([
+            'employer_email' =>$request->input('email'),
+            'company_name'=>$request->input('company_name'),
+            'company_website' => $request->input('company_website'),
+            'tc' => $request->file('terms_and_conditions'),
+            'docs' => $request->file('company_documents'),
+            'location' => $request->input('city'),
 
         ]);
 
-        //GET THE USER ID OF THE  INSERTED RECORD  
-        $user_id = User::where('email', $request->input('email'))->value('id');
 
-        //ADDING PROFESSIONAL DETAILS OF THE USER FOR GIVEN USER ID
-        $employer_professional_details = Employer_Professional_Detail::create([
+        //INSERT INTO EMPLOYER PERSONAL DETAILS
 
-                'company_website' => $request->input('company_website'),
-                'tc' => $request->file('terms_and_conditions'),
-                'docs' => $request->file('company_documents'),
-                'phone' => $request->input('phone_number'),
-                'location' => $request->input('city'),
-                'user_id' => $user_id
-
-            ]);
-
-        //ADDING PERSONAL DETAILS OF THE USER FOR GIVEN USER ID
-
-        $employer_personal_details = Employer_Personal_Detail::create([
+        DB::table('employer_personal_details')->insert([
+            'employer_email' =>$request->input('email'),
             'city' => $request->input('city'),
             'state' => $request->input('state'),
-            'user_id'=>$user_id
+            'phone'=>$request->input('phone_number'),
+
+
         ]);
 
 
-        /* REGISTRATION COMPLETED */
 
-        $email_success = $request->input('email');
 
-        /* SENDING EMAIL CONFIRMATION */
+              /* REGISTRATION COMPLETED */
 
-        return redirect()->route('success_registration', $email_success);
+$email_success = $request->input('email');
+
+/* SENDING EMAIL CONFIRMATION */
+
+return redirect()->route('success_registration', $email_success);
+
+
+
+
     }
 
     //SENDING CONFIRMATION SUCCESS MAIL
-    public function success_registration($email_success)
-    {
-        Mail::to($email_success)->send(
-            new employer_successfull_registration()
-        );
-        return view('confirm_registration');
-    }
+public function success_registration($email_success)
+{
+Mail::to($email_success)->send(
+    new employer_successfull_registration()
+);
+return view('confirm_registration');
+}
+
+
+
+
+
+
 }

@@ -18,7 +18,7 @@ class EmployerCheck
     {
 
 
-        if (session()->missing('employer')) 
+        if (session()->missing('employer_email')) 
         {
 
             return redirect()->route('employer_login');

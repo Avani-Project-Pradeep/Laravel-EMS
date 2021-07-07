@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmployerPersonalDetailsTable extends Migration
+class EmployeePersonalDetails extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,17 @@ class CreateEmployerPersonalDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql')->create('employer_personal_details', function (Blueprint $table) {
+        Schema::connection('mysql')->create('employee_personal_details', function (Blueprint $table) {
+           
             $table->increments('id');
-
-            $table->string('employer_email');
-
-            $table->foreign('employer_email')->references('email')->on('users')
-
-            ->onDelete('cascade')->onUpdate('cascade');
-
-
+            $table->unsignedBigInteger('employee_id');
+            $table->string('employee_email');
             $table->string('first_name')->nullable();
  
             $table->string('last_name')->nullable();
  
             $table->text('image')->nullable();
-            $table->string('phone');
-
+            
  
             $table->string('city');
             $table->string('state');
@@ -40,13 +34,36 @@ class CreateEmployerPersonalDetailsTable extends Migration
             $table->string('address')->nullable();
  
             $table->string('education')->nullable();
+
+            $table->string('bloodtype')->nullable();
+
+            $table->string('phone')->nullable();
+
+            $table->string('emergency_phone_number')->nullable();
+
+            $table->string('pan')->nullable();
+
+            $table->string('aadhar')->nullable();
+
+            $table->string('permanent_address')->nullable();
+
+            $table->string('current_address')->nullable();
+
+
+
+
+
+
  
 
     
             $table->timestamps();
 
 
+
+
         });
+
     }
 
     /**
@@ -56,6 +73,6 @@ class CreateEmployerPersonalDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employer__personal__details');
+        //
     }
 }

@@ -4,6 +4,8 @@ use App\Http\Controllers\Employer_RegistrationController;
 use App\Http\Controllers\Employer_LoginController;
 use App\Http\Controllers\Employer_portalController;
 use App\Http\Controllers\EditEmployerController;
+use App\Http\Controllers\AddEmployee_Controller;
+
 
 
 use Illuminate\Support\Facades\Mail;
@@ -95,6 +97,19 @@ Route::get('/login', function()
 
  //Add Employee
   Route::get('/{company_name}/employer_portal/add_employee',[Employer_portalController::class,'add_employee']);
+
+
+
+  //Add Employee Next
+  Route::POST('nextaddemployee',[AddEmployee_Controller::class,'nextaddemployee']);
+
+
+  //Add Employee Final Action
+  Route::POST('actionaddemployee',[AddEmployee_Controller::class,'actionaddemployee']);
+
+
+
+
  
  
  

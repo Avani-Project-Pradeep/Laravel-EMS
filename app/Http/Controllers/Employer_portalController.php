@@ -16,14 +16,20 @@ class Employer_portalController extends Controller
     public function allowemployerportal($company_name, Request $request)
     {
 
-        //getting logged in id 
+        //getting logged in user email
 
-        $id = $request->session()->get('employer');
+        $email = $request->session()->get('employer_email');
 
 
-        //fetching professional details of the logged in id
-        $professional_details=Employer_Professional_Detail::where('user_id','=', $id)->get();
-        $personal_details=Employer_Personal_Detail::where('user_id','=', $id)->get();
+        //fetching professional details of the logged in user
+        $professional_details=Employer_Professional_Detail::where('employer_email','=', $email)->get();
+
+
+
+     //fetching personal  details of the logged in user
+
+
+        $personal_details=Employer_Personal_Detail::where('employer_email','=', $email)->get();
 
 
         return view('employer_portal_homepage',['professional_details'=>$professional_details,'personal_details'=>$personal_details])->with('company_name', $company_name);
@@ -72,8 +78,12 @@ class Employer_portalController extends Controller
     public function employer_portal_logout()
     {
 
+        //deleting all session values
 
-        session()->pull('employer');
+        session()->pull('employer_email');
+
+        session()->pull('company_name');
+        session()->pull('role');
 
         //REDIRECT TO LOGIN PAGE
         return redirect()->route('employer_login');
