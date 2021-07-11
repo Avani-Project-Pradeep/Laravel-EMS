@@ -15,14 +15,22 @@ class CreateEmployerPersonalDetailsTable extends Migration
     {
         Schema::connection('mysql')->create('employer_personal_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('user_id');
+
+            $table->string('employer_email');
+
+            $table->foreign('employer_email')->references('email')->on('users')
+
+            ->onDelete('cascade')->onUpdate('cascade');
+
 
             $table->string('first_name')->nullable();
  
             $table->string('last_name')->nullable();
  
-            $table->text('image')->nullable();
-            
+            $table->string('image')->nullable();
+           
+            $table->string('phone');
+
  
             $table->string('city');
             $table->string('state');
@@ -34,9 +42,7 @@ class CreateEmployerPersonalDetailsTable extends Migration
  
             $table->string('education')->nullable();
  
-            $table->foreign('user_id')->references('id')->on('users')
 
-            ->onDelete('cascade');
     
             $table->timestamps();
 

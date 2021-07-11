@@ -25,13 +25,13 @@ html {
         font-family: 'Oswald', sans-serif;
 
       }
-      
-      
+
+
       p{
         font-family:calibri;
         padding-left:10px;
       }
-      
+
       #container{
         margin: 0 auto;
         margin-left: 50px;
@@ -40,7 +40,7 @@ html {
 
         padding-top:50px;
       }
-      
+
       .one{
         background:white;
         width:500px;
@@ -55,9 +55,9 @@ html {
         float:right;
         border-right: #ccc;
       }
-      
+
 .tab-wrap
-{   
+{
   list-style: none;
 
   min-height: 100px;
@@ -67,10 +67,10 @@ html {
   /* allows for tabs to be next to each other */
   position: relative;
   /* relative here contains the width of the content */
-}      
+}
 
 .tab-wrap input[type="radio"]
-{ 
+{
   display:none;
 }
 
@@ -122,10 +122,28 @@ display: block;}
   cursor:pointer;
   }
 
-input
+  input:not(#change )
 {
   border: none;
   border-bottom: solid 2px green;
   width:450px;
 }
+
+#change {
+    background-color: #4CAF50;
+border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+
+    width: 150px"
+
+}
+
+
 

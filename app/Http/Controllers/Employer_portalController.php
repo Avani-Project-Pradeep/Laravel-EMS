@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 use App\Models\User;
@@ -16,14 +17,20 @@ class Employer_portalController extends Controller
     public function allowemployerportal($company_name, Request $request)
     {
 
-        //getting logged in id 
+        //getting logged in user email
 
-        $id = $request->session()->get('employer');
+        $email = $request->session()->get('employer_email');
 
 
-        //fetching professional details of the logged in id
-        $professional_details=Employer_Professional_Detail::where('user_id','=', $id)->get();
-        $personal_details=Employer_Personal_Detail::where('user_id','=', $id)->get();
+        //fetching professional details of the logged in user
+        $professional_details=Employer_Professional_Detail::where('employer_email','=', $email)->get();
+
+
+
+     //fetching personal  details of the logged in user
+
+
+        $personal_details=Employer_Personal_Detail::where('employer_email','=', $email)->get();
 
 
         return view('employer_portal_homepage',['professional_details'=>$professional_details,'personal_details'=>$personal_details])->with('company_name', $company_name);
@@ -32,7 +39,79 @@ class Employer_portalController extends Controller
     }
 
 
-      
+
+
+
+//image section
+   public function image(Request $request)
+   {
+    $email=$request->session()->get('email');
+
+
+
+    if ($request->hasFile('image')) {
+
+
+    $validated=$request->validate([
+        "image"=>'nullable|image|mimes:jpg,png,jpeg|max:5000',
+    ]);
+
+
+    $image = file($validated['image']);
+    $image_name = rand(1000,9999).'.'.$validated['image']->extension();
+    $validated['image']->move(public_path('images'),$image_name);
+
+
+
+
+
+
+
+   $image_db = DB::table('employer_personal_details')
+              ->where('employer_email', $email)
+              ->update(['image' => $image_name]);
+
+
+
+
+
+    /*   $employer_image= Employer_Personal_Detail::where('employer_email', '=', $email)->first();
+      $employer_image->image = $image_name;
+      $employer_image->save();
+
+ */
+            return back()
+            ->with('success','You have successfully upload image.');
+
+
+   }
+   else{
+       return back()
+       ->with('empty','Please select an image to upload');
+
+   }
+
+
+
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /* ADD EMPLOYEE PAGE */
@@ -72,8 +151,12 @@ class Employer_portalController extends Controller
     public function employer_portal_logout()
     {
 
+        //deleting all session values
 
-        session()->pull('employer');
+        session()->pull('employer_email');
+
+        session()->pull('company_name');
+        session()->pull('role');
 
         //REDIRECT TO LOGIN PAGE
         return redirect()->route('employer_login');

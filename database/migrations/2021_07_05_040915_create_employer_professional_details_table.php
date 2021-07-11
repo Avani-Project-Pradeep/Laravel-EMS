@@ -15,30 +15,31 @@ class CreateEmployerProfessionalDetailsTable extends Migration
     {
         Schema::connection('mysql')->create('employer_professional_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('user_id');
+            $table->string('employer_email');
+            $table->foreign('employer_email')->references('email')->on('users')
+                  ->onDelete('cascade')->onUpdate('cascade');
+
+            $table->string('company_name');
 
             $table->string('company_website');
             $table->text('tc');
             $table->text('docs');
-            $table->string('phone');
             $table->string('location');
             $table->string('designation')->nullable();
 
             $table->string('division')->nullable();
             $table->date('doj')->nullable();
- 
-            $table->string('skills')->nullable();
- 
-            $table->string('work_experience')->nullable();
- 
-            $table->string('bank_details')->nullable();
- 
-            $table->foreign('user_id')->references('id')->on('users')
 
-            ->onDelete('cascade');
+            $table->string('skills')->nullable();
+
+            $table->string('work_experience')->nullable();
+
+            $table->string('bank_details')->nullable();
+
+
             $table->timestamps();
 
-    
+
     });
     }
 

@@ -17,12 +17,13 @@ class Employer_Professional_Detail extends Model
     protected $table='employer_professional_details';
 
     protected $fillable = [
+        'employer_email',
+        'company_name',
         'company_website',
         'tc',
         'docs',
         'phone',
         'location',
-        'user_id',
     ];
 
     

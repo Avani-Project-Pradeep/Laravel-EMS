@@ -33,10 +33,33 @@
 <section>
   <br><br><br>
 
-  
+
 <br><br>
+<form action="/{{ $company_name }}/employer_portal/employer_image"  enctype="multipart/form-data"  method="POST" >
+  @csrf
+
   {{-- IMAGE SECTION --}}
-<img src="https://i.ibb.co/yNGW4gg/avatar.png" id="blah" alt="Avatar">
+
+  @foreach ($personal_details as $per )
+
+  <br>
+  <div class="input_field">
+
+    <div style="color:red; font-size:12px;">
+
+      @error('image')
+
+      {{ "*".$message }}
+      <br>
+
+      @enderror
+</div>
+
+
+
+
+
+</section>
 {{ session('employer_email') }}
 
 </section>
@@ -47,6 +70,7 @@
 <button class="btn" style="width:100px;">EDIT</button>
 
 </td>
+</form>
 <td>
 <ul>
   {{-- PROFESSIONAL DETAILS --}}
@@ -65,7 +89,7 @@
 
        <td style="width: 100px;">
         <label >Designation: </label>
-      
+
 
         <input  style="width: 100px;" type="text"  name="designation" placeholder="Designation " value={{ $pd->designation }}>
       </td>
@@ -75,7 +99,7 @@
       </td>
       <td style="width: 150px;">
         <label>Company Name:</label>
-        <input style="width: 150px;" value={{$company_name}} type="text" 
+        <input style="width: 150px;" value={{$company_name}} type="text"
           name= "company_name"placeholder="Company Name" >
       </td>
       <td style="width: 100px;">
@@ -121,8 +145,7 @@
 </tr>
 
 
-
-@foreach ($personal_details as $per )
+@endforeach
 
 <tr>
   <td class="section2">
@@ -131,7 +154,7 @@
   </td>
   <td>
     <ul>
-  
+
 
 
 
@@ -140,20 +163,20 @@
   <h2>PERSONAL DETAILS</h2>
   <hr style="border: solid black;">
   <ul>
-    
+
       <table>
         <tr>
           <td>
           </td>
           <td style="width: 150px;">
            <label >First Name: </label>
-         
-   
-   
+
+
+
            <input  style="width: 150px;" type="text" name="first_name" placeholder="First Name"  value={{ $per->first_name }} >
          </td>
          <td style="width: 150px;">
-  
+
            <label >Last Name: </label>
            <input  style="width: 150px;" type="text"  name="last_name" placeholder="Last Name"
             value={{ $per->last_name }} >
@@ -171,25 +194,25 @@
           <input type="email" placeholder="Email" name="email"
            value={{ session('employer_email') }} >
            <span style="color:red; font-size:12px;">
-            
+
             @error('email')
 
             {{ "*".$message }}
-            <br> 
+            <br>
 
             @enderror
            </span>
           </td>
-   
+
          <td>
            <label >Phone Number: </label>
-           <input type="text"     name="phone_number"  placeholder="Phone Number"   value={{ $pd->phone }} >
+           <input type="text"     name="phone_number"  placeholder="Phone Number"   value={{ $per->phone }} >
            <span style="color:red; font-size:12px;">
-            
+
             @error('phone_number')
 
             {{ "*".$message }}
-            <br> 
+            <br>
 
             @enderror
            </span>
@@ -202,13 +225,13 @@
     </td>
     <td style="width: 150px;">
      <label >City: </label>
-   
-  
-  
+
+
+
      <input  style="width: 150px;" type="text" placeholder="City" name="city"   value={{ $per->city }}>
    </td>
    <td style="width: 150px;">
-  
+
      <label >State: </label>
      <input  style="width: 150px;" type="text" placeholder="State"  name="state"  value={{ $per->state }}>
    </td>
@@ -217,7 +240,8 @@
      <input  type="text" placeholder="Gender"  name="gender"   value={{ $per->gender }}>
    </td>
     </tr>
-  
+
+
    <tr>
      <td></td>
      <td colspan="2">
@@ -229,12 +253,12 @@
           <input type="text" placeholder="Educational Details" name="education"
            value={{ $per->education }}  >
          </td>
-   
+
    </tr>
-   
+
 
       </table>
-<input type="submit"  
+<input type="submit"
  style="background-color: #4CAF50;
 border: none;
 color: white;
@@ -247,7 +271,7 @@ margin: 4px 2px;
 cursor: pointer;
 "  value="edit">
     </form>
-   
+
     </ul>
   </td>
   </tr>
@@ -257,7 +281,6 @@ cursor: pointer;
     </div>
 
 
-@endforeach
 @endforeach
 
 

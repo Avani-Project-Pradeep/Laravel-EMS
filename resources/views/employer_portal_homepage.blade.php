@@ -35,25 +35,90 @@
 
   <a href="/{{ $company_name }}/employer_portal/edit"> <i class="fa fa-edit" style="font-size:48px">EDIT</a></i>
 <br><br>
+
+
+
+@if ($message = Session::get('success'))
+
+<div style="color:green; font-size:15px;">
+
+       {{ $message }}
+</div>
+
+@endif
+
+@if ($message = Session::get('empty'))
+<div style="color:red; font-size:15px;">
+
+        {{ $message}}
+</div>
+
+@endif
+
+
+
+
+
+
+
+
+
+
+<form action="image"  enctype="multipart/form-data"  method="POST" >
+  @csrf
+
   {{-- IMAGE SECTION --}}
-<img src="https://i.ibb.co/yNGW4gg/avatar.png" id="blah" alt="Avatar">
-{{ session('employer_email') }}
+
+  @foreach ($personal_details as $per )
+  <img src= "C:\xamppp\htdocs\Laravel project\ems\public\images\{{$per->image}}
+  ">
+
+ 
+  <br>
+  <div class="input_field">
+
+    <div style="color:red; font-size:12px;">
+
+      @error('image')
+
+      {{ "*".$message }}
+      <br> 
+
+      @enderror
+</div>
+
+
+
+
 
 </section>
 <br><br><br><br><br><br>
 
 
-<button class="btn" style="width:100px;">UPLOAD</button>
-<button class="btn" style="width:100px;">EDIT</button>
+<input type="file" name="image">
 
+<span>
+
+<button type="submit" class="btn"
+ style="width:100px;">UPLOAD IMAGE</button>
+
+
+<button class="btn" style="width:100px;">REMOVE IMAGE</button>
+</span>
+
+
+
+
+
+</form>
 </td>
 <td>
-<ul>
+<ul><form>
   {{-- PROFESSIONAL DETAILS --}}
  <h2> PROFESSIONAL DETAILS</h2>
  <hr style="border: solid black;">
 
- <form>
+
    <table>
      <tr>
        <td>
@@ -113,14 +178,13 @@
 
 
    </table>
- </form>
+
 </ul>
 </td>
 </tr>
 
 
 
-@foreach ($personal_details as $per )
 
 <tr>
   <td class="section2">
@@ -138,7 +202,7 @@
   <h2>PERSONAL DETAILS</h2>
   <hr style="border: solid black;">
   <ul>
-    <form>
+  
       <table>
         <tr>
           <td>
