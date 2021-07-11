@@ -135,16 +135,6 @@ class Employer_portalController extends Controller
 
 
 
-    public function manage_mg($company_name)
-    {
-
-
-        return view('employer_portal.manage_employees_mg')->with('company_name', $company_name);
-        return redirect()->route('employer_portal_login');
-    }
-
-
-
 
 
     //Logout

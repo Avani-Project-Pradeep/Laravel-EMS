@@ -30,6 +30,7 @@ class EmployeeProfessionalDetails extends Migration
             $table->string('shift');
             $table->string('employee_type');
             $table->string('employee_status');
+            $table->tinyInteger('status')->default('1');
             $table->string('work_experience')->nullable();
             $table->string('skills')->nullable();
             $table->text('project')->nullable();

@@ -1,58 +1,72 @@
+@include('layouts.manage_layout')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ asset('styles/sidebar.css') }}" >
-    <title>Document</title>
-</head>
-<body>
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:400px; margin-right:200px;   margin-top:80px;">
 
-{{-- TOP NAVIGATION BAR --}}
-    <!-- Image and text -->
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
+    <table class="table table-striped">
 
-    DASHBOARD
-    </a>
+        <thead>
+          <tr>
+            <th scope="col">Employee ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Image</th>
+            <th scope="col">Email</th>
+            <th scope="col">Designation</th>
+            <th scope="col">DOJ</th>
+            <th scope="col">Status</th>
+            <th scope="col">View</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
 
-    <ul class="nav justify-content-center">
-        <li class="nav-item">
-            <a class="navbar-brand" href="#">
+          </tr>
+        </thead>
+        <tbody>
+            @foreach ($employees as $employee)
 
-                EMPLOYER PORTAL
-                </a>
-        </li>
+          <tr>
+            <td>{{$employee->employee_id}}</td>
+           <td>{{$employee->first_name}}</td>
+            <td>{{$employee->last_name}}</td>
+            <td>{{$employee->image}}</td>
+            <td>{{$employee->employee_email}}</td>
+            <td>{{$employee->designation}}</td>
+            <td>{{$employee->doj}}</td>
+                 <td>
+                    <input data-id="{{$employee->employee_id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $employee->status ? 'checked' : '' }}
 
-      </ul>
+                    >
+                    </td>
 
-    <ul class="nav justify-content-end">
+            <td><a href="/viewemployee/{{$employee->employee_id}}">View</a></td>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Add Employees</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
-        </li>
-      </ul>
-
-{{-- side nav --}}
-<div class="sidenav">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#clients">Clients</a>
-    <a href="#contact">Contact</a>
-  </div>
+            <td><a href="/editemployee/{{$employee->employee_id}}">Edit</a></td>
+            <td><a href="#">Delete</a></td>
 
 
-
-
+          </tr>
+          @endforeach
+        </tbody>
+    </table>
 
 </body>
+<script>
+    $(function() {
+      $('.toggle-class').change(function() {
+          var status = $(this).prop('checked') == true ? 1 : 0;
+          var employee_id = $(this).data('employee_id');
+
+
+          $.ajax({
+              type: "GET",
+              dataType: "json",
+              url:'{{ route('changestatus')}}',
+              data: {'status': status, 'employee_id': employee_id},
+              success: function(data){
+                console.log(data.success)
+              }
+          });
+      })
+    })
+  </script>
 </html>

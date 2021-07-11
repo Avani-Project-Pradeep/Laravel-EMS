@@ -9,6 +9,7 @@ use App\Http\Controllers\Employee_RegistrationController;
 use App\Http\Controllers\Employee_LoginController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\uploadcontroller;
+use App\Http\Controllers\ManageEmployee;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\employer_successfull_registration;
 use App\Mail\employee_successfull_registration;
@@ -125,7 +126,25 @@ Route::POST('actionaddemployee',[AddEmployee_Controller::class,'actionaddemploye
 
 
 //Manage Employee_view page
-Route::get('/{company_name}/employer_portal/manage_employees/view',[Employer_portalController::class,'manage_employee_view']);
+Route::get('/{company_name}/employer_portal/manage_employees/view',[ManageEmployee::class,'show']);
+
+
+//change status of employee
+Route::get('/changestatus', [ManageEmployee::class,'changestatus'])->name('changestatus');
+
+//edit employee
+
+Route::get('/editemployee/{id}', [ManageEmployee::class,'editemployee']);
+
+
+Route::get('/viewemployee/{id}', [ManageEmployee::class,'viewemployee']);
+
+
+Route::get('/home',[ManageEmployee::class,'home'] );
+
+
+
+
 
 
 
