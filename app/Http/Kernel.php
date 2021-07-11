@@ -45,6 +45,9 @@ class Kernel extends HttpKernel
         ],
         /* Employer portal page check if employer is logged in or not */
    'EmployerCheck'=>[\App\Http\Middleware\EmployerCheck::class],
+
+
+   'EmployeeCheck'=>[\App\Http\Middleware\EmployeeCheck::class],
    ];
 
     /**

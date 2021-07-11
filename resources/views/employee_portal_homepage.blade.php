@@ -3,7 +3,7 @@
 @section('options')
 <a href="/{{ $company_name }}/employer_portal/Home"><i class="fa fa-home"></i> Home</a>
 <a href="/{{ $company_name }}/employer_portal/add_employee"><i class="fa fa-user-plus"></i> Add Employees </a>
-<a href="/{{ $company_name }}/employer_portal/manage_employees/view"><i class="fa fa-users	"></i> Manage Employees</a>
+<a href="/employer_portal/manage_employees/view"><i class="fa fa-users	"></i> Manage Employees</a>
 <a href="/{{ $company_name }}/employer_portal/logout"><i class="fa fa-power-off
  "></i> Logout</a>     </nav>
 

@@ -126,7 +126,7 @@ Route::POST('actionaddemployee',[AddEmployee_Controller::class,'actionaddemploye
 
 
 //Manage Employee_view page
-Route::get('/{company_name}/employer_portal/manage_employees/view',[ManageEmployee::class,'show']);
+Route::get('/employer_portal/manage_employees/view',[ManageEmployee::class,'show']);
 
 
 //change status of employee
@@ -159,16 +159,24 @@ Route::get('{company_name}/employer_portal/logout',[Employer_portalController::c
 );
 
 
+/* -------------------------------------------------------------EMPLOYEE--------------------------------------------------------------- */
 
 
 
 
+    Route::get('/Employee/register', [Employee_RegistrationController::class, 'registerform']);
 
-    Route::get('{company_name}/employee/register', [Employee_RegistrationController::class, 'registerform']);
+    Route::POST('/Employee/registeremployee', [Employee_RegistrationController::class, 'actionregister']);
 
-    Route::POST('/registeremployee', [Employee_RegistrationController::class, 'actionregister']);
+    Route::get('/Employee/login', [Employee_LoginController::class, 'loginform'])->name('employee_login');
 
-    Route::get('/Employee/login', [Employee_LoginController::class, 'loginform']);
+    Route::post('/Employee/loginverify',[Employee_LoginController::class,'loginverify']);
+
+    Route::group(['middleware'=>['EmployerCheck']],function()
+ {
+
+    Route::get('/employee_portal/Home',[Employee_portalController::class,'allowemployeeportal'])->name('employee_portal');
+ });
 
 
 

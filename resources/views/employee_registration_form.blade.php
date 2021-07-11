@@ -16,7 +16,7 @@
 
      {{-- FORM --}}
 
-     <form action="/registeremployee" enctype="multipart/form-data" method='post'>
+     <form action="registeremployee" enctype="multipart/form-data" method='post'>
      @csrf
 
       <div class="input_field">
@@ -27,7 +27,7 @@
 
             <input type="text" placeholder="Enter First Name" name="first_name">
 
-               
+
 
     <br>
     <div style="color:red; font-size:12px;">
@@ -35,7 +35,7 @@
                 @error('first_name')
 
                 {{ "*".$message }}
-                <br> 
+                <br>
 
                 @enderror
     </div>
@@ -49,9 +49,9 @@
 
             <div class="input_field">
                 <span><i aria-hidden="true" class="fa fa-user"></i></span>
-    
+
                 <input type="text" placeholder="Enter Last Name" name="last_name">
-                   
+
 
     <br>
     <div style="color:red; font-size:12px;">
@@ -59,19 +59,19 @@
                 @error('last_name')
 
                 {{ "*".$message }}
-                <br> 
+                <br>
 
                 @enderror
     </div>
-    
+
             </div>
-    
+
             <div class="input_field">
                 <span><i aria-hidden="true" class="fa fa-phone-square"></i></span>
 
                 <input type="text" name="phone_number" placeholder="Enter Phone Number" />
 
-                   
+
 
     <br>
     <div style="color:red; font-size:12px;">
@@ -79,7 +79,7 @@
                 @error('phone_number')
 
                 {{ "*".$message }}
-                <br> 
+                <br>
 
                 @enderror
     </div>
@@ -89,9 +89,9 @@
 
                             <div class="input_field">
                                 <span><i aria-hidden="true" class="fa fa-location-arrow"></i></span>
-            
+
                                 <input type="text" name="city" placeholder="City" />
-                                   
+
 
     <br>
     <div style="color:red; font-size:12px;">
@@ -99,23 +99,23 @@
                 @error('city')
 
                 {{ "*".$message }}
-                <br> 
+                <br>
 
                 @enderror
     </div>
-            
+
                             </div>
-            
-            
-            
-            
+
+
+
+
                             {{-- STATE --}}
-            
+
                             <div class="input_field">
                                 <span><i aria-hidden="true" class="fa fa-location-arrow"></i></span>
-            
+
                                 <input type="text" name="state" placeholder="State" />
-               
+
 
     <br>
     <div style="color:red; font-size:12px;">
@@ -123,28 +123,28 @@
                 @error('state')
 
                 {{ "*".$message }}
-                <br> 
+                <br>
 
                 @enderror
     </div>
                             </div>
 
 
-            
+
                             <div class="container">
 
                                 <div class="input-group shadow">
-            
+
                                     <input type="file" name="image">
                                     <br>
                                     <div class="input_field">
-            
+
                                         <span><i aria-hidden="true" class="fa fa-file-image-o"></i></span>
-            
+
                                         <input type="text" class="form-control form-control-lg" placeholder="Upload Image"
                                             x-model="fileName" name="image" readonly>
 
-                                               
+
 
     <br>
     <div style="color:red; font-size:12px;">
@@ -152,25 +152,25 @@
                 @error('image')
 
                 {{ "*".$message }}
-                <br> 
+                <br>
 
                 @enderror
     </div>
 
-                                        
-            
+
+
                                     </div>
                                 </div>
                             </div>
-            
+
 
 
                             <div class="input_field">
                                 <span><i aria-hidden="true" class="fa fa-home"></i></span>
-            
+
                                 <input type="text" name="address" placeholder="Enter Address" />
 
-                                   
+
 
     <br>
     <div style="color:red; font-size:12px;">
@@ -178,20 +178,20 @@
                 @error('address')
 
                 {{ "*".$message }}
-                <br> 
+                <br>
 
                 @enderror
     </div>
-            
+
                             </div>
 
                             <div class="input_field">
 
                                 <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-            
+
                                 <input type="email" name="email" placeholder=" Enter Email"  />
 
-                                   
+
 
     <br>
     <div style="color:red; font-size:12px;">
@@ -199,11 +199,11 @@
                 @error('email')
 
                 {{ "*".$message }}
-                <br> 
+                <br>
 
                 @enderror
     </div>
-            
+
                             </div>
 
                                             {{-- REGISTER BUTTON --}}
@@ -212,7 +212,7 @@
             </form>
 
 
-            
+
 
 
 

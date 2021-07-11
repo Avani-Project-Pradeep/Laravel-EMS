@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>Manage Employees</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -20,6 +20,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+    <!-- As a heading -->
+
+    <span class="w3-bar-item w3-left">DASHBOARD</span>
+
 
 
   <span class="w3-bar-item w3-right">Logout</span>
@@ -39,14 +43,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </div>
   </div>
   <hr>
-  <div class="w3-container">
-    <h5>Dashboard</h5>
-  </div>
+
   <div class="w3-bar-block">
 
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i> View all Employees</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>Add Employees</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Search Employees</a>
+    <a href="/employer_portal/manage_employees/view" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i> View all Employees</a>
+    <a href="/add_employee" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>Add Employees</a>
+    <a href="/search_employee" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Search Employees</a>
 
   </div>
 </nav>

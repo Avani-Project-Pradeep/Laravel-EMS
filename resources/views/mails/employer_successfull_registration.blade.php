@@ -2,17 +2,17 @@
 # Successfully Registered
 
 Hi,
-You are successfully registered. 
+You are successfully registered.
 <br>
 Click  here for Login.
-@component('mail::button', ['url' => 'http://127.0.0.1:8000/Employer/login'])
+@component('mail::button', ['url' => '/Employer/login'])
 Login
 @endcomponent
 
 Register your employees with this link.
-@component('mail::button', ['url' => 'http://127.0.0.1:8000/Employee/register'])
+@component('mail::button', ['url' => '/Employee/register'])
 Register Employees
 @endcomponent
 
-Thanks,<br>Help Desk 
+Thanks,<br>Help Desk
 @endcomponent

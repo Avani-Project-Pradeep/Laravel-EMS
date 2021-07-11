@@ -3,7 +3,7 @@
 @section('options')
 <a href="/{{ $company_name }}/employer_portal/Home"><i class="fa fa-home"></i> Home</a>
 <a href="/{{ $company_name }}/employer_portal/add_employee"><i class="fa fa-user-plus"></i> Add Employees </a>
-<a href="/{{ $company_name }}/employer_portal/manage_employees/view"><i class="fa fa-users	"></i> Manage Employees</a>
+<a href="/employer_portal/manage_employees/view"><i class="fa fa-users	"></i> Manage Employees</a>
 <a href="/{{ $company_name }}/employer_portal/logout"><i class="fa fa-power-off
  "></i> Logout</a>     </nav>
 
@@ -73,7 +73,7 @@
   <img src= "C:\xamppp\htdocs\Laravel project\ems\public\images\{{$per->image}}
   ">
 
- 
+
   <br>
   <div class="input_field">
 
@@ -82,7 +82,7 @@
       @error('image')
 
       {{ "*".$message }}
-      <br> 
+      <br>
 
       @enderror
 </div>
@@ -128,7 +128,7 @@
 
        <td style="width: 100px;">
         <label >Designation: </label>
-      
+
 
         <input  style="width: 100px;" type="text"  readonly placeholder="Designation " value={{ $pd->designation }}>
       </td>
@@ -193,7 +193,7 @@
   </td>
   <td>
     <ul>
-  
+
 
 
 
@@ -202,20 +202,20 @@
   <h2>PERSONAL DETAILS</h2>
   <hr style="border: solid black;">
   <ul>
-  
+
       <table>
         <tr>
           <td>
           </td>
           <td style="width: 150px;">
            <label >First Name: </label>
-         
-   
-   
+
+
+
            <input  style="width: 150px;" type="text" placeholder="First Name" readonly value={{ $per->first_name }} >
          </td>
          <td style="width: 150px;">
-  
+
            <label >Last Name: </label>
            <input  style="width: 150px;" type="text" placeholder="Last Name"
            readonly value={{ $per->last_name }} >
@@ -233,7 +233,7 @@
           <input type="email" placeholder="Email" readonly
            value={{ session('employer_email') }} >
           </td>
-   
+
          <td>
            <label >Phone Number: </label>
            <input type="text" placeholder="Phone Number"readonly  value={{ $pd->phone }} >
@@ -245,13 +245,13 @@
     </td>
     <td style="width: 150px;">
      <label >City: </label>
-   
-  
-  
+
+
+
      <input  style="width: 150px;" type="text" placeholder="City"  readonly value={{ $per->city }}>
    </td>
    <td style="width: 150px;">
-  
+
      <label >State: </label>
      <input  style="width: 150px;" type="text" placeholder="State"  readonly value={{ $per->state }}>
    </td>
@@ -260,7 +260,7 @@
      <input  type="text" placeholder="Gender"  readonly value={{ $per->gender }}>
    </td>
     </tr>
-  
+
    <tr>
      <td></td>
      <td colspan="2">
@@ -272,14 +272,14 @@
           <input type="text" placeholder="Educational Details" readonly
            value={{ $per->education }}  >
          </td>
-   
+
    </tr>
-   
-   
+
+
       </table>
-   
+
     </form>
-   
+
     </ul>
   </td>
   </tr>

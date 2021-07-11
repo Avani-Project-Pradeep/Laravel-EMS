@@ -18,7 +18,7 @@ class Employee_RegistrationController extends Controller
     public function registerform()
     {
         return view('employee_registration_form');
-        
+
     }
 
     public function actionregister(Request $request )
@@ -35,7 +35,7 @@ class Employee_RegistrationController extends Controller
             "address"=>'required|max:200',
             "email"=>'required|email|unique:users,email',
 
-            
+
         ]);
 
 
@@ -86,7 +86,7 @@ $data=([
 ]);
 
 
-   /* SENDING SUCCESSFULL REGISTRATION MAIL */ 
+   /* SENDING SUCCESSFULL REGISTRATION MAIL */
 
     Mail::to($email_success,$data)->send(
         new employee_successfull_registration($data)

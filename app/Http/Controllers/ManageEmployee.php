@@ -39,11 +39,6 @@ class ManageEmployee extends Controller
 
 
 
-    public function editemployee($employee_id)
-    {
-      return view('view_employee')->with('employee_id',$employee_id);
-
-    }
 
     public function home(Request $request)
     {
@@ -67,6 +62,19 @@ class ManageEmployee extends Controller
 
 
     }
+
+
+
+    public function editemployee($employee_id)
+    {
+        $professional_details=Employee_Professional_Detail::where('employee_id','=', $employee_id)->get();
+        $personal_details=Employee_Personal_Detail::where('employee_id','=',$employee_id)->get();
+        return view('edit_employee',['professional_details'=>$professional_details,'personal_details'=>$personal_details]);
+
+
+
+    }
+
 
     }
 
