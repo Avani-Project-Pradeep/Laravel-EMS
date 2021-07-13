@@ -1,10 +1,10 @@
 @extends('layouts.portal_layout')
 {{-- NAVIGATION OPTIONS --}}
 @section('options')
-<a href="/{{ $company_name }}/employer_portal/Home"><i class="fa fa-home"></i> Home</a>
-<a href="/{{ $company_name }}/employer_portal/add_employee"><i class="fa fa-user-plus"></i> Add Employees </a>
+<a href="/employer_portal/Home"><i class="fa fa-home"></i> Home</a>
+<a href="/employer_portal/add_employee"><i class="fa fa-user-plus"></i> Add Employees </a>
 <a href="/employer_portal/manage_employees/view"><i class="fa fa-users	"></i> Manage Employees</a>
-<a href="/{{ $company_name }}/employer_portal/logout"><i class="fa fa-power-off
+<a href="/employer_portal/logout"><i class="fa fa-power-off
  "></i> Logout</a>     </nav>
 
 @endsection
@@ -33,7 +33,7 @@
 <section>
   <br><br><br>
 
-  <a href="/{{ $company_name }}/employer_portal/edit"> <i class="fa fa-edit" style="font-size:48px">EDIT</a></i>
+  <a href="/employer_portal/edit"> <i class="fa fa-edit" style="font-size:48px">EDIT</a></i>
 <br><br>
 
 
@@ -138,7 +138,7 @@
       </td>
       <td style="width: 150px;">
         <label>Company Name:</label>
-        <input style="width: 150px;" value={{$company_name}} type="text" placeholder="Company Name" readonly>
+        <input style="width: 150px;" value={{$pd->company_name}} type="text" placeholder="Company Name" readonly>
       </td>
       <td style="width: 100px;">
         <label>Division: </label>

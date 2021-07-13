@@ -14,7 +14,7 @@ class Employer_portalController extends Controller
 {
     //Return employerportal home page if session is active
 
-    public function allowemployerportal($company_name, Request $request)
+    public function allowemployerportal(Request $request)
     {
 
         //getting logged in user email
@@ -33,7 +33,7 @@ class Employer_portalController extends Controller
         $personal_details=Employer_Personal_Detail::where('employer_email','=', $email)->get();
 
 
-        return view('employer_portal_homepage',['professional_details'=>$professional_details,'personal_details'=>$personal_details])->with('company_name', $company_name);
+        return view('employer_portal_homepage',['professional_details'=>$professional_details,'personal_details'=>$personal_details]);
 
 
     }
@@ -98,37 +98,21 @@ class Employer_portalController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /* ADD EMPLOYEE PAGE */
 
 
-    public function add_employee($company_name)
+    public function add_employee()
     {
-        return view('employer_portal_add_employee')->with('company_name', $company_name);
+        return view('employer_portal_add_employee');
     }
 
 
     /* MANAGE EMPLOYEES_VIEW ALL EMPLOYEES */
 
-    public function manage_employee_view($company_name)
+    public function manage_employee_view()
     {
 
-        return view('manage_employee_view')->with('company_name', $company_name);
+        return view('manage_employee_view');
     }
 
 

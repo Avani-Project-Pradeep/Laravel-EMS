@@ -21,19 +21,17 @@ class AddEmployee_Controller extends Controller
      $professional_details=   $request->validate([
 
 
-            'employee_id' => 'required|digits_between:1,10,',
+            'employee_id' => 'required|digits_between:1,10|unique:Employee_Professional_Details,Employee_id',
             'designation' => 'required|max:50',
-            'company_name' => 'required|max:50',
+            'company_name' => 'required|max:50|unique:Employee_Professional_Details,company_name',
             'department' => 'required|max:50',
             'reporting_manager' => 'required|max:50',
             'division' => 'required|max:100',
-
             'employee_type' => 'required|max:50',
             'employee_status' => 'required|max:50',
             'joining_date'=>'required',
             'company_name' => 'required|max:50',
             'shift' => 'required|max:50',
-            Rule::in(['India', 'Abroad']),
              'employee_status'=>'required|max:50',
 
 
@@ -41,11 +39,39 @@ class AddEmployee_Controller extends Controller
         ]);
 
 
-        $company_name = $request->session()->get('company_name');
+
+        $employee_id= $request->input('employee_id');
+
+        $employee = new Employee_Professional_Detail ;
+        $employee->employer_email=$request->session()->get('employer_email');
+        $employee->employee_id = $request->employee_id;
+        $employee->designation = $request->designation;
+        $employee->department = $request->department;
+        $employee->division = $request->division;
+        $employee->employee_type = $request->employee_type;
+        $employee->doj = $request->joining_date;
+        $employee->company_name = $request->company_name;
+        $employee->reporting_manager = $request->reporting_manager;
+        $employee->shift = $request->shift;
+        $employee->employee_status = $request->employee_status;
+        $employee->save();
 
 
 
-        return view('employer_portal_addemployeetab2',['professional_details'=>$professional_details])->with('company_name', $company_name);
+        $employee = new Employee_Personal_Detail ;
+       $employee->employee_id = $request->employee_id;
+       $employee->save();
+
+
+
+
+
+
+
+
+
+         return redirect()->route('addemployee_tab2',['id'=>$employee_id]);
+
 
 
 
@@ -57,55 +83,26 @@ class AddEmployee_Controller extends Controller
     {
 
 
-    $employee = new Employee_Professional_Detail ;
-
-    $employee->employee_id = $request->employee_id;
-    $employee->employee_email = $request->email;
-    $employee->designation = $request->designation;
-    $employee->department = $request->department;
-    $employee->division = $request->division;
-    $employee->employee_type = $request->employee_type;
-    $employee->doj = $request->joining_date;
-    $employee->company_name = $request->company_name;
-    $employee->reporting_manager = $request->reporting_manager;
-    $employee->shift = $request->shift;
-    $employee->employee_status = $request->employee_status;
-    $employee->save();
-
-    $employee = new Employee_Personal_Detail ;
-    $employee->employee_id = $request->employee_id;
-    $employee->employee_email = $request->email;
-    $employee->first_name = $request->first_name;
-    $employee->last_name = $request->last_name;
-    $employee->gender = $request->gender;
-    $employee->dob = $request->dob;
-    $employee->phone = $request->phone;
-    $employee->state = $request->state;
-    $employee->city = $request->city;
-    $employee->permanent_address = $request->permanent_address;
-    $employee->education = $request->educational_details;
-    $employee->save();
+        $personal_details = $request->validate([
+            'first_name'=>'required|max:50',
+           'last_name'=>'required|max:50',
+           'gender'=>'required',
+           'employee_email' => 'required|email|unique:employee_personal_details,employee_email',
+           'phone'=>'required|digits:10|unique:employee_personal_details,phone',
+           'dob'=>'required',
+           'state'=>'required|max:50',
+           'city'=>'required|max:50',
+           'permanent_address' => 'required|max:200',
 
 
-
-return 'success';
-
+        ]);
 
 
+ $employee_id=$request->input('employee_id');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+ Employee_Personal_Detail::where('employee_id', $employee_id)
+ ->update($personal_details);
 
 
     }

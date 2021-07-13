@@ -1,5 +1,5 @@
 <?php
-
+/* EMPLOYER LOGIN */
 
 namespace App\Http\Controllers;
 
@@ -52,7 +52,7 @@ class Employer_LoginController extends Controller
 
                 if ($companydb == ($request->company_name)) {
 
-                    //verify password 
+                    //verify password
                     if (Hash::check($request->password, $user->password)) {
 
                         //all inputs are valid,leads to set session
@@ -63,7 +63,7 @@ class Employer_LoginController extends Controller
                         $request->session()->put('role', 'employer');
 
                         //return the url for employer_portal with company name
-                        return redirect()->route('employer_portal', $request->company_name);
+                        return redirect()->route('employer_portal');
                     }
                 }
             }

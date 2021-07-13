@@ -16,27 +16,27 @@ use Illuminate\Support\Facades\DB;
 
 class EditEmployerController extends Controller
 {
-            
-    public function editemployer($company_name, Request $request)
+
+    public function editemployer( Request $request)
     {
         //getting logged in user email
 
         $email = $request->session()->get('employer_email');
 
 
-        //fetching professional details of the logged in user 
+        //fetching professional details of the logged in user
 
         $professional_details=Employer_Professional_Detail::where('employer_email','=', $email)->get();
-        
+
         $personal_details=Employer_Personal_Detail::where('employer_email','=', $email)->get();
 
 
-        return view('employer_portal_homepage_edit',['professional_details'=>$professional_details,'personal_details'=>$personal_details])->with('company_name', $company_name);
+    return view('employer_portal_homepage_edit',['professional_details'=>$professional_details,'personal_details'=>$personal_details]);
 
 
     }
 
-    
+
 
 
 
@@ -47,30 +47,41 @@ public function editemployeraction(Request $request)
         $email = $request->session()->get('employer_email');
 
         $existing_phone=Employer_Personal_Detail::where('employer_email','=', $email)->value('phone');
-    
 
-          
         if($request->input('phone_number')!=$existing_phone)
         {
             $request->validate([
                 'phone_number' => 'required|digits:10|unique:employer_personal_details,phone'
-            ]);    
-        
-        
+            ]);
+
+
         }
 
 
         $existing_email=$request->session()->get('employer_email');
-        
+
 
         if($request->input('email')!=$existing_email)
         {
             $request->validate([
             'email' => 'required|email|unique:users,email'
-           
-            ]);    
-        
+
+            ]);
+
         }
+
+
+        $existing_company_name = $request->session()->get('company_name');
+        if($request->input('company_name')!=$existing_company_name)
+        {
+            $request->validate([
+            'company_name' => 'required|unique:users,company_name',
+
+            ]);
+
+        }
+
+
 
 
          $request->validate([ 'city' => 'required|max:50|',
@@ -79,13 +90,13 @@ public function editemployeraction(Request $request)
 
 
           //EDIT PERSONAL DETAILS
-    
+
 
           DB::table('employer_personal_details')
           ->where('employer_email',$email)
            ->update([
-     
-     
+
+
              'first_name'=>$request->input('first_name'),
              'last_name'=>$request->input('last_name'),
              'city'=>$request->input('city'),
@@ -96,11 +107,14 @@ public function editemployeraction(Request $request)
              'education'=>$request->input('education'),
              'phone'=>$request->input('phone_number'),
 
-            
-     
-     
+
+
+
       ]);
-     
+
+      $request->session()->put('employer_first_name', $request->input('first_name'));
+      $request->session()->put('employer_last_name', $request->input('last_name'));
+
 
 
       //EDIT PROFESSIONAL DETAILS
@@ -123,8 +137,8 @@ public function editemployeraction(Request $request)
  ]);
 
 
- 
-//EDIT EMAIL ID IN USERS 
+
+//EDIT EMAIL ID IN USERS
  DB::table('users')
  ->where('email',$email)
  ->update([
@@ -136,11 +150,11 @@ public function editemployeraction(Request $request)
 
 
   //RETURN TO HOMEPAGE
-  return redirect()->route('employer_portal', $request->company_name);
+  return redirect()->route('employer_portal');
 
 
 }
 
-
-
 }
+
+

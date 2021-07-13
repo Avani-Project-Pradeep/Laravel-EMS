@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
+
+
 use App\Http\Controllers\Employer_RegistrationController;
 use App\Http\Controllers\Employer_LoginController;
 use App\Http\Controllers\Employer_portalController;
@@ -14,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\employer_successfull_registration;
 use App\Mail\employee_successfull_registration;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Employee_PortalController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -82,17 +86,17 @@ Route::get('/login', function()
  Route::group(['middleware'=>['EmployerCheck']],function()
  {
      //Home page
-Route::get('{company_name}/employer_portal/Home',[Employer_portalController::class,'allowemployerportal'])->name('employer_portal');
+Route::get('/employer_portal/Home',[Employer_portalController::class,'allowemployerportal'])->name('employer_portal');
 
 
 //Edit Employer Page
 
-Route::get('{company_name}/employer_portal/edit',[EditEmployerController::class,'editemployer']);
+Route::get('/employer_portal/edit',[EditEmployerController::class,'editemployer']);
 
 
 //Employer Image
 
-Route::post('{company_name}/employer_portal/image',[Employer_portalController::class,'image']);
+Route::post('employer_portal/image',[Employer_portalController::class,'image']);
 
 
 
@@ -102,48 +106,64 @@ Route::POST('editemployeraction',[EditEmployerController::class,'editemployeract
 
 
 
+//add employee
+Route::get('/employer_portal/add_employee',[Employer_portalController::class,'add_employee'])->name('addemployee_tab1');
 
-//Add Employee
-Route::get('/{company_name}/employer_portal/add_employee',[Employer_portalController::class,'add_employee'])->name('addemployee_tab1');
 
 
 
 //Add Employee Next
+
 Route::POST('nextaddemployee',[AddEmployee_Controller::class,'nextaddemployee']);
 
 
+//Go to tab 2 add employee
+
+Route::get('/employer_portal/add_employee/tab2/{id}', function($id)
+{
+return view('employer_portal_addemployeetab2',['id'=>$id]);
+})->name('addemployee_tab2');
 
 
 
 
-//Add Employee Final Action
-Route::POST('actionaddemployee',[AddEmployee_Controller::class,'actionaddemployee']);
+Route::POST('/actionaddemployee',[AddEmployee_Controller::class,'actionaddemployee']);
 
 
 
 
 
-
-
-//Manage Employee_view page
-Route::get('/employer_portal/manage_employees/view',[ManageEmployee::class,'show']);
-
-
-//change status of employee
-Route::get('/changestatus', [ManageEmployee::class,'changestatus'])->name('changestatus');
-
-//edit employee
-
-Route::get('/editemployee/{id}', [ManageEmployee::class,'editemployee']);
-
-
-Route::get('/viewemployee/{id}', [ManageEmployee::class,'viewemployee']);
 
 
 Route::get('/home',[ManageEmployee::class,'home'] );
 
 
 
+//Manage Employees
+Route::get('/employer_portal/manage_employees/view',[ManageEmployee::class,'show'])->name('manage');
+
+
+//change status of employee
+
+Route::get('/statustoactive/{id}', [ManageEmployee::class,'active']);
+
+
+Route::get('/statustoinactive/{id}', [ManageEmployee::class,'inactive']);
+
+
+
+
+
+//edit employee
+
+Route::get('/editemployee/{id}', [ManageEmployee::class,'editemployee']);
+
+Route::post('/editemployeeaction/{id}', [ManageEmployee::class,'editemployee_action']);
+
+
+
+//view employee
+Route::get('/viewemployee/{id}', [ManageEmployee::class,'viewemployee']);
 
 
 
@@ -151,7 +171,7 @@ Route::get('/home',[ManageEmployee::class,'home'] );
 
 //Logout
 
-Route::get('{company_name}/employer_portal/logout',[Employer_portalController::class,'employer_portal_logout'])->name('employer_logout');
+Route::get('employer_portal/logout',[Employer_portalController::class,'employer_portal_logout'])->name('employer_logout');
 
 
 
@@ -172,10 +192,16 @@ Route::get('{company_name}/employer_portal/logout',[Employer_portalController::c
 
     Route::post('/Employee/loginverify',[Employee_LoginController::class,'loginverify']);
 
-    Route::group(['middleware'=>['EmployerCheck']],function()
+    Route::group(['middleware'=>['EmployeeCheck']],function()
  {
 
     Route::get('/employee_portal/Home',[Employee_portalController::class,'allowemployeeportal'])->name('employee_portal');
+
+    Route::get('/About_Employer',[Employee_portalController::class,'aboutemployer']);
+
+    Route::get('/employee_portal/add_details',[Employee_portalController::class,'add_details']);
+
+
  });
 
 

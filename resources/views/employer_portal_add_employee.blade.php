@@ -44,17 +44,10 @@
 
             {{-- tab2 --}}
             <li>
-                <input type="radio" id="tab-2" name="tab" />
-                <label for="tab-2">
+                <input type="radio" id="tab-2" name="tab" disabled />
+                <label for="tab-2" disabled>
                     Tab 2
                 </label>
-                <div style="color:red; font-size:12px; background-color:pink">
-
-                    <br>
-                    <br>
-                    {{ "*Please  Fill all mandatory fields,and  then click next" }}
-
-                </div>
             </li>
 
 

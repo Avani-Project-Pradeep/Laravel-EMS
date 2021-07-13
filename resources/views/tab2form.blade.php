@@ -1,48 +1,52 @@
-<span>
+<div>
     <span>First Name: </span>
-    <input type="text" style="width:200px;" name="first_name">
 
+    <input type="text" style="width:300px;" name="first_name"><span style="color: red;">@error('first_name'){{"*".$message}}@enderror</span>
 
+</div>
 
+    <br>
+
+    <div>
 
     <span>Last Name: </span>
-    <input type="text" style="width:200px;" name="last_name">
+    <input type="text" style="width:300px;" name="last_name"><span style="color: red;">@error('last_name'){{"*".$message}}@enderror</span>
 
-</span>
 
-<br><br>
+    </div>
+<br>
 
 <div>
     <span>
         <span>Gender: </span>
-        <input type="text" style="width:200px;" name="gender">
-
+        <input type="text" style="width:100px;" name="gender"><span style="color: red;">@error('gender'){{"*".$message}}@enderror</span>
+         <br><br>
         <span>DOB: </span>
-        <input type="date" style="width:200px;" name="dob">
+        <input type="date" style="width:200px;" name="dob"><span style="color: red;">@error('dob'){{"*".$message}}@enderror</span>
+
 
     </span>
 
 </div>
 
-<br>
+<br><br>
 
 <div>
     <span>Email ID:<span>
-            <br>
 
-            <input type="email" name="email">
+            <input type="email" name="employee_email"><br><span style="color: red;">@error('employee_email'){{"*".$message}}@enderror</span>
+
 
 
 </div>
 
 
 <br>
-
 <div>
     <span>Contact Number:</span>
-            <br>
 
-            <input type="text" name="phone">
+            <input type="text" name="phone"><br><span style="color: red;">@error('phone'){{"*".$message}}@enderror</span>
+
 
 </div>
 
@@ -52,35 +56,28 @@
 <div>
     <span>
         <span>State: </span>
-        <input type="text" style="width:200px;" name="state">
+        <input type="text" style="width:100px;" name="state"><span style="color: red;">@error('state'){{"*".$message}}@enderror</span>
 
-        &nbsp;&nbsp;&nbsp;
 
+&nbsp;&nbsp;
         <span>City: </span>
-        <input type="text" style="width:200px;" name="city">
+        <input type="text" style="width:100px;" name="city"><span style="color: red;">@error('city'){{"*".$message}}@enderror</span>
+
 
     </span>
 </div>
 
 
-<br>
+<br><br>
 
 <div>
     <span>Permanent Address:</span>
-      <br>
-            <input type="text" name="permanent_address">
+
+            <input type="text" name="permanent_address"><br><span style="color: red;">@error('permanent_address'){{"*".$message}}@enderror</span>
 
 
-</div>
-
-
-<br>
-
-<div>
-    <span>Educational Details:<span>
-            <br>
-
-            <input type="text" name="educational_details">
-            <br><br><br>
 
 </div>
+
+
+

@@ -9,33 +9,13 @@
     <br>
     <h2 style="margin-left:20px; color: white">Add Employee</h2>
     <hr style="border: solid green;">
-    <form method="POST" action="/actionaddemployee">
-        @csrf
 
         <ul class="tab-wrap">
             <li>
-                <input type="radio" id="tab-1" name="tab" checked="checked" />
+                <input type="radio" id="tab-1" name="tab" disabled/>
                 <label for="tab-1">
                     Tab 1
                 </label>
-                {{-- tab1 --}}
-                <div class="tab-content">
-                    <div id="container">
-                        {{-- tab1-form.part1 --}}
-                        @include('tab1form1prefilled')
-
-
-                        <div class="two">
-                            <div style="margin-left:50px">
-                                <br><br>
-                                @include('tab1form2prefilled')
-                                <input type="radio">
-                                <label id="change" for="tab-2">Next</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
 
             <li>
                 <input type="radio" id="tab-2" name="tab" checked="checked" />
@@ -58,6 +38,8 @@
 
                                 </section>
 
+                                <form method="POST" action="/actionaddemployee">
+                                    @csrf
 
                             </div>
 
@@ -68,19 +50,14 @@
 
                                 <br>
 
-                                <input type="radio" id="tab-4" name="tab" value="" />
-                                <label id="change" style="background-color: #4CAF50;" for="tab-1">
-                                    Previous
-                                </label>
+                                <input type="hidden" value={{$id}} name='employee_id'>
 
-                                <br>
-
-
+                                <a href='/employer_portal/add_employee' id='change'>Back</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                                 <input type="submit" id="change" value= "Save">
 
 
-                                <input type="submit" id="change" value=" Update">
 
 
 
@@ -91,7 +68,6 @@
 
                         </div>
                     </div>
-                </div>
                 </div>
             </li>
 

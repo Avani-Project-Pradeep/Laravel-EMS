@@ -4,14 +4,17 @@
 <div class="w3-main" style="margin-left:400px; margin-right:200px;   margin-top:80px;">
 
     <body>
+        <button type="button" class="btn btn-light">EMPLOYEE ID -  {{$employee_id}}</button>
+        <br><br>
+
         <table cellspacing="0" cellpadding="0">
             <tr>
                 <td>
                     <section>
                         <br><br><br>
 
-                        <a href='/editemployee/{id}'> <i class="fa fa-edit" style="font-size:48px">EDIT</a></i>
-                        <br><br>
+
+
 
 
 
@@ -84,7 +87,10 @@
                 </td>
             </table>
 
+            <br><br>
 
+            <a href="/editemployee/{{$employee_id}}"> <i class="fa fa-edit" style="font-size:24px">EDIT DETAILS</a></i>
+            <br><br><br>
 
 
         <ul>
@@ -136,13 +142,13 @@
                     &nbsp;&nbsp;
 
                     <label>Date_Of_Joining: </label>
-                    <input style="width: 200px;" type="date" value={{ $pd->doj }} readonly>
+                    <input style="width: 200px;" type="date"  readonly value="{{ $pd->doj }}">
 
                     &nbsp;&nbsp;&nbsp;
 
                     <label>Work_Experience: </label>
-                    <input style="width: 200px;" type="text" placeholder="Work Experience"
-                        value={{ $pd->work_experience }} readonly>
+                    <input style="width: 100px;" type="text" placeholder="Work"
+                      readonly  value="{{ $pd->work_experience }}">
 
                 </div>
 
@@ -152,13 +158,12 @@
 
                 <div>
                     <label>Skills: </label>
-                    <input style="width: 250px;" type="text" placeholder="Skills" value={{ $pd->skills }} readonly>
+                    <input style="width: 250px;" type="text" placeholder="Skills" readonly value="{{ $pd->skills }}" >
 
                     &nbsp;&nbsp;
 
-                    <label>Bank Details: </label>
-                    <input style="width: 250px;" type="text" placeholder="Bank Details" readonly
-                        value={{ $pd->bank_details  }}>
+                    <label>Department: </label>
+                    <input style="width: 250px;" type="text" placeholder="Department" readonly value={{ $pd->department }}>
 
                 </div>
 
@@ -212,12 +217,13 @@
                                   <div>
 
                                 <label>Email: </label>
-                                <input type="email" placeholder="Email" readonly value={{ session('employer_email') }}>
+                                <input type="email" placeholder="Email" readonly
+                                 value={{$per->employee_email}}>
 
                                    &nbsp;&nbsp;
 
                                 <label>Phone Number: </label>
-                                <input type="text" placeholder="Phone Number" readonly value={{ $pd->phone }}>
+                                <input type="text" placeholder="Phone Number" readonly value={{ $per->phone }}>
                                 &nbsp;&nbsp;
 
                                 <label>City: </label>

@@ -1,10 +1,11 @@
-@extends('layouts.portal_layout')
+@extends('layouts.employee_portal')
 {{-- NAVIGATION OPTIONS --}}
 @section('options')
-<a href="/{{ $company_name }}/employer_portal/Home"><i class="fa fa-home"></i> Home</a>
-<a href="/{{ $company_name }}/employer_portal/add_employee"><i class="fa fa-user-plus"></i> Add Employees </a>
-<a href="/employer_portal/manage_employees/view"><i class="fa fa-users	"></i> Manage Employees</a>
-<a href="/{{ $company_name }}/employer_portal/logout"><i class="fa fa-power-off
+
+<a href="/employee_portal/Home"  style="font-size:25px;"><i class="fa fa-home"></i> Home</a>
+
+<a href="/employee_portal/add_details"><i class="fa fa-user-plus"></i> Add Details </a>
+<a href="/employee_portal/logout"><i class="fa fa-power-off
  "></i> Logout</a>     </nav>
 
 @endsection
@@ -33,7 +34,6 @@
 <section>
   <br><br><br>
 
-  <a href="/{{ $company_name }}/employer_portal/edit"> <i class="fa fa-edit" style="font-size:48px">EDIT</a></i>
 <br><br>
 
 
@@ -136,7 +136,7 @@
       </td>
       <td style="width: 150px;">
         <label>Company Name:</label>
-        <input style="width: 150px;" value={{$company_name}} type="text" placeholder="Company Name" readonly>
+        <input style="width: 150px;" value="{{$pd->ompany_name}}" type="text" placeholder="Company Name" readonly>
       </td>
       <td style="width: 100px;">
         <label>Division: </label>
@@ -153,7 +153,7 @@
 
       <td colspan="3">
         <label >Work_Experience: </label>
-        <input type="text" placeholder="Work Experience" value={{ $pd->work_experience }} readonly>
+        <input type="text" placeholder="Work Experience" value="{{ $pd->work_experience }}" readonly>
        </td>
 <td>
 </tr>
@@ -162,7 +162,7 @@
   <td colspan="4">
       <label >Skills: </label>
       <br>
-      <input  type="text" placeholder="Skills" value={{ $pd->skills }} readonly>
+      <input  type="text" placeholder="Skills" value="{{ $pd->skills }}" readonly>
      </td>
 </tr>
 
@@ -229,7 +229,7 @@
           <td colspan="2">
            <label >Email: </label>
           <input type="email" placeholder="Email" readonly
-           value={{ session('employer_email') }} >
+           value={{ session('employee_email') }} >
           </td>
 
          <td>

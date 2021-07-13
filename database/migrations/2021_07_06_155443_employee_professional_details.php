@@ -16,21 +16,24 @@ class EmployeeProfessionalDetails extends Migration
 
         Schema::connection('mysql')->create('employee_professional_details', function (Blueprint $table) {
 
-            $table->increments('id');
-            $table->unsignedBigInteger('employee_id');
-            $table->string('employee_email');
+            $table->unsignedBigInteger('employee_id')->primary();
 
             $table->date('doj');
             $table->string('designation');
+            $table->string('employer_name')->nullable();
+            $table->string('employer_email');
+
             $table->string('company_name');
+
+
+
             $table->string('department');
 
             $table->string('reporting_manager');
             $table->string('division');
             $table->string('shift');
             $table->string('employee_type');
-            $table->string('employee_status');
-            $table->tinyInteger('status')->default('1');
+            $table->tinyInteger('employee_status');
             $table->string('work_experience')->nullable();
             $table->string('skills')->nullable();
             $table->text('project')->nullable();

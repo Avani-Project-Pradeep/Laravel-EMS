@@ -14,25 +14,24 @@ class EmployeePersonalDetails extends Migration
     public function up()
     {
         Schema::connection('mysql')->create('employee_personal_details', function (Blueprint $table) {
-           
-            $table->increments('id');
-            $table->unsignedBigInteger('employee_id');
-            $table->string('employee_email');
+
+            $table->unsignedBigInteger('employee_id')->primary();
             $table->string('first_name')->nullable();
- 
+
             $table->string('last_name')->nullable();
- 
+
             $table->text('image')->nullable();
-            
- 
-            $table->string('city');
-            $table->string('state');
+
+            $table->text('employee_email')->nullable();
+
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
             $table->date('dob')->nullable();
- 
+
             $table->string('gender')->nullable();
- 
+
             $table->string('address')->nullable();
- 
+
             $table->string('education')->nullable();
 
             $table->string('bloodtype')->nullable();
@@ -49,21 +48,22 @@ class EmployeePersonalDetails extends Migration
 
             $table->string('current_address')->nullable();
 
+            $table->foreign('employee_id')
+                ->references('employee_id')
+                ->on('employee_professional_details')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
 
 
 
 
- 
 
-    
+
+
+
             $table->timestamps();
-
-
-
-
         });
-
     }
 
     /**
