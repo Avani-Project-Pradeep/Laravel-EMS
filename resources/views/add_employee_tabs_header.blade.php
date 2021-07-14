@@ -1,4 +1,4 @@
-{{-- NAVIGATION OPTIONS --}}
+
 @section('options')
 <a href="/employer_portal/Home"><i class="fa fa-home"></i> Home</a>
 <a href="/employer_portal/manage_employees/view"><i class="fa fa-users	"></i>

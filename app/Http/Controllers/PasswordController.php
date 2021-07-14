@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\resetpassword;
+use App\Mail\success_reset;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
@@ -37,7 +38,7 @@ class PasswordController extends Controller
 else
 {
     //Create Password Reset Token
-DB::table('password_resets')->update([
+DB::table('password_resets')->insert([
     'email' => $request->email,
     'token' => str::random(60),
     'created_at' => Carbon::now()
@@ -53,13 +54,15 @@ $email=$request->email;
 
 
 
+
+
 $name=DB::table('employee_personal_details') ->where('employee_email', $request->email)->value('first_name');
     //Generate, the password reset link. The token generated is embedded in the link
 
 
-$link = '/password/reset/'.'token='.$tokenData.'?email=' .urlencode($email);
+$link = '/password/reset/'.$tokenData.'?email=' .urlencode($email);
 
-    
+
 $data=([
     'name' =>$name,
     'link'=>$link
@@ -68,59 +71,71 @@ $data=([
 ]);
 
 
-   /* SENDING MAIL */ 
+   /* SENDING MAIL */
 
    Mail::to($email,$data)->send(
     new resetpassword($data)
 );
 
 
-return "Please check your mail";
-
+return view('reset_link_msg');
 
     }
 
- 
+
     }
 
 
     public function resetcheck(Request $request)
     {
-            //Validate input
-            $validator = Validator::make($request->all(), [
-                'password' => 'required|confirmed|max:8',
-             ]);
-        
-            //check if payload is valid before moving on
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors(['email' => 'Please complete the form']);
-            }
-        
-            $password = $request->password;
-        // Validate the token
-            $tokenData = DB::table('password_resets')
-            ->where('token', $request->token)->first();
-        // Redirect the user back to the password reset request form if the token is invalid
-        
-            $user = User::where('email', $tokenData->email)->first();
-        // Redirect the user back if the email is invalid
-            if (!$user) return redirect()->back()->withErrors(['email' => 'Email not found']);
-        //Hash and update the new password
-            $user->password = Hash::make($password);
-            $user->update(); //or $user->save();
-        
-        
-            //Delete the token
-            DB::table('password_resets')->where('email', $user->email)
-            ->delete();
-        
-            
-          
-        
-            }
+//Validate input
+$request->validate([
+    'password' => 'required|confirmed|max:8',
+    'password_confirmation'=>'required|'
+ ]);
+$tokenData=$request->token;
+$password = $request->input('password');
+// Validate the token
+// Redirect the user back to the password reset request form if the token is invalid
 
 
-       
+
+
+ $user=DB::table('password_resets')->where('token','=',$tokenData)->value('email');
+
+if(!$user)
+{
+    if (!$user) return redirect()->back()->withErrors(['email' => 'Email not found']);
+
+}
+
+$password = Hash::make($password);
+
+
+User::where('email', $user)
+      ->update(['password' => $password]);
+
+
+
+//Delete the token
+DB::table('password_resets')->where('email', $user)
+->delete();
+
+
+
+
+   /* SENDING SUCCESSFULL REGISTRATION MAIL */
+
+   Mail::to($user)->send(
+    new success_reset()
+);
+
+return view('confirm_reset');
+
+}
+
+
+
 
 
 
@@ -130,7 +145,7 @@ return "Please check your mail";
 
 
 
-    
+
 
 
 

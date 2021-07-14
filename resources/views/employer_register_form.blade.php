@@ -4,6 +4,11 @@
 {{-- SECTION --}}
 @section('content')
 
+<div>
+    <h4><a href="http://127.0.0.1:8000/" style="color:green;margin-left:50px" > Back to Home Page </a></h4>
+
+</div>
+
 <title>Employer Registration Form</title>
     <div class="form_wrapper">
         <div class="form_container">
@@ -27,7 +32,7 @@
 
                     <input  type="text" placeholder="Enter Company Name*"
                      name="company_name" :value="old('company_name')" >
-                 
+
 
     <br>
         <div style="color:red; font-size:12px;">
@@ -35,12 +40,12 @@
                     @error('company_name')
 
                     {{ "*".$message }}
-                    <br> 
+                    <br>
 
                     @enderror
         </div>
 
-  
+
     </div>
 
 
@@ -52,19 +57,19 @@
 
                     <input type="text" placeholder="Enter Company Website* " name="company_website" :value="old('company_website')">
 
-                    
+
                     <br>
                     <div style="color:red; font-size:12px;">
-            
+
                                 @error('company_website')
-            
+
                                 {{ "*".$message }}
-                                <br> 
-            
+                                <br>
+
                                 @enderror
                     </div>
-            
-            
+
+
 
                 </div>
 
@@ -86,19 +91,19 @@
                                 placeholder="Upload Terms and Conditions*" x-model="fileName" readonly>
 
                                 <div style="color:red; font-size:12px;">
-            
+
                                     @error('terms_and_conditions')
-                
+
                                     {{ "*".$message }}
-                                    <br> 
-                
+                                    <br>
+
                                     @enderror
                         </div>
-        
+
                         </div>
 
                     </div>
-            
+
                 </div>
 
 
@@ -118,15 +123,15 @@
                             <input type="text" class="form-control form-control-lg" placeholder="Upload Company Documents*"
                                 x-model="fileName" readonly>
                                 <div style="color:red; font-size:12px;">
-            
+
                                     @error('company_documents')
-                
+
                                     {{ "*".$message }}
-                                    <br> 
-                
+                                    <br>
+
                                     @enderror
                         </div>
- 
+
 
                         </div>
                     </div>
@@ -142,16 +147,16 @@
                     <input type="text" name="phone_number" placeholder="Enter Phone Number*" :value="old('phone_number')" />
 
                     <div style="color:red; font-size:12px;">
-            
+
                         @error('phone_number')
-    
+
                         {{ "*".$message }}
-                        <br> 
-    
+                        <br>
+
                         @enderror
             </div>
 
-                    
+
 
 
                 </div>
@@ -165,12 +170,12 @@
 
                     <input type="text" name="city" placeholder="City*" :value="old('city')" />
                     <div style="color:red; font-size:12px;"  >
-            
+
                         @error('city')
-    
+
                         {{ "*".$message }}
-                        <br> 
-    
+                        <br>
+
                         @enderror
             </div>
 
@@ -187,12 +192,12 @@
                     <input type="text" name="state" placeholder="State*" :value="old('state')">
 
                     <div style="color:red; font-size:12px;">
-            
+
                         @error('state')
-    
+
                         {{ "*".$message }}
-                        <br> 
-    
+                        <br>
+
                         @enderror
             </div>
 
@@ -209,12 +214,12 @@
                     <input type="email" name="email" placeholder=" Enter Email*" :value="old('email')" />
 
                     <div style="color:red; font-size:12px;">
-            
+
                         @error('email')
-    
+
                         {{ "*".$message }}
-                        <br> 
-    
+                        <br>
+
                         @enderror
             </div>
 
@@ -230,12 +235,12 @@
                     <input type="password" name="password" placeholder=" Enter Password*"  :value="old('password')"/>
 
                     <div style="color:red; font-size:12px;">
-            
+
                         @error('password')
-    
+
                         {{ "*".$message }}
-                        <br> 
-    
+                        <br>
+
                         @enderror
             </div>
 
@@ -251,12 +256,12 @@
                     <input type="password" name="password_confirmation" placeholder="Confirm Password*" :value="old('confirm_password')" />
 
                     <div style="color:red; font-size:12px;">
-            
+
                         @error('password_confirmation')
                         {{ "*".$message }}
-    
-                        <br> 
-    
+
+                        <br>
+
                         @enderror
             </div>
 

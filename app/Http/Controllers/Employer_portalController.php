@@ -60,6 +60,8 @@ class Employer_portalController extends Controller
     $image = file($validated['image']);
     $image_name = rand(1000,9999).'.'.$validated['image']->extension();
     $validated['image']->move(public_path('images'),$image_name);
+    $validated['image']=$image_name;
+
 
 
 

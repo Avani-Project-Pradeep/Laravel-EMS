@@ -3,7 +3,8 @@
 @extends('layouts.forms_layout')
  {{-- SECTION STARTED --}}
  @section('content')
-
+<br><br>
+ <h4><a href="http://127.0.0.1:8000/" style="color:green;margin-left:50px" > Back to Home Page </a></h4>
 
 
  {{-- TITLE --}}
@@ -68,13 +69,9 @@
      <input class="button" type="submit" value="Login" />
      <br><br>
      <div class="flex items-center justify-end mt-4">
-         @if (Route::has('password.request'))
-             <a  style="color:green;" class=underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                 {{ __('Forgot your password?') }}
-             </a>
-         @endif
+        <a href="http://127.0.0.1:8000/newforgotpassword">Forgot Password</a>
 
-     </div>
+    </div>
      </form>
 <br>
 <br>

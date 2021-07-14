@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-  <title>Confirmation</title>
+  <title>Reset Password</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,7 +11,5 @@
 
 <div class="container">
   <div class="alert alert-success" style="margin-top:150px;border:solid 2px ; border-color:green"  >
-    <strong >You are Successfully Registered!</strong><br>Please Check Your Mail Inbox<br>
-    <a href="http://127.0.0.1:8000/">Back to  Home </a>
-
-  </div>
+    <strong >Password Reset Successfully </strong><br>
+    <a href="http://127.0.0.1:8000/"> Home </a>    </div>

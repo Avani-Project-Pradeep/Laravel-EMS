@@ -8,16 +8,16 @@ use App\Http\Controllers\Employer_LoginController;
 use App\Http\Controllers\Employer_portalController;
 use App\Http\Controllers\EditEmployerController;
 use App\Http\Controllers\AddEmployee_Controller;
+use App\Http\Controllers\UpdateEmployee_Controller;
+
 use App\Http\Controllers\Employee_RegistrationController;
 use App\Http\Controllers\Employee_LoginController;
-use App\Http\Controllers\PasswordController;
-use App\Http\Controllers\uploadcontroller;
 use App\Http\Controllers\ManageEmployee;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\employer_successfull_registration;
-use App\Mail\employee_successfull_registration;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Employee_PortalController;
+use App\Http\Controllers\PasswordController;
+
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -75,7 +75,36 @@ Route::get('/login', function()
     return abort('404');
 });
 
+Route::get('/http://127.0.0.1:8000/dashboard', function()
+{
+    return abort('404');
+
+});
+
+
+
  /* ------------------EMPLOYER FORGOT PASSWORD------------------------ */
+
+
+/* ---------------- FORGOT PASSWORD------------------------ */
+//forgot password form - input mail
+Route::get('/newforgotpassword', [PasswordController::class, 'inputmailform']);
+
+
+//send mail for reset link
+Route::post('/resetpasswordmail', [PasswordController::class, 'inputmailcheck']);
+
+
+
+
+Route::get('password/reset/{token}', function ($token) {
+    return view('reset_password',['token' => $token]);
+});
+
+
+Route::post('/newpassword', [PasswordController::class, 'resetcheck']);
+
+
 
 
 
@@ -169,6 +198,66 @@ Route::get('/viewemployee/{id}', [ManageEmployee::class,'viewemployee']);
 
 
 
+
+//update employee form
+
+
+Route::get("employer_portal/edit_employee",function()
+{
+    return view('Update_Employees');
+});
+
+
+//Update Employee Next
+
+Route::POST('/nextupdateemployee',[UpdateEmployee_Controller::class,'nextupdateemployee']);
+
+
+//Go to tab 2 add employee
+
+Route::get('/employer_portal/update_employee/tab2/{id}', function($id)
+{
+return view('employer_portal_updateemployeetab2',['id'=>$id]);
+})->name('updateemployee_tab2');
+
+
+
+
+Route::POST('/actionupdateemployee',[UpdateEmployee_Controller::class,'actionupdateemployee']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//search employee
+Route::get('/search_employee', function()
+{
+    return view('search');
+});
+
+
+Route::post('searchresults',[ManageEmployee::class,'searchresults']);
+
+Route::get('/delete/{id}',[ManageEmployee::class,'deleteemployee']);
+
+
+Route::get('//',[ManageEmployee::class,'deleteemployee']);
+
+
+
+
+
+
+
 //Logout
 
 Route::get('employer_portal/logout',[Employer_portalController::class,'employer_portal_logout'])->name('employer_logout');
@@ -199,10 +288,19 @@ Route::get('employer_portal/logout',[Employer_portalController::class,'employer_
 
     Route::get('/About_Employer',[Employee_portalController::class,'aboutemployer']);
 
-    Route::get('/employee_portal/add_details',[Employee_portalController::class,'add_details']);
+    Route::get('/employee_portal/add_details',[Employee_portalController::class,'next_add_details']);
+
+
+
+
+
+
+
+
 
 
  });
+
 
 
 

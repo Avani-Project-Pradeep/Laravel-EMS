@@ -14,15 +14,21 @@ class Employer_RegistrationController extends Controller
 {
     public function registerform()
     {
-        return view('employer_register_form');
+        return view('employer_register_form');//returns form
     }
 
-    public function registeremployees(Request $request)
-    {
+
+
+    //handle form action
+
+
+
+    public function registeremployees(Request $request)    {
         //VALIDATIONS
         $request->validate([
 
-            'company_name' => 'required|max:50|string|unique:employer_professional_details,company_name',
+            'company_name' => 'required|max:50|string|regex:/^([^0-9]*)$/|
+            unique:employer_professional_details,company_name',
 
             'company_website' => 'required|url',
 
@@ -31,11 +37,11 @@ class Employer_RegistrationController extends Controller
             'company_documents' => 'required|file|max:500|mimes:pdf',
 
             'phone_number' => 'required|digits:10|unique:employer_personal_details,phone',
-            
-            'city' => 'required|max:50|',
-            'state' => 'required|max:50|',
+
+            'city' => 'required|max:50|regex:/^([^0-9]*)$/',
+            'state' => 'required|max:50|regex:/^([^0-9]*)$/',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|max:8||confirmed',
+            'password' => 'required|max:8|confirmed',
 
             'password_confirmation' => 'required|max:8',
 

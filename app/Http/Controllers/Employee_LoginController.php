@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee_Professional_Detail;
+use App\Models\Employee_Personal_Detail;
+
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -46,7 +47,7 @@ class Employee_LoginController extends Controller
                 $request->session()->put('employee_email', $request->email);
                 $request->session()->put('role', 'employee');
 
-                $employee_id = Employee_Professional_Detail::where('employee_email', $request->email)->value('employee_id');
+                $employee_id = Employee_Personal_Detail::where('employee_email', $request->email)->value('employee_id');
                 $request->session()->put('employee_id', $employee_id);
 
 

@@ -1,18 +1,18 @@
-{{-- portal layout --}}
-@extends('layouts.portal_layout')
 
+@extends('layouts.employee_portal')
 
-{{-- tab headers --}}
-@include('add_employee_tabs_header')
+{{-- CONTENT --}}
+@section('content')
+<!--EXTERNAL CSS-->
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/add_employee.css') }}">
+
+</head>
 
 <body>
     <br>
-
-   <em><span style="margin-left:50px; font-size:30px;color: white">Add Employee</span></em>
-    <em><a  style="margin-left:800px; font-size:30px;color:white" href="http://127.0.0.1:8000/Employee/register">Click here to Register Employees </a></em>
-
+    <h2 style="margin-left:20px; color: white">Add Details</h2>
     <hr style="border: solid green;">
-    <form method="POST" action="/nextaddemployee">
+    <form method="POST" action="/nextadddetails">
         @csrf
 
         <ul class="tab-wrap">
@@ -25,17 +25,19 @@
                 <div class="tab-content">
                     <div id="container">
                         {{-- tab1-form.part1 --}}
-                        @include('tab1form1')
+                        @include('tab1form1_details')
 
                         <div class="two">
                             <div style="margin-left:50px">
                                 <br><br>
                                 {{-- tab1-form.part2 --}}
-                                @include('tab1form2')
+                                @include('tab1_form2_adddetails')
 
                                 {{-- next button --}}
 
 
+
+                                <br><br>
                               <input id="change" type="submit"   value="Next">
                             </div>
                         </div>

@@ -7,8 +7,7 @@
 
 <body>
     <br>
-    <em><span style="margin-left:50px; font-size:30px;color: white">Add Employee</span></em>
-    <em><a  style="margin-left:800px; font-size:30px;color:white" href="http://127.0.0.1:8000/Employee/register">Click here to Register Employees </a></em>
+    <em><span style="margin-left:50px; font-size:30px;color: white">Update Employee Details</span></em>
 
       <hr style="border: solid green;">
 
@@ -40,7 +39,7 @@
 
                                 </section>
 
-                                <form method="POST" action="/actionaddemployee">
+                                <form method="POST" action="/actionupdateemployee">
                                     @csrf
 
                             </div>
@@ -57,7 +56,7 @@
                                 <a href='/employer_portal/add_employee' id='change'>Back</a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                                <input type="submit" id="change" value= "Save">
+                                <input type="submit" id="change" value= "Update">
 
 
 

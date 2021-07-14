@@ -130,11 +130,11 @@
         <label >Designation: </label>
 
 
-        <input  style="width: 100px;" type="text"  readonly placeholder="Designation " value={{ $pd->designation }}>
+        <input  style="width: 100px;" type="text"  readonly placeholder="Designation " value="{{ $pd->designation }}">
       </td>
       <td style="width: 100px;">
         <label >Location: </label>
-        <input  style="width: 100px;" type="text" placeholder="Location" readonly value={{$pd->location}}>
+        <input  style="width: 150px;" type="text" placeholder="Location" readonly value="{{$pd->location}}">
       </td>
       <td style="width: 150px;">
         <label>Company Name:</label>
@@ -142,7 +142,7 @@
       </td>
       <td style="width: 100px;">
         <label>Division: </label>
-        <input  style="width: 100px;"type="text" placeholder="Division" value={{ $pd->division }} readonly>
+        <input  style="width: 100px;"type="text" placeholder="Division" value="{{ $pd->division }}" readonly>
       </td>
      </tr>
      <tr>
@@ -150,12 +150,12 @@
        </td>
        <td>
         <label >Date_Of_Joining: </label>
-       <input type="date" value={{ $pd->doj }} readonly>
+       <input type="date" value="{{ $pd->doj }}" readonly>
        </td>
 
       <td colspan="3">
         <label >Work_Experience: </label>
-        <input type="text" placeholder="Work Experience" value={{ $pd->work_experience }} readonly>
+        <input type="text" placeholder="Work Experience" value="{{ $pd->work_experience }}" readonly>
        </td>
 <td>
 </tr>
@@ -164,7 +164,7 @@
   <td colspan="4">
       <label >Skills: </label>
       <br>
-      <input  type="text" placeholder="Skills" value={{ $pd->skills }} readonly>
+      <input  type="text" placeholder="Skills" value="{{ $pd->skills }}" readonly>
      </td>
 </tr>
 
@@ -172,7 +172,7 @@
   <td></td>
   <td colspan="4">
       <label >Bank Details: </label>
-      <input type="text" placeholder="Bank Details"  readonly value={{ $pd->bank_details  }}  >
+      <input type="text" placeholder="Bank Details"  readonly value="{{ $pd->bank_details  }}"  >
      </td>
 </tr>
 
@@ -212,17 +212,17 @@
 
 
 
-           <input  style="width: 150px;" type="text" placeholder="First Name" readonly value={{ $per->first_name }} >
+           <input  style="width: 150px;" type="text" placeholder="First Name" readonly value="{{ $per->first_name }}" >
          </td>
          <td style="width: 150px;">
 
            <label >Last Name: </label>
            <input  style="width: 150px;" type="text" placeholder="Last Name"
-           readonly value={{ $per->last_name }} >
+           readonly value="{{ $per->last_name }}" >
          </td>
          <td>
            <label>DOB:</label>
-           <input  type="date"  readonly value={{ $per->dob }}>
+           <input  type="date"  readonly value="{{ $per->dob }}">
          </td>
           </tr>
         <tr>
@@ -231,12 +231,12 @@
           <td colspan="2">
            <label >Email: </label>
           <input type="email" placeholder="Email" readonly
-           value={{ session('employer_email') }} >
+           value="{{ session('employer_email') }}" >
           </td>
 
          <td>
            <label >Phone Number: </label>
-           <input type="text" placeholder="Phone Number"readonly  value={{ $pd->phone }} >
+           <input type="text" placeholder="Phone Number"readonly  value="{{ $pd->phone }}" >
           </td>
    <td>
    </tr>
@@ -248,16 +248,16 @@
 
 
 
-     <input  style="width: 150px;" type="text" placeholder="City"  readonly value={{ $per->city }}>
+     <input  style="width: 150px;" type="text" placeholder="City"  readonly value="{{ $per->city }}">
    </td>
    <td style="width: 150px;">
 
      <label >State: </label>
-     <input  style="width: 150px;" type="text" placeholder="State"  readonly value={{ $per->state }}>
+     <input  style="width: 150px;" type="text" placeholder="State"  readonly value="{{ $per->state }}">
    </td>
    <td>
      <label>Gender:</label>
-     <input  type="text" placeholder="Gender"  readonly value={{ $per->gender }}>
+     <input  type="text" placeholder="Gender"  readonly value="{{ $per->gender }}">
    </td>
     </tr>
 
@@ -265,12 +265,12 @@
      <td></td>
      <td colspan="2">
          <label >Address: </label>
-         <input type="text" placeholder="Address" readonly  value={{ $per->address }} >
+         <input type="text" placeholder="Address" readonly  value="{{ $per->address }}" >
         </td>
         <td colspan="2">
           <label> Educational Details:</label>
           <input type="text" placeholder="Educational Details" readonly
-           value={{ $per->education }}  >
+           value="{{ $per->education }}"  >
          </td>
 
    </tr>

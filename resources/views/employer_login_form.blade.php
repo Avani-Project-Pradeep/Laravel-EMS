@@ -5,6 +5,7 @@
  @section('content')
 
 
+ <h4><a href="http://127.0.0.1:8000/" style="color:green;margin-left:50px" > Back to Home Page </a></h4>
 
  {{-- TITLE --}}
 
@@ -12,6 +13,7 @@
 <title>Employer Login Form</title>
 <div class="form_wrapper">
 <div class="form_container">
+
 
 
  <div class="title_container">
@@ -30,11 +32,11 @@
 
 <input type="text" placeholder="Enter Company name" name="company_name">
 <div style="color:red; font-size:12px;">
- 
+
  @error('company_name')
 
  {{ "*".$message }}
- <br> 
+ <br>
 
  @enderror
 </div>
@@ -49,11 +51,11 @@
 
  <input type="email" name="email" placeholder=" Enter Email"  />
  <div style="color:red; font-size:12px;">
- 
+
      @error('email')
 
      {{ "*".$message }}
-     <br> 
+     <br>
 
      @enderror
 </div>
@@ -69,12 +71,12 @@
 
                  <input type="password" name="password" placeholder=" Enter Password" />
                  <div style="color:red; font-size:12px;">
- 
+
                      @error('password')
- 
+
                      {{ "*".$message }}
-                     <br> 
- 
+                     <br>
+
                      @enderror
          </div>
 
@@ -86,13 +88,9 @@
      <input class="button" type="submit" value="Login" />
      <br><br>
      <div class="flex items-center justify-end mt-4">
-         @if (Route::has('password.request'))
-             <a  style="color:green;" class=underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                 {{ __('Forgot your password?') }}
-             </a>
-         @endif
+        <a href="http://127.0.0.1:8000/newforgotpassword">Forgot Password</a>
 
-     </div>
+    </div>
      </form>
 <br>
 <br>

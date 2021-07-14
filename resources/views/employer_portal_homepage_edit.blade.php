@@ -91,20 +91,20 @@
         <label >Designation: </label>
 
 
-        <input  style="width: 100px;" type="text"  name="designation" placeholder="Designation " value={{ $pd->designation }}>
+        <input  style="width: 100px;" type="text"  name="designation" placeholder="Designation " value="{{ $pd->designation }}">
       </td>
       <td style="width: 100px;">
         <label >Location: </label>
-        <input  style="width: 100px;" type="text" placeholder="Location" name="location"  value={{$pd->location}}>
+        <input  style="width: 100px;" type="text" placeholder="Location" name="location"  value="{{$pd->location}}">
       </td>
       <td style="width: 150px;">
         <label>Company Name:</label>
-        <input style="width: 150px;" value={{$pd->company_name}} type="text"
+        <input style="width: 150px;" value="{{$pd->company_name}}" type="text"
           name= "company_name"placeholder="Company Name" >
       </td>
       <td style="width: 100px;">
         <label>Division: </label>
-        <input  style="width: 100px;"type="text"  name="division" placeholder="Division" value={{ $pd->division }} >
+        <input  style="width: 100px;"type="text"  name="division" placeholder="Division" value="{{ $pd->division }}" >
       </td>
      </tr>
      <tr>
@@ -112,12 +112,12 @@
        </td>
        <td>
         <label >Date_Of_Joining: </label>
-       <input type="date"  name="doj" value={{ $pd->doj }}  >
+       <input type="date"  name="doj" value="{{ $pd->doj }}"  >
        </td>
 
       <td colspan="3">
         <label >Work_Experience: </label>
-        <input type="text" placeholder="Work Experience" name="work_experience" value={{ $pd->work_experience }} >
+        <input type="text" placeholder="Work Experience" name="work_experience" value="{{ $pd->work_experience }}" >
        </td>
 <td>
 </tr>
@@ -126,7 +126,8 @@
   <td colspan="4">
       <label >Skills: </label>
       <br>
-      <input  type="text" placeholder="Skills" name="skills" value={{ $pd->skills }} >
+      <input  type="text" placeholder="Skills" name="skills" value=
+      "{{ $pd->skills }}" >
      </td>
 </tr>
 
@@ -134,7 +135,7 @@
   <td></td>
   <td colspan="4">
       <label >Bank Details: </label>
-      <input type="text" placeholder="Bank Details" name="bank"  value={{ $pd->bank_details  }}  >
+      <input type="text" placeholder="Bank Details" name="bank"  value="{{ $pd->bank_details  }}"  >
      </td>
 </tr>
 
@@ -173,17 +174,17 @@
 
 
 
-           <input  style="width: 150px;" type="text" name="first_name" placeholder="First Name"  value={{ $per->first_name }} >
+           <input  style="width: 150px;" type="text" name="first_name" placeholder="First Name"  value="{{ $per->first_name }}" >
          </td>
          <td style="width: 150px;">
 
            <label >Last Name: </label>
            <input  style="width: 150px;" type="text"  name="last_name" placeholder="Last Name"
-            value={{ $per->last_name }} >
+            value="{{ $per->last_name }}" >
          </td>
          <td>
            <label>DOB:</label>
-           <input  type="date" name="dob"   value={{ $per->dob }}>
+           <input  type="date" name="dob"   value="{{ $per->dob }}">
          </td>
           </tr>
         <tr>
@@ -192,7 +193,7 @@
           <td colspan="2">
            <label >Email: </label>
           <input type="email" placeholder="Email" name="email"
-           value={{ session('employer_email') }} >
+           value="{{ session('employer_email') }}" >
            <span style="color:red; font-size:12px;">
 
             @error('email')
@@ -206,7 +207,7 @@
 
          <td>
            <label >Phone Number: </label>
-           <input type="text"     name="phone_number"  placeholder="Phone Number"   value={{ $per->phone }} >
+           <input type="text"     name="phone_number"  placeholder="Phone Number"   value="{{ $per->phone }}" >
            <span style="color:red; font-size:12px;">
 
             @error('phone_number')
@@ -228,16 +229,17 @@
 
 
 
-     <input  style="width: 150px;" type="text" placeholder="City" name="city"   value={{ $per->city }}>
+     <input  style="width: 150px;" type="text" placeholder="City" name="city"   value="{{ $per->city }}">
    </td>
    <td style="width: 150px;">
 
      <label >State: </label>
-     <input  style="width: 150px;" type="text" placeholder="State"  name="state"  value={{ $per->state }}>
+     <input  style="width: 150px;" type="text" placeholder="State"  name="state"  value="{{ $per->state }}">
    </td>
    <td>
      <label>Gender:</label>
-     <input  type="text" placeholder="Gender"  name="gender"   value={{ $per->gender }}>
+     <input  type="text" placeholder="Gender"  name="gender"   value=
+     "{{ $per->gender }}">
    </td>
     </tr>
 
@@ -246,12 +248,12 @@
      <td></td>
      <td colspan="2">
          <label >Address: </label>
-         <input type="text" placeholder="Address" name="address"  value={{ $per->address }} >
+         <input type="text" placeholder="Address" name="address"  value="{{ $per->address }}" >
         </td>
         <td colspan="2">
           <label> Educational Details:</label>
           <input type="text" placeholder="Educational Details" name="education"
-           value={{ $per->education }}  >
+           value="{{ $per->education }}"  >
          </td>
 
    </tr>

@@ -24,6 +24,10 @@
 
        <!-- HEADING -->
        <h1 style="color: whitesmoke; font-size: 30px">EMPLOYEE PORTAL </h1>
-       @yield('options')
+       <a href="/employee_portal/Home"  style="font-size:25px;"><i class="fa fa-home"></i> Home</a>
+
+       <a href="/employee_portal/add_details"><i class="fa fa-user-plus"></i> Add Details </a>
+       <a href="/employee_portal/logout"><i class="fa fa-power-off
+        "></i> Logout</a>     </nav>
 
 </nav>

@@ -11,6 +11,20 @@
 
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+table {
+       counter-reset: tableCount;
+   }
+   .counterCell:before {
+       content: counter(tableCount);
+       counter-increment: tableCount;
+   }
+
+
+   .w-5{
+       display: none;
+   }
+
+
 </style>
 <body class="w3-light-grey">
 
@@ -27,17 +41,22 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </div>
 
 <!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:265px;" id="mySidebar"><br>
   <div class="w3-container w3-row">
     <div class="w3-col s4">
 
     </div>
     <div class="w3-col s8 w3-bar">
+        <br>
 
       <a href="#" class="w3-bar-item w3-button">
       <i class="fa fa-user-circle" style="font-size:20px;"> Welcome</i><br><br>
 
-        <button type="button" class="btn btn-outline-primary">{{session('employer_first_name')." ".session('employer_last_name')}}</button>
+      {{session('employer_first_name')." ".session('employer_last_name')}}
+
+        <button type="button" class="btn btn-outline-primary">
+         Email ID :<br> {{session('employer_email')}}
+        </button>
 
 
 
@@ -47,12 +66,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </div>
   <hr>
 
-  <div class="w3-bar-block" style="font-size:20px;">
+  <div class="w3-bar-block" style="font-size:20px; width:200px">
 
     <a href="/employer_portal/manage_employees/view" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i> View all Employees</a><br>
     <a href="/employer_portal/add_employee" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus-square"></i> Add Employees</a><br>
 
-    <a href="/employer_portal/edit_employee" class="w3-bar-item w3-button w3-padding"><i class="fa fa-edit"></i> Edit Employees</a><br>
+    <a href="/employer_portal/edit_employee" class="w3-bar-item w3-button w3-padding"><i class="fa fa-edit"></i> Update Employee <br>All Details </a><br>
 
     <a href="/search_employee" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search"></i>Search Employees</a>
 
