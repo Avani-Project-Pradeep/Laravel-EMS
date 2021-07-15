@@ -14,18 +14,18 @@ class EmployeeRegistration extends Migration
     public function up()
     {
         Schema::connection('mysql')->create('employee_registration', function (Blueprint $table) {
-            $table->increments('reg_id');
             $table->string('first_name');
-            $table->string('last_name');
+             $table->string('last_name');
             $table->text('image')->nullable();
             $table->string('phone_number');
-            $table->string('email');
+            $table->string('email')->primary();
             $table->string('city');
             $table->string('state');
             $table->string('address');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
-
+            $table->foreign('email') ->references('employee_email')
+         ->on('employee_personal_details')->onUpdate('cascade')->onDelete('cascade');
 
 
     });

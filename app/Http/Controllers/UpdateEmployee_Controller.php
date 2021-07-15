@@ -78,7 +78,7 @@ class UpdateEmployee_Controller extends Controller
     {
 
 
-        $employee_id=$request->input('employee_id');
+         $employee_id=$request->input('employee_id');
 
 
         $personal_details = $request->validate([

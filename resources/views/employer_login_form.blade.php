@@ -5,7 +5,7 @@
  @section('content')
 
 
- <h4><a href="http://127.0.0.1:8000/" style="color:green;margin-left:50px" > Back to Home Page </a></h4>
+ <h4><a href="/" style="color:green;margin-left:50px" > Back to Home Page </a></h4>
 
  {{-- TITLE --}}
 
@@ -88,7 +88,7 @@
      <input class="button" type="submit" value="Login" />
      <br><br>
      <div class="flex items-center justify-end mt-4">
-        <a href="http://127.0.0.1:8000/newforgotpassword">Forgot Password</a>
+        <a href="/newforgotpassword">Forgot Password</a>
 
     </div>
      </form>

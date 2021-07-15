@@ -11,6 +11,8 @@
             <tr>
                 <td>
                     <section>
+                        <form action="/employee/image/edit/{{$employee_id}}"  enctype="multipart/form-data"  method="POST" >
+                         @csrf
                         <br><br><br>
 
                         @if ($message = Session::get('success'))
@@ -36,8 +38,14 @@
                             {{-- IMAGE SECTION --}}
 
                             @foreach ($personal_details as $per )
-                            <img src="C:\xamppp\htdocs\Laravel project\ems\public\images\{{$per->image}}
-          ">
+
+                            @if( $per->image==NULL)
+                            <img  style="height:200px; width:200px" src="{{asset("images")}}/{{"blank.png"}}">
+                            @else
+                            <img src= "{{asset("images")}}/{{$per->image}}"
+                            >
+                            @endif
+
 
 
                             <br>
@@ -60,22 +68,22 @@
                     </section>
                     <br><br><br>
 
-                    <form action="image" enctype="multipart/form-data" method="POST">
-                        @csrf
+                    <span>
 
                     <input type="file" name="image">
 
-                    <span>
 
-                        <button type="submit" class="btn" style="width:100px;">UPLOAD IMAGE</button>
+                    <button type="submit" class="class=btn btn-primary btn-sm"
+                     style="width:120px;">UPLOAD IMAGE</button>
 
-                        <br>
 
-                        <button class="btn" style="width:100px;">REMOVE IMAGE</button>
                     </span>
 
-                </form>
-                </td>
+
+                    <a href="/delete/employee_image/{{$employee_id}}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">REMOVE IMAGE</a>
+
+                    </form>
+                  </td>
         </table>
 
 
@@ -105,7 +113,7 @@
                     <label>Designation: </label>
 
 
-                    <input style="width: 200px;" type="text" placeholder="Designation" name="designation" value={{ $pd->designation }}>
+                    <input style="width: 200px;" type="text" placeholder="Designation" name="designation" value="{{ $pd->designation }}">
                     <span style="color:red; font-size:12px;" >
                         @error('designation')
                         {{ '*' . $message }}<br>
@@ -118,7 +126,7 @@
 
 
                     <label>Company Name:</label>
-                    <input style="width: 200px;" name="company_name" value={{$pd->company_name}} type="text" placeholder="Company Name">
+                    <input style="width: 200px;" name="company_name" value="{{$pd->company_name}}" type="text" placeholder="Company Name">
                     <span style="color:red; font-size:12px;" >
                         @error('company_name')
                         {{ '*' . $message }}<br>
@@ -136,7 +144,7 @@
 
                 <div>
                     <label>Division: </label>
-                    <input style="width: 200px;" type="text" placeholder="Division"  name="division" value={{ $pd->division }}>
+                    <input style="width: 200px;" type="text" placeholder="Division"  name="division" value="{{ $pd->division }}">
                     <span style="color:red; font-size:12px;" >
                         @error('division')
                         {{ '*' . $message }}<br>
@@ -147,14 +155,14 @@
                     &nbsp;&nbsp;
 
                     <label>Date_Of_Joining: </label>
-                    <input style="width: 200px;" type="date" name="doj" value={{ $pd->doj }}>
+                    <input style="width: 200px;" type="date" name="doj" value="{{ $pd->doj }}">
 
 
                     &nbsp;&nbsp;&nbsp;
 
                     <label>Work_Experience: </label>
                     <input style="width: 100px;" type="text" name="work_experience" placeholder="Work"
-                        value={{ $pd->work_experience }}>
+                        value="{{ $pd->work_experience }}">
 
                 </div>
 
@@ -164,7 +172,7 @@
 
                 <div>
                     <label>Skills: </label>
-                    <input style="width: 250px;" type="text" name="skills" placeholder="Skills" value={{ $pd->skills }}>
+                    <input style="width: 250px;" type="text" name="skills" placeholder="Skills" value="{{ $pd->skills }}">
                     <span style="color:red; font-size:12px;" >
                         @error('skills')
                         {{ '*' . $message }}<br>
@@ -175,7 +183,7 @@
                     &nbsp;&nbsp;
 
                     <label>Department: </label>
-                    <input style="width: 250px;" type="text" name="department" placeholder="Department" value={{ $pd->department }}>
+                    <input style="width: 250px;" type="text" name="department" placeholder="Department" value="{{ $pd->department }}">
                     <span style="color:red; font-size:12px;" >
                         @error('department')
                         {{ '*' . $message }}<br>
@@ -207,7 +215,7 @@
                         <div>
                             <label>First Name: </label>
                             <input style="width: 300;" type="text" name="first_name" placeholder="First Name"
-                                value={{ $per->first_name }}>
+                                value="{{ $per->first_name }}">
                                 <span style="color:red; font-size:12px;" >
                                     @error('first_name')
                                     {{ '*' . $message }}<br>
@@ -218,7 +226,7 @@
                             &nbsp;&nbsp;
 
                             <label>Last Name: </label>
-                            <input style="width: 300;" type="text"  name="last_name" placeholder="Last Name" value={{ $per->last_name }}>
+                            <input style="width: 300;" type="text"  name="last_name" placeholder="Last Name" value="{{ $per->last_name }}">
                             <span style="color:red; font-size:12px;" >
                                 @error('last_name')
                                 {{ '*' . $message }}<br>
@@ -233,7 +241,7 @@
 
 
                             <label>DOB:</label>
-                            <input style="width: 300;" name="dob" type="date" value={{ $per->dob }}>
+                            <input style="width: 300;" name="dob" type="date" value="{{ $per->dob }}">
 
 
                         </div>
@@ -245,7 +253,7 @@
                         <div>
 
                             <label>Email: </label>
-                            <input type="email" placeholder="Email" name="employee_email" value={{$per->employee_email}}>
+                            <input type="email" placeholder="Email" name="employee_email" value="{{$per->employee_email}}">
                             <span style="color:red; font-size:12px;" >
                                 @error('employee_email')
                                 {{ '*' . $message }}<br>
@@ -256,7 +264,7 @@
                             &nbsp;&nbsp;
 
                             <label>Phone Number: </label>
-                            <input type="text" placeholder="Phone Number" name="phone" value={{ $per->phone }}>
+                            <input type="text" placeholder="Phone Number" name="phone" value="{{ $per->phone }}">
                             <span style="color:red; font-size:12px;" >
                                 @error('phone')
                                 {{ '*' . $message }}<br>
@@ -266,7 +274,7 @@
                             &nbsp;&nbsp;
 
                             <label>City: </label>
-                            <input type="text" name="city" placeholder="City" value={{ $per->city }}>
+                            <input type="text" name="city" placeholder="City" value="{{ $per->city }}">
                             <span style="color:red; font-size:12px;" >
                                 @error('city')
                                 {{ '*' . $message }}<br>
@@ -283,7 +291,7 @@
                         <div>
 
                             <label>State: </label>
-                            <input type="text" name="state" placeholder="State" value={{ $per->state }}>
+                            <input type="text" name="state" placeholder="State" value="{{ $per->state }}">
                             <span style="color:red; font-size:12px;" >
                                 @error('state')
                                 {{ '*' . $message }}<br>
@@ -295,12 +303,11 @@
 
 
                             <label>Gender:</label>
-                            <input type="text" placeholder="Gender" value={{ $per->gender }}>
+                            <input type="text" placeholder="Gender" value="{{ $per->gender }}">
 
-                            &nbsp;&nbsp;
-
+                            <br><br>
                             <label>Address: </label>
-                            <input type="text" placeholder="Address" name="address" value={{ $per->address }}>
+                            <input type="text" placeholder="Address" name="address" value="{{ $per->address }}" style="width:500px">
                             <span style="color:red; font-size:12px;" >
                                 @error('address')
                                 {{ '*' . $message }}<br>
@@ -315,7 +322,7 @@
 
 
                         <label> Educational Details:</label>
-                        <input type="text" placeholder="Educational Details" name="educational_details" value={{ $per->education }}>
+                        <input type="text" style="width:500px" placeholder="Educational Details" name="educational_details" value="{{ $per->education }}">
                         <span style="color:red; font-size:12px;" >
                             @error('educational_details')
                             {{ '*' . $message }}<br>

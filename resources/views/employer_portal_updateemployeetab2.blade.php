@@ -9,70 +9,124 @@
     <br>
     <em><span style="margin-left:50px; font-size:30px;color: white">Update Employee Details</span></em>
 
-      <hr style="border: solid green;">
+    <hr style="border: solid green;">
 
-        <ul class="tab-wrap">
-            <li>
-                <input type="radio" id="tab-1" name="tab" disabled/>
-                <label for="tab-1">
-                    Tab 1
-                </label>
+    <ul class="tab-wrap">
+        <li>
+            <input type="radio" id="tab-1" name="tab" disabled />
+            <label for="tab-1">
+                Tab 1
+            </label>
 
-            <li>
-                <input type="radio" id="tab-2" name="tab" checked="checked" />
-                <label for="tab-2">
-                    Tab 2
-                </label>
+        <li>
+            <input type="radio" id="tab-2" name="tab" checked="checked" />
+            <label for="tab-2">
+                Tab 2
+            </label>
 
-                <div class="tab-content">
-                    <div id="container">
-                        <div>
-                            <div class="one">
+            <div class="tab-content">
+                <div id="container">
+                    <div>
+                        <div class="one">
 
-                                <br><br>
-                                <section style="margin-left: 20px">
-                                    {{-- IMAGE SECTION --}}
-                                    <img src="https://i.ibb.co/yNGW4gg/avatar.png" id="blah" alt="Avatar">
-                                    {{ session('employer_email') }}
-                                    <br><br>
-                                    <button class="btn" style="width:80px;">UPLOAD</button>
-
-                                </section>
-
-                                <form method="POST" action="/actionupdateemployee">
+                            <br><br>
+                            <section>
+                                <form action="/employee/image/edit/{{$id}}" enctype="multipart/form-data" method="POST">
                                     @csrf
+                                    <br><br><br>
 
-                            </div>
+                                    @if ($message = Session::get('success'))
 
-                            <div class="two">
-                                <br><br>
+                                    <div style="color:green; font-size:15px;">
 
-                                @include('tab2form')
+                                        {{ $message }}
+                                    </div>
 
-                                <br>
+                                    @endif
 
-                                <input type="hidden" value={{$id}} name='employee_id'>
+                                    @if ($message = Session::get('empty'))
+                                    <div style="color:red; font-size:15px;">
 
-                                <a href='/employer_portal/add_employee' id='change'>Back</a>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{ $message}}
+                                    </div>
 
-                                <input type="submit" id="change" value= "Update">
-
-
-
-
+                                    @endif
 
 
 
 
-                            </div>
+                                    {{-- IMAGE SECTION --}}
+
+
+                                    <img style="height:300px; width:300px margin-left:20px"
+                                        src="{{asset("images")}}/{{"blank.png"}}">
+
+
+
+                                    <br>
+                                    <div class="input_field">
+
+                                        <div style="color:red; font-size:12px;">
+
+                                            @error('image')
+
+                                            {{ "*".$message }}
+                                            <br>
+
+                                            @enderror
+                                        </div>
+
+
+                                        <span>
+                                            <input type="file" name="image" id="change">
+                                            <br>
+
+                                            <button type="submit" id="change" style="width:120px;">UPLOAD IMAGE</button>
+
+                                        </span>
+
+                                </form>
+
+                            </section>
+
+
+
+
+
+                            <form method="POST" action="/actionupdateemployee">
+                                @csrf
 
                         </div>
+
+                        <div class="two">
+                            <br><br>
+
+                            @include('tab2form')
+
+                            <br>
+
+                            <input type="hidden" value={{$id}} name='employee_id'>
+
+                            <a href='/employer_portal/add_employee' id='change'>Back</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            <input type="submit" id="change" value="Update">
+
+
+
+
+
+
+
+
+                        </div>
+
                     </div>
                 </div>
-            </li>
+            </div>
+        </li>
 
-        </ul>
+    </ul>
     </form>
 
 

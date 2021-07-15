@@ -5,7 +5,7 @@
 @section('content')
 
 <div>
-    <h4><a href="http://127.0.0.1:8000/" style="color:green;margin-left:50px" > Back to Home Page </a></h4>
+    <h4><a href="/" style="color:green;margin-left:50px" > Back to Home Page </a></h4>
 
 </div>
 

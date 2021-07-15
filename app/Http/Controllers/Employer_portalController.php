@@ -23,18 +23,89 @@ class Employer_portalController extends Controller
 
 
         //fetching professional details of the logged in user
-        $professional_details=Employer_Professional_Detail::where('employer_email','=', $email)->get();
+        $professional_details = Employer_Professional_Detail::where('employer_email', '=', $email)->get();
 
 
 
-     //fetching personal  details of the logged in user
+        //fetching personal  details of the logged in user
 
 
-        $personal_details=Employer_Personal_Detail::where('employer_email','=', $email)->get();
+        $personal_details = Employer_Personal_Detail::where('employer_email', '=', $email)->get();
 
 
-        return view('employer_portal_homepage',['professional_details'=>$professional_details,'personal_details'=>$personal_details]);
+        return view('employer_portal_homepage', ['professional_details' => $professional_details, 'personal_details' => $personal_details]);
+    }
 
+
+
+
+
+    //image section
+    public function image(Request $request)
+    {
+        $email = $request->session()->get('email');
+
+
+        if ($request->hasFile('image')) {
+
+
+            $validated = $request->validate([
+                "image" => 'nullable|image|mimes:jpg,png,jpeg|max:5000',
+            ]);
+
+
+
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move(public_path('images'),$filename);
+            }
+
+            $email = $request->session()->get('employer_email');
+
+            $image_db = DB::table('employer_personal_details')
+              ->where('employer_email', $email)
+              ->update(['image' => $filename]);
+
+
+            return back()
+                ->with('success', 'You have successfully upload image.');
+        } else {
+            return back()
+                ->with('empty', 'Please select an image to upload');
+        }
+    }
+
+
+
+    public function delete_image(Request $request,$email)
+    {
+
+
+        $image=DB::table('employer_personal_details')
+        ->where('employer_email',$email)->value('image');
+
+
+        if($image)
+        {
+
+        $image_db = DB::table('employer_personal_details')
+        ->where('employer_email','=', $email)
+        ->update(['image' => NULL]);
+
+        return back()
+        ->with('success', 'You have successfully removed image.');
+
+        }
+
+        else
+        {
+            return back()
+            ->with('empty', 'No image uploaded to remove');
+
+        }
 
     }
 
@@ -42,61 +113,6 @@ class Employer_portalController extends Controller
 
 
 
-//image section
-   public function image(Request $request)
-   {
-    $email=$request->session()->get('email');
-
-
-
-    if ($request->hasFile('image')) {
-
-
-    $validated=$request->validate([
-        "image"=>'nullable|image|mimes:jpg,png,jpeg|max:5000',
-    ]);
-
-
-    $image = file($validated['image']);
-    $image_name = rand(1000,9999).'.'.$validated['image']->extension();
-    $validated['image']->move(public_path('images'),$image_name);
-    $validated['image']=$image_name;
-
-
-
-
-
-
-
-
-   $image_db = DB::table('employer_personal_details')
-              ->where('employer_email', $email)
-              ->update(['image' => $image_name]);
-
-
-
-
-
-    /*   $employer_image= Employer_Personal_Detail::where('employer_email', '=', $email)->first();
-      $employer_image->image = $image_name;
-      $employer_image->save();
-
- */
-            return back()
-            ->with('success','You have successfully upload image.');
-
-
-   }
-   else{
-       return back()
-       ->with('empty','Please select an image to upload');
-
-   }
-
-
-
-
-   }
 
 
 

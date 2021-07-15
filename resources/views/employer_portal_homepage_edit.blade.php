@@ -1,3 +1,7 @@
+
+{{-- EMPLOYER PORTAL --}}
+
+
 @extends('layouts.portal_layout')
 {{-- NAVIGATION OPTIONS --}}
 @section('options')
@@ -34,44 +38,79 @@
   <br><br><br>
 
 
-<br><br>
-<form action="/employer_portal/employer_image"  enctype="multipart/form-data"  method="POST" >
-  @csrf
+@if ($message = Session::get('success'))
 
-  {{-- IMAGE SECTION --}}
+<div style="color:green; font-size:15px;">
 
-  @foreach ($personal_details as $per )
-
-  <br>
-  <div class="input_field">
-
-    <div style="color:red; font-size:12px;">
-
-      @error('image')
-
-      {{ "*".$message }}
-      <br>
-
-      @enderror
+       {{ $message }}
 </div>
 
+@endif
+
+@if ($message = Session::get('empty'))
+<div style="color:red; font-size:15px;">
+
+        {{ $message}}
+</div>
+
+@endif
+
+<br><br>
+<form action="image"  enctype="multipart/form-data"  method="POST" >
+    @csrf
+
+    {{-- IMAGE SECTION --}}
+
+    @foreach ($personal_details as $per )
+
+    @if( $per->image==NULL)
+    <img src="{{asset("images")}}/{{"blank.png"}}">
+    @else
+    <img src= "{{asset("images")}}/{{$per->image}}"
+    >
+    @endif
+
+
+    <br>
+    <div class="input_field">
+
+      <div style="color:red; font-size:12px;">
+
+        @error('image')
+
+        {{ "*".$message }}
+        <br>
+
+        @enderror
+  </div>
 
 
 
 
-</section>
-{{ session('employer_email') }}
 
-</section>
-<br><br><br><br><br><br>
+  </section>
+  <br><br><br><br><br><br>
 
 
-<button class="btn" style="width:100px;">UPLOAD</button>
-<button class="btn" style="width:100px;">EDIT</button>
+  <input type="file" name="image">
 
-</td>
-</form>
+  <span>
+
+  <button type="submit" class="btn"
+   style="width:120px;">UPLOAD IMAGE</button>
+
+
+  </span>
+
+  <a   class="btn" style="background-color:rgb(235, 137, 137);width:80px;" href="/delete_image/{{$per->employer_email}}">REMOVE IMAGE</a>
+
+  </form>
+  </td>
+
+
 <td>
+
+
 <ul>
   {{-- PROFESSIONAL DETAILS --}}
  <h2> PROFESSIONAL DETAILS</h2>

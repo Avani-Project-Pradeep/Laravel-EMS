@@ -24,13 +24,13 @@ class Employee_RegistrationController extends Controller
     public function actionregister(Request $request )
     {
 
-        $request->validate([
+      $validate=  $request->validate([
 
-            "first_name" => 'required|max:50|string|',
-            "last_name"=> 'required|max:50|string|',
+            "first_name" => 'required|max:50|string|regex:/^([^0-9]*)$/',
+            "last_name"=> 'required|max:50|string|regex:/^([^0-9]*)$/',
             "phone_number"=>'required|digits:10|unique:employee_personal_details,phone|',
-            "city"=>'required|max:50|',
-            "state"=>'required|max:50|',
+            "city"=>'required|max:50|regex:/^([^0-9]*)$/',
+            "state"=>'required|max:50|regex:/^([^0-9]*)$/',
             "image"=>'nullable|image|mimes:jpg,png,jpeg|max:5000',
             "address"=>'required|max:200',
             "email"=>'required|email|unique:users,email',
@@ -58,11 +58,31 @@ class Employee_RegistrationController extends Controller
             'city' => $request->input('city'),
             'state' => $request->input('state'),
             'phone_number'=>$request->input('phone_number'),
-            'image' => $request->file('image'),
             'address'=> $request->input('address'),
 
 
         ]);
+
+
+           //Image registration
+           if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move(public_path('images'),$filename);
+        }
+
+
+        $image_db = DB::table('employee_registration')
+        ->where('email',$validate['email'])
+        ->update(['image' => $filename]);
+
+
+
+
+
+
+
 
                  /* REGISTRATION COMPLETED */
 

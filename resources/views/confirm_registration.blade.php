@@ -11,7 +11,7 @@
 
 <div class="container">
   <div class="alert alert-success" style="margin-top:150px;border:solid 2px ; border-color:green"  >
-    <strong >You are Successfully Registered!</strong><br>Please Check Your Mail Inbox<br>
-    <a href="http://127.0.0.1:8000/">Back to  Home </a>
+    <strong >Successfully Registered!</strong><br>Login Link is sent to the registered email id<br>
+    <a href="/">Back to  Home </a>
 
   </div>

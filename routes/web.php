@@ -9,6 +9,8 @@ use App\Http\Controllers\Employer_portalController;
 use App\Http\Controllers\EditEmployerController;
 use App\Http\Controllers\AddEmployee_Controller;
 use App\Http\Controllers\UpdateEmployee_Controller;
+use App\Http\Controllers\EmployeeImage_Controller;
+
 
 use App\Http\Controllers\Employee_RegistrationController;
 use App\Http\Controllers\Employee_LoginController;
@@ -75,7 +77,7 @@ Route::get('/login', function()
     return abort('404');
 });
 
-Route::get('/http://127.0.0.1:8000/dashboard', function()
+Route::get('/dashboard', function()
 {
     return abort('404');
 
@@ -126,6 +128,9 @@ Route::get('/employer_portal/edit',[EditEmployerController::class,'editemployer'
 //Employer Image
 
 Route::post('employer_portal/image',[Employer_portalController::class,'image']);
+
+Route::get('/delete_image/{email}',[Employer_portalController::class,'delete_image']);
+
 
 
 
@@ -199,6 +204,7 @@ Route::get('/viewemployee/{id}', [ManageEmployee::class,'viewemployee']);
 
 
 
+
 //update employee form
 
 
@@ -250,7 +256,15 @@ Route::post('searchresults',[ManageEmployee::class,'searchresults']);
 Route::get('/delete/{id}',[ManageEmployee::class,'deleteemployee']);
 
 
-Route::get('//',[ManageEmployee::class,'deleteemployee']);
+
+
+
+//employee image action
+Route::post('/employee/image/edit/{id}',[EmployeeImage_Controller::class,'upload_employee_image']);
+
+
+
+Route::get('/delete/employee_image/{id}',[EmployeeImage_Controller::class,'delete_employee_image']);
 
 
 
@@ -288,10 +302,17 @@ Route::get('employer_portal/logout',[Employer_portalController::class,'employer_
 
     Route::get('/About_Employer',[Employee_portalController::class,'aboutemployer']);
 
-    Route::get('/employee_portal/add_details',[Employee_portalController::class,'next_add_details']);
+    Route::get('/employee_portal/add_details',[Employee_portalController::class,'add_details']);
+
+    Route::post('/nextadddetails',[Employee_portalController::class,'next_add_details']);
+
+    Route::get('/employee_portal/add_details/tab2/{id}', function($id)
+    {
+    return view('employee_portal.add_details_tab2',['id'=>$id]);
+    })->name('add_details_tab2');
 
 
-
+    Route::post('/add_details_all/{id}',[Employee_portalController::class,'all_add_details']);
 
 
 

@@ -36,8 +36,8 @@ table {
 
 
 
-  <span class="w3-bar-item w3-right">Logout</span>
-  <span class="w3-bar-item w3-right"><a href="/home">Home</span>
+  <span class="w3-bar-item w3-right"><a href="/employer_portal/logout">Logout</a></span>
+  <span class="w3-bar-item w3-right"><a href="/home">Home</a></span>
 </div>
 
 <!-- Sidebar/menu -->
@@ -66,10 +66,13 @@ table {
   </div>
   <hr>
 
-  <div class="w3-bar-block" style="font-size:20px; width:200px">
+  <div class="w3-bar-block" style="font-size:15px; width:200px">
 
     <a href="/employer_portal/manage_employees/view" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i> View all Employees</a><br>
     <a href="/employer_portal/add_employee" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus-square"></i> Add Employees</a><br>
+
+    <a href="/Employee/register" class="w3-bar-item w3-button w3-padding"><i class="fa fa-check-circle"></i> Register Employees</a><br>
+
 
     <a href="/employer_portal/edit_employee" class="w3-bar-item w3-button w3-padding"><i class="fa fa-edit"></i> Update Employee <br>All Details </a><br>
 

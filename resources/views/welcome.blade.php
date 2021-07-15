@@ -18,18 +18,18 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 <div class="w3-top">
   <div class="w3-row w3-large w3-light-grey">
     <div class="w3-col s3">
-      <a href="http://127.0.0.1:8000/" class="w3-button w3-block" style="background-color:lavender">Home</a>
+      <a href="/" class="w3-button w3-block" style="background-color:lavender">Home</a>
     </div>
         <div class="w3-col s3">
-            <a href="http://127.0.0.1:8000/Employer/register"  class="w3-button w3-block">Employer Registration</a>
+            <a href="/Employer/register"  class="w3-button w3-block">Employer Registration</a>
           </div>
 
           <div class="w3-col s3">
-            <a href="http://127.0.0.1:8000/Employer/login" class="w3-button w3-block">Employer Login</a>
+            <a href="/Employer/login" class="w3-button w3-block">Employer Login</a>
           </div>
 
           <div class="w3-col s3">
-            <a href="http://127.0.0.1:8000/Employee/login" class="w3-button w3-block">Employee Login</a>
+            <a href="/Employee/login" class="w3-button w3-block">Employee Login</a>
           </div>
         </div>
       </div>

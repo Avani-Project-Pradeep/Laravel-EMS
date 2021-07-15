@@ -1,9 +1,9 @@
 {{-- NAVIGATION OPTIONS --}}
 @section('options')
-<a href="http://127.0.0.1:8000/{{ $company_name }}/employer_portal/Home"><i class="fa fa-home"></i> Home</a>
-<a href="http://127.0.0.1:8000/{{ $company_name }}/employer_portal/manage_employees/view"><i class="fa fa-users	"></i>
+<a href="/{{ $company_name }}/employer_portal/Home"><i class="fa fa-home"></i> Home</a>
+<a href="/{{ $company_name }}/employer_portal/manage_employees/view"><i class="fa fa-users	"></i>
     Manage Employees</a>
-<a href="http://127.0.0.1:8000/{{ $company_name }}/employer_portal/logout"><i class="fa fa-power-off
+<a href="/{{ $company_name }}/employer_portal/logout"><i class="fa fa-power-off
                              "></i> Logout</a> </nav>
 
 @endsection
@@ -18,7 +18,7 @@
 <body>
     <br>
     <em><span style="margin-left:50px; font-size:30px;color: white">Add Employee</span></em>
-    <em><a  style="margin-left:800px; font-size:30px;color:white" href="http://127.0.0.1:8000/Employee/register">Click here to Register Employees </a></em>
+    <em><a  style="margin-left:800px; font-size:30px;color:white" href="/Employee/register">Click here to Register Employees </a></em>
 
 
     <ul class="tab-wrap">

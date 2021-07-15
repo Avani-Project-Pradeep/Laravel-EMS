@@ -4,7 +4,7 @@
 <div class="w3-main" style="margin-left:400px; margin-right:200px;   margin-top:80px;">
 
     <body>
-        <button type="button" class="btn btn-light">EMPLOYEE ID -  {{$employee_id}}</button>
+        <button type="button" class="btn btn-light">EMPLOYEE ID - {{$employee_id}}</button>
         <br><br>
 
         <table cellspacing="0" cellpadding="0">
@@ -13,84 +13,22 @@
                     <section>
                         <br><br><br>
 
+                        @foreach ($personal_details as $per )
 
-
-
-
-
-                        @if ($message = Session::get('success'))
-
-                        <div style="color:green; font-size:15px;">
-
-                            {{ $message }}
-                        </div>
-
+                        @if( $per->image==NULL)
+                        <img  style="width:300px; height: 300px;" src="{{asset("images")}}/{{"blank.png"}}">
+                        @else
+                        <img src="{{asset("images")}}/{{$per->image}}">
                         @endif
-
-                        @if ($message = Session::get('empty'))
-                        <div style="color:red; font-size:15px;">
-
-                            {{ $message}}
-                        </div>
-
-                        @endif
-
-
-
-                        <form action="image" enctype="multipart/form-data" method="POST">
-                            @csrf
-
-                            {{-- IMAGE SECTION --}}
-
-                            @foreach ($personal_details as $per )
-                            <img src="C:\xamppp\htdocs\Laravel project\ems\public\images\{{$per->image}}
-          ">
-
-
-                            <br>
-                            <div class="input_field">
-
-                                <div style="color:red; font-size:12px;">
-
-                                    @error('image')
-
-                                    {{ "*".$message }}
-                                    <br>
-
-                                    @enderror
-                                </div>
-
-
-
-
 
                     </section>
-                    <br><br><br>
-
-
-                    <input type="file" name="image">
-
-                    <span>
-
-                        <button type="submit" class="btn" style="width:100px;">UPLOAD IMAGE</button>
-
-                        <br>
-
-                        <button class="btn" style="width:100px;">REMOVE IMAGE</button>
-                    </span>
-
-
-
-
-
-                    </form>
                 </td>
-            </table>
+        </table>
 
-            <br><br>
+        <br><br>
 
-            <a href="/editemployee/{{$employee_id}}"> <i class="fa fa-edit" style="font-size:24px">EDIT DETAILS</a></i>
-            <br><br><br>
+        <a href="/editemployee/{{$employee_id}}"> <i class="fa fa-edit" style="font-size:24px">EDIT DETAILS</a></i>
+        <br><br><br>
 
 
         <ul>
@@ -111,20 +49,20 @@
 
 
                     <input style="width: 200px;" type="text" readonly placeholder="Designation "
-                        value={{ $pd->designation }}>
+                        value="{{ $pd->designation }}">
 
 
                     &nbsp;&nbsp;
 
 
                     <label>Location: </label>
-                    <input style="width: 200px;" type="text" placeholder="Location" readonly value={{$pd->location}}>
+                    <input style="width: 200px;" type="text" placeholder="Location" readonly value="{{$pd->location}}">
 
 
                     &nbsp;&nbsp;
 
                     <label>Company Name:</label>
-                    <input style="width: 200px;" value={{$pd->company_name}} type="text" placeholder="Company Name"
+                    <input style="width: 200px;" value="{{$pd->company_name}}" type="text" placeholder="Company Name"
                         readonly>
 
 
@@ -137,18 +75,19 @@
 
                 <div>
                     <label>Division: </label>
-                    <input style="width: 200px;" type="text" placeholder="Division" value={{ $pd->division }} readonly>
+                    <input style="width: 200px;" type="text" placeholder="Division" value="{{ $pd->division }}"
+                        readonly>
 
                     &nbsp;&nbsp;
 
                     <label>Date_Of_Joining: </label>
-                    <input style="width: 200px;" type="date"  readonly value="{{ $pd->doj }}">
+                    <input style="width: 200px;" type="date" readonly value="{{ $pd->doj }}">
 
                     &nbsp;&nbsp;&nbsp;
 
                     <label>Work_Experience: </label>
-                    <input style="width: 100px;" type="text" placeholder="Work"
-                      readonly  value="{{ $pd->work_experience }}">
+                    <input style="width: 100px;" type="text" placeholder="Work" readonly
+                        value="{{ $pd->work_experience }}">
 
                 </div>
 
@@ -158,12 +97,13 @@
 
                 <div>
                     <label>Skills: </label>
-                    <input style="width: 250px;" type="text" placeholder="Skills" readonly value="{{ $pd->skills }}" >
+                    <input style="width: 250px;" type="text" placeholder="Skills" readonly value="{{ $pd->skills }}">
 
                     &nbsp;&nbsp;
 
                     <label>Department: </label>
-                    <input style="width: 250px;" type="text" placeholder="Department" readonly value={{ $pd->department }}>
+                    <input style="width: 250px;" type="text" placeholder="Department" readonly
+                        value="{{ $pd->department }}">
 
                 </div>
 
@@ -173,111 +113,107 @@
         </ul>
 
 
-    <td class="section2">
-         <ul>
+        <td class="section2">
+            <ul>
 
 
 
 
-                   <form>
+                <form>
 
 
-                {{-- PERSONAL DETAILS --}}
-                <h2>PERSONAL DETAILS</h2>
-                <hr style="border: solid black;">
-                <ul>
+                    {{-- PERSONAL DETAILS --}}
+                    <h2>PERSONAL DETAILS</h2>
+                    <hr style="border: solid black;">
+                    <ul>
 
-                    <table>
-                     <div>
-                      <label>First Name: </label>
-                      <input style="width: 300;" type="text" placeholder="First Name" readonly
-                                    value={{ $per->first_name }}>
+                        <table>
+                            <div>
+                                <label>First Name: </label>
+                                <input style="width: 300;" type="text" placeholder="First Name" readonly
+                                    value="{{ $per->first_name }}">
 
-                                       &nbsp;&nbsp;
+                                &nbsp;&nbsp;
 
                                 <label>Last Name: </label>
                                 <input style="width: 300;" type="text" placeholder="Last Name" readonly
-                                    value={{ $per->last_name }}>
+                                    value="{{ $per->last_name }}">
 
 
-                                    &nbsp;&nbsp;
-                                    &nbsp;&nbsp;
+                                &nbsp;&nbsp;
+                                &nbsp;&nbsp;
 
 
 
                                 <label>DOB:</label>
-                                <input  style="width: 300;" type="date" readonly value={{ $per->dob }}>
+                                <input style="width: 300;" type="date" readonly value="{{ $per->dob }}">
 
-                                  </div>
+                            </div>
 
-                                  <br><br>
+                            <br><br>
 
 
 
-                                  <div>
+                            <div>
 
                                 <label>Email: </label>
-                                <input type="email" placeholder="Email" readonly
-                                 value={{$per->employee_email}}>
+                                <input type="email" placeholder="Email" readonly value="{{$per->employee_email}}">
 
-                                   &nbsp;&nbsp;
+                                &nbsp;&nbsp;
 
                                 <label>Phone Number: </label>
-                                <input type="text" placeholder="Phone Number" readonly value={{ $per->phone }}>
+                                <input type="text" placeholder="Phone Number" readonly value="{{ $per->phone }}">
                                 &nbsp;&nbsp;
 
                                 <label>City: </label>
-                                <input  type="text" placeholder="City" readonly
-                                    value={{ $per->city }}>
-                                    &nbsp;&nbsp;
+                                <input type="text" placeholder="City" readonly value="{{ $per->city }}">
+                                &nbsp;&nbsp;
 
 
 
-                                  </div>
+                            </div>
 
-                                   <br><br>
-                                  <div>
+                            <br><br>
+                            <div>
 
-                                    <label>State: </label>
-                                    <input  type="text" placeholder="State" readonly
-                                        value={{ $per->state }}>
+                                <label>State: </label>
+                                <input type="text" placeholder="State" readonly value="{{ $per->state }}">
 
-                                        &nbsp;&nbsp;
+                                &nbsp;&nbsp;
 
 
                                 <label>Gender:</label>
-                                <input type="text" placeholder="Gender" readonly value={{ $per->gender }}>
+                                <input type="text" placeholder="Gender" readonly value="{{ $per->gender }}">
 
-                                    &nbsp;&nbsp;
+                                &nbsp;&nbsp;
 
                                 <label>Address: </label>
-                                <input type="text" placeholder="Address" readonly value={{ $per->address }}>
+                                <input type="text" placeholder="Address" readonly value="{{ $per->address }}">
 
 
-                                  </div>
+                            </div>
 
-                                  <br><br>
-
-
-                                <label> Educational Details:</label>
-                                <input type="text" placeholder="Educational Details" readonly
-                                    value={{ $per->education }}>
+                            <br><br>
 
 
-
-
-
-                    </table>
-
-                    </form>
+                            <label> Educational Details:</label>
+                            <input type="text" placeholder="Educational Details" readonly value="{{ $per->education }}">
 
 
 
 
-@endforeach
-@endforeach
+
+                        </table>
+
+                </form>
 
 
-</body>
 
-</html>
+
+                @endforeach
+                @endforeach
+
+
+    </body>
+
+    </html>

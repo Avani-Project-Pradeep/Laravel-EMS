@@ -52,7 +52,12 @@
             <td>{{$employee->employee_id}}</td>
            <td>{{$employee->first_name}}</td>
             <td>{{$employee->last_name}}</td>
-            <td>{{$employee->image}}</td>
+            @if( $employee->image==NULL)
+            <td> <img  style="width:80px; height:80px" src="{{asset("images")}}/{{"blank.png"}}"></td>
+            @else
+            <td><img  style="width:80px; height:80px" src= "{{asset("images")}}/{{$employee->image}}"></td>
+
+            @endif
             <td>{{$employee->employee_email}}</td>
             <td>{{$employee->designation}}</td>
             <td colspan="2">{{$employee->doj}}</td>

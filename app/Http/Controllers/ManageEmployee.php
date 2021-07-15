@@ -34,12 +34,14 @@ class ManageEmployee extends Controller
         $employees = DB::table('employee_professional_details')
             ->join('employee_personal_details', 'employee_professional_details.employee_id', '=', 'employee_personal_details.employee_id')
             ->select('employee_professional_details.employee_id', 'employee_professional_details.designation', 'employee_professional_details.doj',  'employee_professional_details.employee_status', 'employee_personal_details.first_name', 'employee_personal_details.last_name', 'employee_personal_details.image', 'employee_personal_details.employee_email')
-            ->paginate('5');
+            ->paginate('3');
 
 
 
         return view('manage_employee_view', ['employees' => $employees]);
     }
+
+
 
 
 
@@ -75,6 +77,13 @@ class ManageEmployee extends Controller
         $personal_details = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->get();
         return view('view_employee', ['professional_details' => $professional_details, 'personal_details' => $personal_details, 'employee_id' => $employee_id]);
     }
+
+
+
+
+
+
+
 
 
 
@@ -136,7 +145,7 @@ class ManageEmployee extends Controller
 
         if ($request->input('phone') != $existing_phone) {
             $request->validate([
-                'phone' => 'required|digits:10|unique:employer_personal_details,phone'
+                'phone' => 'required|digits:10|unique:employee_personal_details,phone'
             ]);
         }
 

@@ -25,13 +25,13 @@
                 <div class="tab-content">
                     <div id="container">
                         {{-- tab1-form.part1 --}}
-                        @include('tab1form1_details')
+                        @include('employee_portal.tab1form1_details')
 
                         <div class="two">
                             <div style="margin-left:50px">
                                 <br><br>
                                 {{-- tab1-form.part2 --}}
-                                @include('tab1_form2_adddetails')
+                                @include('employee_portal.tab1_form2_adddetails')
 
                                 {{-- next button --}}
 

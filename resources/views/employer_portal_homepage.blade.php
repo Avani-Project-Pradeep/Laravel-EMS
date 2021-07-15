@@ -1,4 +1,9 @@
 @extends('layouts.portal_layout')
+
+
+ {{-- EMPLOYER PORTAL HOME PAGE --}}
+
+
 {{-- NAVIGATION OPTIONS --}}
 @section('options')
 <a href="/employer_portal/Home"><i class="fa fa-home"></i> Home</a>
@@ -70,8 +75,13 @@
   {{-- IMAGE SECTION --}}
 
   @foreach ($personal_details as $per )
-  <img src= "C:\xamppp\htdocs\Laravel project\ems\public\images\{{$per->image}}
-  ">
+
+  @if( $per->image==NULL)
+  <img src="{{asset("images")}}/{{"blank.png"}}">
+  @else
+  <img src= "{{asset("images")}}/{{$per->image}}"
+  >
+  @endif
 
 
   <br>
@@ -100,15 +110,12 @@
 <span>
 
 <button type="submit" class="btn"
- style="width:100px;">UPLOAD IMAGE</button>
+ style="width:120px;">UPLOAD IMAGE</button>
 
 
-<button class="btn" style="width:100px;">REMOVE IMAGE</button>
 </span>
 
-
-
-
+<a   class="btn" style="background-color:rgb(235, 137, 137);width:80px;" href="/delete_image/{{$per->employer_email}}">REMOVE IMAGE</a>
 
 </form>
 </td>

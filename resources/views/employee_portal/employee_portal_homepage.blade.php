@@ -23,85 +23,64 @@
  <table cellspacing="0" cellpadding="0" >
     <tr>
 <td>
-<section>
-  <br><br><br>
+    <section>
+        {{$employee_id= session('employee_id')}}
+        <form action="/employee/image/edit/{{$employee_id}}"  enctype="multipart/form-data"  method="POST" >
+         @csrf
+        <br><br><br>
 
-<br><br>
+        @if ($message = Session::get('success'))
 
+        <div style="color:green; font-size:15px;">
 
+            {{ $message }}
+        </div>
 
-@if ($message = Session::get('success'))
+        @endif
 
-<div style="color:green; font-size:15px;">
+        @if ($message = Session::get('empty'))
+        <div style="color:red; font-size:15px;">
 
-       {{ $message }}
-</div>
+            {{ $message}}
+        </div>
 
-@endif
-
-@if ($message = Session::get('empty'))
-<div style="color:red; font-size:15px;">
-
-        {{ $message}}
-</div>
-
-@endif
-
+        @endif
 
 
 
 
+            {{-- IMAGE SECTION --}}
+
+            @foreach ($personal_details as $per )
+
+            @if( $per->image==NULL)
+            <img  style="height:200px; width:200px" src="{{asset("images")}}/{{"blank.png"}}">
+            @else
+            <img src= "{{asset("images")}}/{{$per->image}}"
+            >
+            @endif
 
 
 
+            <br>
+            <div class="input_field">
 
+                <div style="color:red; font-size:12px;">
 
-<form action="image"  enctype="multipart/form-data"  method="POST" >
-  @csrf
+                    @error('image')
 
-  {{-- IMAGE SECTION --}}
+                    {{ "*".$message }}
+                    <br>
 
-  @foreach ($personal_details as $per )
-  <img src="{{asset('/images/' . $per->image)}}" >
-
-  <br>
-  <div class="input_field">
-
-    <div style="color:red; font-size:12px;">
-
-      @error('image')
-
-      {{ "*".$message }}
-      <br>
-
-      @enderror
-</div>
+                    @enderror
+                </div>
 
 
 
 
 
-</section>
-<br><br><br><br><br><br>
-
-
-<input type="file" name="image">
-
-<span>
-
-<button type="submit" class="btn"
- style="width:100px;">UPLOAD IMAGE</button>
-
-
-<button class="btn" style="width:100px;">REMOVE IMAGE</button>
-</span>
-
-
-
-
-
-</form>
-</td>
+    </section>
+    <br><br><br>
 <td>
 <ul><form>
   {{-- PROFESSIONAL DETAILS --}}
