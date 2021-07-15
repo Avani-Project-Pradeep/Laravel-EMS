@@ -10,7 +10,7 @@
     <h3>  Hi {{$data['name']}},You are successfully Registered </h3>
     <br>
     <h3>Click here to login </h3><br>
- <a href="/Employee/login">Login</a>
+ <a href="http://ems/Employee/login">Login</a>
  <br>
  <h3><em>Your Password: </em></h3><p>{{$data['password']}}</p>
 
