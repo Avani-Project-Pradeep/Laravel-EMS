@@ -28,7 +28,7 @@ class Employee_RegistrationController extends Controller
 
             "first_name" => 'required|max:50|string|regex:/^([^0-9]*)$/',
             "last_name"=> 'required|max:50|string|regex:/^([^0-9]*)$/',
-            "phone_number"=>'required|digits:10|unique:employee_personal_details,phone|',
+            "phone_number"=>'required|digits:10|unique:employee_registration,phone_number',
             "city"=>'required|max:50|regex:/^([^0-9]*)$/',
             "state"=>'required|max:50|regex:/^([^0-9]*)$/',
             "image"=>'nullable|image|mimes:jpg,png,jpeg|max:5000',

@@ -30,9 +30,15 @@
 
                         <br><br>
                         <section>
-                            <form action="" enctype="multipart/form-data" method="POST">
+                            <form action="/add_details_all/{{session('employee_id')}}" enctype="multipart/form-data" method="POST">
+                                @foreach ($personal_details as $per)
+
                                 @csrf
                                 <br><br><br>
+
+
+
+
 
                                 @if ($message = Session::get('success'))
 
@@ -54,11 +60,18 @@
 
 
 
+
+
                                 {{-- IMAGE SECTION --}}
 
+                                @if( $per->image==NULL)
+                                <img style="height:200px; width:200px" src="{{asset("images")}}/{{"blank.png"}}">
+                                @else
+                                <img src="{{asset("images")}}/{{$per->image}}">
+                                @endif
 
-                                <img style="height:300px; width:300px margin-left:20px"
-                                    src="{{asset("images")}}/{{"blank.png"}}">
+
+
 
 
 
@@ -83,7 +96,6 @@
 
                                     </span>
 
-                            </form>
 
                         </section>
 
@@ -107,6 +119,7 @@
     </ul>
     </form>
 
+    @endforeach
 
 </body>
 

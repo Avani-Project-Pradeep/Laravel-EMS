@@ -23,8 +23,7 @@ class EmployeeProfessionalDetails extends Migration
             $table->string('employer_name')->nullable();
             $table->string('employer_email');
 
-            $table->foreign('employer_email') ->references('employer_email')
-            ->on('employer_professional_details')->onUpdate('cascade')->onDelete('');
+
 
             $table->string('company_name');
 

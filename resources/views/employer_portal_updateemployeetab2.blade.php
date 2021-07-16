@@ -103,9 +103,11 @@
 
                             @include('tab2form')
 
-                            <br>
+
 
                             <input type="hidden" value={{$id}} name='employee_id'>
+
+                            <br><br><br>
 
                             <a href='/employer_portal/add_employee' id='change'>Back</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

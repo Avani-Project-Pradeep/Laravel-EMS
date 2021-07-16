@@ -24,8 +24,6 @@ class EmployeeRegistration extends Migration
             $table->string('address');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->foreign('email') ->references('employee_email')
-         ->on('employee_personal_details')->onUpdate('cascade')->onDelete('cascade');
 
 
     });

@@ -24,6 +24,10 @@ class EmployeePersonalDetails extends Migration
 
             $table->text('employee_email')->nullable();
 
+
+
+
+
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->date('dob')->nullable();
@@ -34,7 +38,7 @@ class EmployeePersonalDetails extends Migration
 
             $table->string('education')->nullable();
 
-            $table->string('bloodtype')->nullable();
+            $table->string('blood_group')->nullable();
 
             $table->string('phone')->nullable();
 
@@ -43,6 +47,9 @@ class EmployeePersonalDetails extends Migration
             $table->string('pan')->nullable();
 
             $table->string('aadhar')->nullable();
+
+            $table->string('hobbies')->nullable();
+
 
             $table->string('permanent_address')->nullable();
 

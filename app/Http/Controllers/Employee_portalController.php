@@ -42,23 +42,21 @@ class Employee_portalController extends Controller
 
         $employee_id = $request->session()->get('employee_id');
 
-        //return $employee_id;
 
-        $email = Employee_Professional_Detail::where('employee_id', '=', $employee_id)->get('employer_email');
-
-        //return $email;
+        $email = Employee_Professional_Detail::where('employee_id', '=', $employee_id)->value('employer_email');
 
 
-        $professional_details = Employer_Professional_Detail::where('employer_email', '=', $email)->get();
+
+        $professional_details = DB::table('employer_professional_details')->where('employer_email','=',$email)->get();
+
 
 
 
         $personal_details = Employer_Personal_Detail::where('employer_email', '=', $email)->get();
 
-        return $professional_details;
 
 
-        return view('About_Employer', ['professional_details' => $professional_details, 'personal_details' => $personal_details]);
+        return view('about_employer', ['professional_details' => $professional_details, 'personal_details' => $personal_details]);
     }
 
 
@@ -77,11 +75,10 @@ class Employee_portalController extends Controller
 
         $professional_details = Employee_Professional_Detail::where('employee_id', '=', $employee_id)->get();
 
-        $personal_details = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->get();
 
 
 
-        return view('employee_portal.add_details_tab1', ['professional_details' => $professional_details, 'personal_details' => $personal_details]);
+        return view('employee_portal.add_details_tab1', ['professional_details' => $professional_details]);
     }
 
 
@@ -146,9 +143,28 @@ class Employee_portalController extends Controller
 
 
 
-  public  function all_add_details($id, Request $request)
+
+
+    public  function view_tab2($employee_id)
     {
 
+        $personal_details = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->get();
+
+
+        return view('employee_portal.add_details_tab2', ['personal_details' => $personal_details, 'id' => $employee_id]);
+    }
+
+
+
+
+
+
+    public  function all_add_details($id, Request $request)
+    {
+
+
+
+        $employee_id = session('employee_id');
 
 
 
@@ -160,19 +176,111 @@ class Employee_portalController extends Controller
             'dob' => 'required',
             'state' => 'required|max:50',
             'city' => 'required|max:50',
-            'permanent_address' => 'required|max:200',
-            'current_address'=> 'required|max:200',
-            'blood_group'=> 'required',
+            'current_address' => 'required|max:200',
+            'blood_group' => 'required',
             'phone' => 'required',
-            'emergency_phone_number'=> 'required|different from:phone|digits:10',
-            'pan'=> 'required|max:10',
+            'emergency_phone_number' => 'required|different:phone|digits:10',
+            'pan' => 'required|max:10',
             'aadhar' => 'required|digits:12',
-            "image" => 'required|image|mimes:jpg,png,jpeg|max:5000',
-            'employee_email'=> 'required',
+            'employee_email' => 'required',
+            'education' => 'required',
+            'hobbies' => 'required'
 
 
         ]);
 
 
-        return "success";
-    }}
+
+        $existing_phone = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->value('phone');
+
+
+
+        if ($request->input('phone') != $existing_phone) {
+            $request->validate([
+                'phone' => 'required|digits:10|unique:employee_personal_details,phone'
+            ]);
+        }
+
+
+
+
+
+        $existing_email = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->value('employee_email');
+
+
+
+
+
+        if ($request->input('employee_email') != $existing_email) {
+            $request->validate([
+                'employee_email' => 'required|email|unique:employee_personal_details,employee_email'
+
+            ]);
+        }
+
+
+
+        $updated_employee_email = $request->input('employee_email');
+
+
+
+        Employee_Personal_Detail::where('employee_id', $employee_id)
+            ->update($personal_details);
+
+
+
+
+
+
+
+        $image = Employee_Personal_Detail::where('employee_id', $employee_id)->value('image');
+
+        if ($image == NULL && !isset($image)) {
+            if (!$request->hasFile('image')) {
+
+                $request->validate(['image' => 'required']);
+            }
+        }
+
+
+
+
+
+
+
+
+        if ($request->hasFile('image')) {
+
+
+            $validated = $request->validate([
+                "image" => 'nullable|image|mimes:jpg,png,jpeg|max:5000',
+            ]);
+
+
+
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move(public_path('images'), $filename);
+            }
+
+
+            $image_db = DB::table('employee_personal_details')
+                ->where('employee_id', $employee_id)
+                ->update(['image' => $filename]);
+
+
+            return redirect()->route('employee_portal')
+                ->with('success', 'You have successfully upload image.');
+        } else {
+            return back()
+                ->with('empty', 'Please select an image to upload');
+        }
+    }
+
+
+
+
+}

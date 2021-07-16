@@ -8,6 +8,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Employer_Professional_Detail;
+use App\Models\Employee_Professional_Detail;
+
 use App\Models\Employer_Personal_Detail;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +41,7 @@ class EditEmployerController extends Controller
 
 
 
-
+//edits employer
 public function editemployeraction(Request $request)
 {
 
@@ -147,6 +149,20 @@ public function editemployeraction(Request $request)
   ]);
 
   $request->session()->put('employer_email', $request->input('email'));
+
+
+
+
+
+  //EDIT EMAIL ID IN EMPLOYEE TABLE
+  $employee=Employee_Professional_Detail::where('employer_email',$email)->first();
+
+  if(isset($employee))
+  $employee->update([
+          'email'=>$request->input('email'),
+
+   ]);
+
 
 
   //RETURN TO HOMEPAGE

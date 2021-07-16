@@ -9,5 +9,5 @@ class Employee_Professional_Detail extends Model
 {
     use HasFactory;
     protected $table = 'employee_professional_details';
-
+    protected $fillable=['email'];
 }

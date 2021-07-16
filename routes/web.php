@@ -43,6 +43,12 @@ Route::get('/', function () {
 });
 
 
+
+Route::get('ems', function () {
+    return view('welcome');
+});
+
+
 //View Employer Registration form
 Route::get('/Employer/register',[Employer_RegistrationController::class,'registerform']);
 
@@ -306,10 +312,7 @@ Route::get('employer_portal/logout',[Employer_portalController::class,'employer_
 
     Route::post('/nextadddetails',[Employee_portalController::class,'next_add_details']);
 
-    Route::get('/employee_portal/add_details/tab2/{id}', function($id)
-    {
-    return view('employee_portal.add_details_tab2',['id'=>$id]);
-    })->name('add_details_tab2');
+    Route::get('/employee_portal/add_details/tab2/{id}',[Employee_portalController::class,'view_tab2']);
 
 
     Route::post('/add_details_all/{id}',[Employee_portalController::class,'all_add_details']);

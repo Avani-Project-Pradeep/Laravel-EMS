@@ -24,8 +24,7 @@
     <tr>
 <td>
     <section>
-        {{$employee_id= session('employee_id')}}
-        <form action="/employee/image/edit/{{$employee_id}}"  enctype="multipart/form-data"  method="POST" >
+        <form action="/employee/image/edit/{{session('employee_id')}}"  enctype="multipart/form-data"  method="POST" >
          @csrf
         <br><br><br>
 
