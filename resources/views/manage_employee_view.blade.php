@@ -7,11 +7,21 @@
 
 
     @if ($message = Session::get('fail'))
-    <div class="alert alert-info alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
+    <div class="alert alert-info alert-block" style="color:red; font-size:15px;">
         <strong>{{ $message }}</strong>
     </div>
     @endif
+
+
+    @if ($message = Session::get('success'))
+
+<div style="color:green; font-size:25px;">
+
+       {{ $message }}
+</div>
+
+@endif
+
 
 
 

@@ -45,7 +45,7 @@
 
 @if ($message = Session::get('success'))
 
-<div style="color:green; font-size:15px;">
+<div style="color:green; font-size:25px;">
 
        {{ $message }}
 </div>
@@ -243,7 +243,7 @@
 
          <td>
            <label >Phone Number: </label>
-           <input type="text" placeholder="Phone Number"readonly  value="{{ $pd->phone }}" >
+           <input type="text" placeholder="Phone Number"  value="{{ $per->phone }}"  readonly>
           </td>
    <td>
    </tr>

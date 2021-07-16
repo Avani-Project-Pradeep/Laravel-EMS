@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class AddEmployee_Controller extends Controller
 {
+
     public function nextaddemployee(Request $request)
     {
         //VALIDATIONS
@@ -23,7 +24,7 @@ class AddEmployee_Controller extends Controller
 
             'employee_id' => 'required|digits_between:1,10|unique:Employee_Professional_Details,Employee_id',
             'designation' => 'required|max:50',
-            'company_name' => 'required|max:50|unique:Employee_Professional_Details,company_name',
+            'company_name' => 'required|max:50|unique:Employee_Professional_Details,company_name|',
             'department' => 'required|max:50',
             'reporting_manager' => 'required|max:50',
             'division' => 'required|max:100',
@@ -38,6 +39,8 @@ class AddEmployee_Controller extends Controller
 
         ]);
 
+
+        //Inserting data
 
 
         $employee_id= $request->input('employee_id');
@@ -68,7 +71,7 @@ class AddEmployee_Controller extends Controller
 
 
 
-
+           //redirect
 
          return redirect()->route('addemployee_tab2',['id'=>$employee_id]);
 
@@ -84,8 +87,8 @@ class AddEmployee_Controller extends Controller
 
 
         $personal_details = $request->validate([
-            'first_name'=>'required|max:50',
-           'last_name'=>'required|max:50',
+            'first_name'=>'required|max:50|regex:/^([^0-9]*)$/',
+           'last_name'=>'required|max:50|regex:/^([^0-9]*)$/',
            'gender'=>'required',
            'employee_email' => 'required|email|unique:employee_personal_details,employee_email',
            'phone'=>'required|digits:10|unique:employee_personal_details,phone',
@@ -104,7 +107,7 @@ class AddEmployee_Controller extends Controller
  Employee_Personal_Detail::where('employee_id', $employee_id)
  ->update($personal_details);
 
- return redirect()->route('manage');
+ return redirect()->route('manage')->with('success','Employee added successfully');
 
     }
 }

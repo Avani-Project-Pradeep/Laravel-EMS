@@ -79,7 +79,7 @@ class Employer_portalController extends Controller
     }
 
 
-
+  //delete image
     public function delete_image(Request $request,$email)
     {
 
@@ -140,15 +140,10 @@ class Employer_portalController extends Controller
 
 
     //Logout
-    public function employer_portal_logout()
+    public function employer_portal_logout(Request $request)
     {
 
-        //deleting all session values
-
-        session()->pull('employer_email');
-
-        session()->pull('company_name');
-        session()->pull('role');
+        $request->session()->flush();
 
         //REDIRECT TO LOGIN PAGE
         return redirect()->route('employer_login');

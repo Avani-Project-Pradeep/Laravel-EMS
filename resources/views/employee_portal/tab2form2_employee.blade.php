@@ -14,7 +14,7 @@
 
     <span> Emergency Contact Number:</span>
 
-    <input type="text" style="width:300px;" name="emergency_phone_number" value="{{$per->phone}}"><br><span
+    <input type="text" style="width:300px;" name="emergency_phone_number" value="{{$per->emergency_phone_number}}"><br><span
         style="color: red;">@error('emergency_phone_number'){{"*".$message}}@enderror</span>
 
 
@@ -27,7 +27,7 @@
         <input type="text" style="width:200px;" name="state" value="{{$per->state}}"><br><span
             style="color: red;">@error('state'){{"*".$message}}@enderror</span>
 
-<br><br>
+<br>
         <span>City: </span>
         <input type="text" style="width:200px;" name="city" value="{{$per->city}}"><br><span
             style="color: red;">@error('city'){{"*".$message}}@enderror</span>
@@ -35,11 +35,21 @@
 
     </span>
 
-    <br><br>
+    <br>
     <span>Current Address:</span>
      <br>
     <input type="text" style="width:200;" name="current_address" value="{{$per->current_address}}"><br><span
         style="color: red;">@error('current_address'){{"*".$message}}@enderror</span>
+
+
+
+        <br><br>
+
+
+        <span>Permanent Address:</span>
+     <br>
+    <input type="text" style="width:200;" name="permanent_address" value="{{$per->permanent_address}}"><br><span
+        style="color: red;">@error('permanent_address'){{"*".$message}}@enderror</span>
 
 
 

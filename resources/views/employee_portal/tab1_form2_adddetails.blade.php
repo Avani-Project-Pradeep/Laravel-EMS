@@ -60,14 +60,21 @@
 
 
                                 <span>Employee Status:<span>
-                                        <input type="text" name="employee_status" @if($pro->employee_status==1)
+                                         @if($pro->employee_status==1)
+                                           <select name="employee_status">
+                                            <option value="1" Selected>Active</option>
+                                            <option value="0">Inactive</option>
+                                           </select>
 
-                                        value="Active"
                                         @else
-                                        value="Inactive"
+                                        <select name="employee_status">
+                                            <option value="1" >Active</option>
+                                            <option value="0" Selected>Inactive</option>
+                                           </select>
+
 
                                         @endif
-                                        >
+
 
 
 

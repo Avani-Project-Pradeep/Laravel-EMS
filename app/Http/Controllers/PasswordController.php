@@ -21,10 +21,12 @@ use App\Models\User;
 
 class PasswordController extends Controller
 {
+    //Form for taking email id as input
     public function inputmailform()
     {
         return view('forgotpass');
     }
+
 
 
     public function inputmailcheck(Request $request)

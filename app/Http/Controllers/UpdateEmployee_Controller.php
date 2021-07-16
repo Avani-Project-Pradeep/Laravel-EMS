@@ -43,26 +43,22 @@ class UpdateEmployee_Controller extends Controller
 
         $employee_id= $request->input('employee_id');
 
+
+            //update function
+
         $employee = Employee_Professional_Detail::where('employee_id',$employee_id)
-                  ->update(
-         ['employer_email'=>$request->session()->get('employer_email')],
-        ['designation' => $request->designation],
-        ['department' => $request->department],
-       [ 'division' => $request->division],
-        ['employee_type' => $request->employee_type],
-       [ 'doj' => $request->joining_date],
-        ['company_name' => $request->company_name],
-        ['reporting_manager' => $request->reporting_manager],
-        ['shift' => $request->shift],
-       [ 'employee_status' => $request->employee_status]
-                  );
-
-
-
-
-
-
-
+                  ->update([
+         'employer_email'=>$request->session()->get('employer_email'),
+        'designation' => $request->designation,
+        'department' => $request->department,
+        'division' => $request->division,
+        'employee_type' => $request->employee_type,
+       'doj' => $request->joining_date,
+        'company_name' => $request->company_name,
+        'reporting_manager' => $request->reporting_manager,
+        'shift' => $request->shift,
+       'employee_status' => $request->employee_status
+                   ] );
 
 
 
@@ -115,11 +111,38 @@ class UpdateEmployee_Controller extends Controller
 
 
 
+        Employee_Personal_Detail::where('employee_id', $employee_id)
 
- Employee_Personal_Detail::where('employee_id', $employee_id)
- ->update($personal_details);
+            ->update([
 
- return redirect()->route('manage');
+
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'city' => $request->input('city'),
+                'dob' => $request->input('dob'),
+                'state' => $request->input('state'),
+                'gender' => $request->input('gender'),
+                'address' => $request->input('address'),
+                'education' => $request->input('education'),
+                'phone' => $request->input('phone'),
+                'employee_email' => $request->input('employee_email')
+
+
+
+
+
+            ]);
+
+ DB::table('users')
+ ->where('email', $existing_email)
+ ->update([
+     'email' => $updated_employee_email
+
+ ]);
+
+
+
+ return redirect()->route('manage')->with('success','All details are updated successfully');
 
     }
 }

@@ -73,15 +73,6 @@ public function editemployeraction(Request $request)
         }
 
 
-        $existing_company_name = $request->session()->get('company_name');
-        if($request->input('company_name')!=$existing_company_name)
-        {
-            $request->validate([
-            'company_name' => 'required|unique:users,company_name',
-
-            ]);
-
-        }
 
 
 
@@ -148,6 +139,19 @@ public function editemployeraction(Request $request)
 
   ]);
 
+ $check= DB::table('employee_professional_details')->where('employer_email','=', $email)->get();
+
+
+ if($check!=[])
+ {
+    DB::table('employee_professional_details')
+       ->where('employer_email','=', $email)
+       ->update(['employer_email'=>$request->input('email'),
+    ]);
+
+ }
+
+
   $request->session()->put('employer_email', $request->input('email'));
 
 
@@ -166,11 +170,9 @@ public function editemployeraction(Request $request)
 
 
   //RETURN TO HOMEPAGE
-  return redirect()->route('employer_portal');
+  return redirect()->route('employer_portal')->with('success','Details edited successfully');
 
 
 }
 
 }
-
-

@@ -64,11 +64,7 @@
 
                                 {{-- IMAGE SECTION --}}
 
-                                @if( $per->image==NULL)
-                                <img style="height:200px; width:200px" src="{{asset("images")}}/{{"blank.png"}}">
-                                @else
-                                <img src="{{asset("images")}}/{{$per->image}}">
-                                @endif
+                        <img style="height:200px; width:200px" src="{{asset("images")}}/{{"blank.png"}}">
 
 
 

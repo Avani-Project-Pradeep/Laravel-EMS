@@ -22,21 +22,22 @@ class EmployeeImage_Controller extends Controller
 
         if ($request->hasFile('image')) {
 
-
+               //validation
             $validated = $request->validate([
                 "image" => 'nullable|image|mimes:jpg,png,jpeg|max:5000',
             ]);
 
 
-
+                //generate file name
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $extension = $file->getClientOriginalExtension();
                 $filename = time() . '.' . $extension;
-                $file->move(public_path('images'),$filename);
+                $file->move(public_path('images'),$filename); //move to public/images
             }
 
+            //upload in db
 
             $image_db = DB::table('employee_personal_details')
               ->where('employee_id', $employee_id)
@@ -52,6 +53,8 @@ class EmployeeImage_Controller extends Controller
     }
 
 
+
+    //Removing Image
 
     public function delete_employee_image(Request $request,$employee_id)
     {

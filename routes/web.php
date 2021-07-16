@@ -38,6 +38,8 @@ use Illuminate\Support\Facades\Route;
 
  /* ---------------------EMPLOYER REGISTRATION ------------------ */
 
+
+ //landing page
 Route::get('/', function () {
     return view('welcome');
 });
@@ -68,7 +70,6 @@ Route::get('/success_register/{email_success}',[Employer_RegistrationController:
 
 
 
-/* -------------------------------------------------------------------- */
 
 
 /* ---------------------EMPLOYER LOGIN------------------ */
@@ -91,7 +92,6 @@ Route::get('/dashboard', function()
 
 
 
- /* ------------------EMPLOYER FORGOT PASSWORD------------------------ */
 
 
 /* ---------------- FORGOT PASSWORD------------------------ */
@@ -104,11 +104,11 @@ Route::post('/resetpasswordmail', [PasswordController::class, 'inputmailcheck'])
 
 
 
+//resetting new password
 
 Route::get('password/reset/{token}', function ($token) {
     return view('reset_password',['token' => $token]);
 });
-
 
 Route::post('/newpassword', [PasswordController::class, 'resetcheck']);
 
@@ -117,7 +117,8 @@ Route::post('/newpassword', [PasswordController::class, 'resetcheck']);
 
 
 
- /* --------EMPLOYER PORTAL ROUTES------------------------ */
+ /* --------EMPLOYER PORTAL ROUTES---------------------------------------------------- */
+
 
 
  Route::group(['middleware'=>['EmployerCheck']],function()
@@ -138,10 +139,6 @@ Route::post('employer_portal/image',[Employer_portalController::class,'image']);
 Route::get('/delete_image/{email}',[Employer_portalController::class,'delete_image']);
 
 
-
-
-//edit action
-
 Route::POST('editemployeraction',[EditEmployerController::class,'editemployeraction']);
 
 
@@ -150,14 +147,9 @@ Route::POST('editemployeraction',[EditEmployerController::class,'editemployeract
 Route::get('/employer_portal/add_employee',[Employer_portalController::class,'add_employee'])->name('addemployee_tab1');
 
 
-
-
-//Add Employee Next
-
 Route::POST('nextaddemployee',[AddEmployee_Controller::class,'nextaddemployee']);
 
 
-//Go to tab 2 add employee
 
 Route::get('/employer_portal/add_employee/tab2/{id}', function($id)
 {
@@ -166,14 +158,10 @@ return view('employer_portal_addemployeetab2',['id'=>$id]);
 
 
 
-
 Route::POST('/actionaddemployee',[AddEmployee_Controller::class,'actionaddemployee']);
 
 
-
-
-
-
+//Home page
 
 Route::get('/home',[ManageEmployee::class,'home'] );
 
@@ -182,6 +170,7 @@ Route::get('/home',[ManageEmployee::class,'home'] );
 //Manage Employees
 Route::get('/employer_portal/manage_employees/view',[ManageEmployee::class,'show'])->name('manage');
 
+/* --------------------------MANAGE EMPLOYEES--------------------------------------- */
 
 //change status of employee
 
@@ -189,7 +178,6 @@ Route::get('/statustoactive/{id}', [ManageEmployee::class,'active']);
 
 
 Route::get('/statustoinactive/{id}', [ManageEmployee::class,'inactive']);
-
 
 
 
@@ -209,9 +197,7 @@ Route::get('/viewemployee/{id}', [ManageEmployee::class,'viewemployee']);
 
 
 
-
-
-//update employee form
+//update employee
 
 
 Route::get("employer_portal/edit_employee",function()
@@ -220,12 +206,10 @@ Route::get("employer_portal/edit_employee",function()
 });
 
 
-//Update Employee Next
 
 Route::POST('/nextupdateemployee',[UpdateEmployee_Controller::class,'nextupdateemployee']);
 
 
-//Go to tab 2 add employee
 
 Route::get('/employer_portal/update_employee/tab2/{id}', function($id)
 {
@@ -236,15 +220,6 @@ return view('employer_portal_updateemployeetab2',['id'=>$id]);
 
 
 Route::POST('/actionupdateemployee',[UpdateEmployee_Controller::class,'actionupdateemployee']);
-
-
-
-
-
-
-
-
-
 
 
 
@@ -288,38 +263,52 @@ Route::get('employer_portal/logout',[Employer_portalController::class,'employer_
 );
 
 
-/* -------------------------------------------------------------EMPLOYEE--------------------------------------------------------------- */
+/* ------------------------------------------------EMPLOYEE PORTAL-------------------- */
 
 
 
-
+    //employee registration
     Route::get('/Employee/register', [Employee_RegistrationController::class, 'registerform']);
 
     Route::POST('/Employee/registeremployee', [Employee_RegistrationController::class, 'actionregister']);
 
+
+
+    //employee login
     Route::get('/Employee/login', [Employee_LoginController::class, 'loginform'])->name('employee_login');
 
     Route::post('/Employee/loginverify',[Employee_LoginController::class,'loginverify']);
 
+
+
+
     Route::group(['middleware'=>['EmployeeCheck']],function()
  {
 
+
+    //employee home
     Route::get('/employee_portal/Home',[Employee_portalController::class,'allowemployeeportal'])->name('employee_portal');
 
+
+    //about employer
     Route::get('/About_Employer',[Employee_portalController::class,'aboutemployer']);
 
+
+    //add details
     Route::get('/employee_portal/add_details',[Employee_portalController::class,'add_details']);
 
     Route::post('/nextadddetails',[Employee_portalController::class,'next_add_details']);
 
-    Route::get('/employee_portal/add_details/tab2/{id}',[Employee_portalController::class,'view_tab2']);
+    Route::get('/employee_portal/add_details/tab2/{id}',[Employee_portalController::class,'view_tab2'])->name('add_details_tab2');
 
 
     Route::post('/add_details_all/{id}',[Employee_portalController::class,'all_add_details']);
 
 
 
+//logout
 
+Route::get('employee_portal/logout',[Employee_portalController::class,'employee_portal_logout'])->name('employee_logout');
 
 
 

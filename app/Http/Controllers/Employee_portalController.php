@@ -14,6 +14,8 @@ use App\Models\Employer_Personal_Detail;
 
 class Employee_portalController extends Controller
 {
+
+    // aftetr login to employee portal
     public function allowemployeeportal(Request $request)
     {
 
@@ -36,7 +38,7 @@ class Employee_portalController extends Controller
         return view('employee_portal.employee_portal_homepage', ['professional_details' => $professional_details, 'personal_details' => $personal_details]);
     }
 
-
+//aboutemployer
     public function aboutemployer(Request $request)
     {
 
@@ -61,7 +63,7 @@ class Employee_portalController extends Controller
 
 
 
-
+//add details
 
     public function add_details(Request $request)
     {
@@ -95,7 +97,7 @@ class Employee_portalController extends Controller
             'designation' => 'required|max:50',
             'department' => 'required|max:50',
             'reporting_manager' => 'required|max:50',
-            'division' => 'required|max:100',
+            'division' => 'required|max:50',
             'employee_type' => 'required|max:50',
             'employee_status' => 'required|max:50',
             'doj' => 'required',
@@ -103,7 +105,7 @@ class Employee_portalController extends Controller
             'shift' => 'required|max:50',
             'employee_status' => 'required|max:50',
             'project' => 'required|max:500',
-            'work_experience' => 'required'
+            'work_experience' => 'required|max:200'
 
 
 
@@ -115,27 +117,27 @@ class Employee_portalController extends Controller
         $employee_id = $request->input('employee_id');
 
         $employee = Employee_Professional_Detail::where('employee_id', $employee_id)
-            ->update(
-                ['designation' => $request->designation],
-                ['department' => $request->department],
-                ['division' => $request->division],
-                ['employee_type' => $request->employee_type],
-                ['doj' => $request->joining_date],
-                ['reporting_manager' => $request->reporting_manager],
-                ['shift' => $request->shift],
-                ['employee_status' => $request->employee_status],
-                ['reporting_manager' => $request->reporting_manager],
-                ['employee_type' => $request->employee_type],
-                ['shift' => $request->shift],
-                ['project' => $request->project],
-                ['work_experience' => $request->work_experience],
-                ['employer_name' => $request->employer_name],
+            ->update([
+                'designation' => $request->designation,
+                'department' => $request->department,
+                'division' => $request->division,
+                'employee_type' => $request->employee_type,
+                'doj' => $request->doj,
+                'reporting_manager' => $request->reporting_manager,
+                'shift' => $request->shift,
+                'employee_status' => $request->employee_status,
+                'reporting_manager' => $request->reporting_manager,
+                'employee_type' => $request->employee_type,
+                'shift' => $request->shift,
+                'project' => $request->project,
+                'work_experience' => $request->work_experience,
+                'employer_name' => $request->employer_name,
 
 
 
 
 
-
+                ]
             );
 
         return redirect()->route('add_details_tab2', ['id' => $employee_id]);
@@ -170,8 +172,8 @@ class Employee_portalController extends Controller
 
 
         $personal_details = $request->validate([
-            'first_name' => 'required|max:50',
-            'last_name' => 'required|max:50',
+            'first_name' => 'required|regex:/^([^0-9]*)$/|max:50|',
+            'last_name' => 'required|regex:/^([^0-9]*)$/|max:50',
             'gender' => 'required',
             'dob' => 'required',
             'state' => 'required|max:50',
@@ -179,12 +181,14 @@ class Employee_portalController extends Controller
             'current_address' => 'required|max:200',
             'blood_group' => 'required',
             'phone' => 'required',
-            'emergency_phone_number' => 'required|different:phone|digits:10',
-            'pan' => 'required|max:10',
+            'emergency_phone_number' => 'required|digits:10|different:phone',
+            'pan' => 'required|size:12',
             'aadhar' => 'required|digits:12',
             'employee_email' => 'required',
             'education' => 'required',
-            'hobbies' => 'required'
+            'hobbies' => 'required',
+            'image' => 'required',
+            'permanent_address' => 'required|max:200',
 
 
         ]);
@@ -235,12 +239,6 @@ class Employee_portalController extends Controller
 
         $image = Employee_Personal_Detail::where('employee_id', $employee_id)->value('image');
 
-        if ($image == NULL && !isset($image)) {
-            if (!$request->hasFile('image')) {
-
-                $request->validate(['image' => 'required']);
-            }
-        }
 
 
 
@@ -273,7 +271,7 @@ class Employee_portalController extends Controller
 
 
             return redirect()->route('employee_portal')
-                ->with('success', 'You have successfully upload image.');
+                ->with('success', 'You have successfully added details');
         } else {
             return back()
                 ->with('empty', 'Please select an image to upload');
@@ -283,4 +281,20 @@ class Employee_portalController extends Controller
 
 
 
-}
+
+
+        //Logout
+        public function employee_portal_logout(Request $request)
+        {
+
+            //deleting all session values
+
+            $request->session()->flush();
+
+            //REDIRECT TO LOGIN PAGE
+            return redirect()->route('employee_login');
+        }
+    }
+
+
+

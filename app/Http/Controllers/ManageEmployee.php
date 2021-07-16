@@ -15,6 +15,8 @@ use PHPUnit\Framework\Constraint\IsEmpty;
 
 class ManageEmployee extends Controller
 {
+
+    //View all employees
     function show()
     {
 
@@ -47,28 +49,32 @@ class ManageEmployee extends Controller
 
 
 
-
+    //change status to active
 
     public function active(Request $request, $employee_id)
     {
 
 
         $professional_details = Employee_Professional_Detail::where('employee_id', '=', $employee_id)->update(['employee_status' => 1]);
-        return redirect()->route('manage');
+        return redirect()->route('manage')->with('success','Status changed successfully');
     }
 
 
 
 
+
+    //change status to inactive
     public function inactive(Request $request, $employee_id)
     {
 
 
         $professional_details = Employee_Professional_Detail::where('employee_id', '=', $employee_id)->update(['employee_status' => 0]);
-        return redirect()->route('manage');
+        return redirect()->route('manage')->with('success','Status changed successfully');
     }
 
 
+
+    //view individual employee
     public function viewemployee(Request $request, $employee_id)
     {
 
@@ -81,14 +87,7 @@ class ManageEmployee extends Controller
 
 
 
-
-
-
-
-
-
-
-
+     //edit employee
     public function editemployee($employee_id)
     {
         $professional_details = Employee_Professional_Detail::where('employee_id', '=', $employee_id)->get();
@@ -102,7 +101,7 @@ class ManageEmployee extends Controller
     public function editemployee_action($employee_id, Request $request)
     {
 
-
+          //validation
 
         $professional_details = $request->validate([
 
@@ -129,13 +128,6 @@ class ManageEmployee extends Controller
 
 
         ]);
-
-
-
-
-
-
-
 
 
 
@@ -169,6 +161,9 @@ class ManageEmployee extends Controller
         $updated_employee_email = $request->input('employee_email');
 
 
+
+
+        //updating the data in tables
 
         Employee_Personal_Detail::where('employee_id', $employee_id)
 
@@ -219,13 +214,14 @@ class ManageEmployee extends Controller
 
 
 
-        return redirect()->route('manage');
+    return redirect()->route('manage')->with('success','Details are edited successfully');
+
     }
 
 
 
 
-
+ //back to home
 
     public function home(Request $request)
     {
@@ -236,6 +232,8 @@ class ManageEmployee extends Controller
 
 
 
+
+    //search employee
 
     public function searchresults(Request $request)
     {
@@ -273,6 +271,7 @@ class ManageEmployee extends Controller
     }
 
 
+    //delete employee
 
 public function deleteemployee($employee_id)
         {
@@ -286,7 +285,7 @@ public function deleteemployee($employee_id)
             Employee_Personal_Detail::where('employee_id', '=', $employee_id)->delete();
             $user = User::where('email', $email)->delete();
 
-            return redirect()->route('manage');
+            return redirect()->route('manage')->with('success','Employee Deleted Successfully');
 
 
         }

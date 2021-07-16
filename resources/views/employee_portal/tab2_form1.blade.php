@@ -22,7 +22,7 @@
         <br><br>
 
         <span>DOB: </span>
-      <br>  <input type="date" name="dob"    value="{{$per->DOB}}">
+      <br>  <input type="date" name="dob"    value="{{$per->dob}}">
       <br><span style="color: red;">@error('dob'){{"*".$message}}@enderror</span>
 
         <br><br>
@@ -30,7 +30,7 @@
 
         <span>Blood Group: </span>
         <select name="blood_group" >
-            <option value="">Choose Blood Group</option>
+            <option>Choose Blood Group</option>
              <option value="O+">O+</option>
             <option value="O-">O-</option>
             <option value="A+">A+</option>

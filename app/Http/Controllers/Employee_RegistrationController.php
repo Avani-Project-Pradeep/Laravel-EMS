@@ -70,13 +70,13 @@ class Employee_RegistrationController extends Controller
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move(public_path('images'),$filename);
-        }
 
 
         $image_db = DB::table('employee_registration')
         ->where('email',$validate['email'])
         ->update(['image' => $filename]);
 
+           }
 
 
 
