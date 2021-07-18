@@ -24,23 +24,28 @@ class ManageEmployee extends Controller
         $count = Employee_Personal_Detail::count();
 
 
-
+        //if no employees are added
         if ($count == 0) {
-            return back()->with('fail', 'No Employees are added');
+
+            return view('no_employee');
+
         }
 
 
+        //else
+        else {
 
 
 
-        $employees = DB::table('employee_professional_details')
-            ->join('employee_personal_details', 'employee_professional_details.employee_id', '=', 'employee_personal_details.employee_id')
-            ->select('employee_professional_details.employee_id', 'employee_professional_details.designation', 'employee_professional_details.doj',  'employee_professional_details.employee_status', 'employee_personal_details.first_name', 'employee_personal_details.last_name', 'employee_personal_details.image', 'employee_personal_details.employee_email')
-            ->paginate('20');
+            $employees = DB::table('employee_professional_details')
+                ->join('employee_personal_details', 'employee_professional_details.employee_id', '=', 'employee_personal_details.employee_id')
+                ->select('employee_professional_details.employee_id', 'employee_professional_details.designation', 'employee_professional_details.doj',  'employee_professional_details.employee_status', 'employee_personal_details.first_name', 'employee_personal_details.last_name', 'employee_personal_details.image', 'employee_personal_details.employee_email')
+                ->paginate('20');
 
 
 
-        return view('manage_employee_view', ['employees' => $employees]);
+            return view('manage_employee_view', ['employees' => $employees]);
+        }
     }
 
 
@@ -56,7 +61,7 @@ class ManageEmployee extends Controller
 
 
         $professional_details = Employee_Professional_Detail::where('employee_id', '=', $employee_id)->update(['employee_status' => 1]);
-        return redirect()->route('manage')->with('success','Status changed successfully');
+        return redirect()->route('manage')->with('success', 'Status changed successfully');
     }
 
 
@@ -69,7 +74,7 @@ class ManageEmployee extends Controller
 
 
         $professional_details = Employee_Professional_Detail::where('employee_id', '=', $employee_id)->update(['employee_status' => 0]);
-        return redirect()->route('manage')->with('success','Status changed successfully');
+        return redirect()->route('manage')->with('success', 'Status changed successfully');
     }
 
 
@@ -87,7 +92,7 @@ class ManageEmployee extends Controller
 
 
 
-     //edit employee
+    //edit employee
     public function editemployee($employee_id)
     {
         $professional_details = Employee_Professional_Detail::where('employee_id', '=', $employee_id)->get();
@@ -101,7 +106,7 @@ class ManageEmployee extends Controller
     public function editemployee_action($employee_id, Request $request)
     {
 
-          //validation
+        //validation
 
         $professional_details = $request->validate([
 
@@ -214,14 +219,13 @@ class ManageEmployee extends Controller
 
 
 
-    return redirect()->route('manage')->with('success','Details are edited successfully');
-
+        return redirect()->route('manage')->with('success', 'Details are edited successfully');
     }
 
 
 
 
- //back to home
+    //back to home
 
     public function home(Request $request)
     {
@@ -273,21 +277,18 @@ class ManageEmployee extends Controller
 
     //delete employee
 
-public function deleteemployee($employee_id)
-        {
+    public function deleteemployee($employee_id)
+    {
 
 
 
 
 
-             $email=Employee_Personal_Detail::where('employee_id', '=', $employee_id)->value('employee_email');
-             Employee_Professional_Detail::where('employee_id', '=', $employee_id)->delete();
-            Employee_Personal_Detail::where('employee_id', '=', $employee_id)->delete();
-            $user = User::where('email', $email)->delete();
+        $email = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->value('employee_email');
+        Employee_Professional_Detail::where('employee_id', '=', $employee_id)->delete();
+        Employee_Personal_Detail::where('employee_id', '=', $employee_id)->delete();
+        $user = User::where('email', $email)->delete();
 
-            return redirect()->route('manage')->with('success','Employee Deleted Successfully');
-
-
-        }
-
+        return redirect()->route('manage')->with('success', 'Employee Deleted Successfully');
     }
+}

@@ -7,9 +7,10 @@
     {{ '*' . $message }}
     @enderror
 </div>
-<br>
+<br><br>
 
 <span>Employer Name:<span>
+    <br>
         <input type="text"  name="employer_name" value="{{$pro->employer_name}}">
         <br>
 
@@ -18,8 +19,8 @@
             {{ '*' . $message }}
             @enderror
         </div>
-        <br>
 
+<br>
         <span>Reporting Manager:<span>
                 <input type="text" name="reporting_manager" value="{{$pro->reporting_manager}}">
                 <br>

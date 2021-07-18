@@ -5,24 +5,24 @@
     <div style="margin-left:20px">
         <span>First Name: </span>
 
-        <input type="text" style="width:300px;" name="first_name"   value="{{$per->first_name}}">
+        <input type="text" style="width:200px;" name="first_name"   value="{{$per->first_name}}">
         <br>   <span style="color: red;">@error ('first_name'){{"*".$message}}@enderror</span>
 
         <br><br>
         <span>Last Name: </span>
-        <input type="text" style="width:300px;" name="last_name"     value="{{$per->last_name}}">
+        <input type="text" style="width:200px;" name="last_name"     value="{{$per->last_name}}">
         <br> <span style="color: red;">@error('last_name'){{"*".$message}}@enderror</span>
 
         <br><br>
 
            <span>Gender: </span>
-        <input type="text"  style="width:300px;" name="gender" value="{{$per->gender}}">
+        <input type="text"  style="width:200px;" name="gender" value="{{$per->gender}}">
         <br>   <span style="color: red;">@error('gender'){{"*".$message}}@enderror
         </span>
-        <br><br>
+        <br>
 
         <span>DOB: </span>
-      <br>  <input type="date" name="dob"    value="{{$per->dob}}">
+      <br>  <input type="date" name="dob" style="width:200px;"   value="{{$per->dob}}">
       <br><span style="color: red;">@error('dob'){{"*".$message}}@enderror</span>
 
         <br><br>
@@ -53,7 +53,7 @@
 
         <span>Email ID:<span>
 
-                <input type="email" name="employee_email" value="{{$per->employee_email}}"><br>
+                <input type="email"  style="width:200px;" name="employee_email" value="{{$per->employee_email}}"><br>
                 <span style="color: red;">@error('employee_email'){{"*".$message}}@enderror</span>
 
                 <br><br>
@@ -61,7 +61,7 @@
 
                 <span>Contact Number:</span>
 
-                <input type="text" name="phone" value="{{$per->phone}}"><br><span
+                <input type="text"  style="width:200px;" name="phone" value="{{$per->phone}}"><br><span
                     style="color: red;">@error('phone'){{"*".$message}}@enderror</span>
 
 
@@ -71,9 +71,10 @@
 
                 <span>Aadhar Number:</span>
 
-                <input type="text"  name="aadhar" value="{{$per->aadhar}}"><br><span
+                <input type="text"  style="width:200px;" name="aadhar" value="{{$per->aadhar}}"><br><span
                     style="color: red;">@error('aadhar'){{"*".$message}}@enderror</span>
-                <br>
+                <br><br>
+
 
 
 

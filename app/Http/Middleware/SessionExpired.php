@@ -3,10 +3,11 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\ServiceProvider;
 
 use Closure;
 use Illuminate\Session\Store;
-use Session;
 
 class SessionExpired {
     protected $session;

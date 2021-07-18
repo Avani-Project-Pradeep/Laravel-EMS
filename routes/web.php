@@ -104,11 +104,14 @@ Route::post('/resetpasswordmail', [PasswordController::class, 'inputmailcheck'])
 
 
 
+
+
+
 //resetting new password
 
 Route::get('password/reset/{token}', function ($token) {
     return view('reset_password',['token' => $token]);
-});
+})->name('password_reset');
 
 Route::post('/newpassword', [PasswordController::class, 'resetcheck']);
 
@@ -238,6 +241,12 @@ Route::get('/delete/{id}',[ManageEmployee::class,'deleteemployee']);
 
 
 
+    //employee registration
+ Route::get('/Employee/register', [Employee_RegistrationController::class, 'registerform'])->name('employee_register');
+
+ Route::POST('/Employee/registeremployee', [Employee_RegistrationController::class, 'actionregister']);
+
+
 
 
 //employee image action
@@ -267,10 +276,6 @@ Route::get('employer_portal/logout',[Employer_portalController::class,'employer_
 
 
 
-    //employee registration
-    Route::get('/Employee/register', [Employee_RegistrationController::class, 'registerform']);
-
-    Route::POST('/Employee/registeremployee', [Employee_RegistrationController::class, 'actionregister']);
 
 
 

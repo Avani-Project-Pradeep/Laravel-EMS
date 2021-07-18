@@ -4,6 +4,7 @@
 
 </head>
 <body>
+    <meta http-equiv="refresh" content="300;url='/employee_portal/logout'" />
 
 
 <div>

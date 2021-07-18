@@ -3,6 +3,8 @@
 
 {{-- CONTENT --}}
 @section('content')
+<meta http-equiv="refresh" content="300;url='/employee_portal/logout'" />
+
 <!--EXTERNAL CSS-->
 <link rel="stylesheet" type="text/css" href="{{ asset('styles/add_employee.css') }}">
 

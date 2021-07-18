@@ -13,8 +13,11 @@ class Employee_LoginController extends Controller
 {
 
     public function loginform()
+
     {
+
         return view('employee_login_form');
+
     }
 
     public function loginverify(Request $request)
@@ -41,7 +44,8 @@ class Employee_LoginController extends Controller
             {
 
 
-
+                 if($user->role =='employee')
+                 {
                 //all inputs are valid,leads to set session
 
                 $request->session()->put('employee_email', $request->email);
@@ -54,6 +58,12 @@ class Employee_LoginController extends Controller
 
                 //return the url for employer_portal with company name
                 return redirect()->route('employee_portal');
+                 }
+                 else
+                 {
+                    return back()->with('fail', 'You are not allowed to login as employee');
+
+                 }
             }
         }
 

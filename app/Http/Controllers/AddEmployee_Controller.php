@@ -24,7 +24,7 @@ class AddEmployee_Controller extends Controller
 
             'employee_id' => 'required|digits_between:1,10|unique:Employee_Professional_Details,Employee_id',
             'designation' => 'required|max:50',
-            'company_name' => 'required|max:50|unique:Employee_Professional_Details,company_name|',
+            'company_name' => 'required|max:50',
             'department' => 'required|max:50',
             'reporting_manager' => 'required|max:50',
             'division' => 'required|max:100',
@@ -93,9 +93,9 @@ class AddEmployee_Controller extends Controller
            'employee_email' => 'required|email|unique:employee_personal_details,employee_email',
            'phone'=>'required|digits:10|unique:employee_personal_details,phone',
            'dob'=>'required',
-           'state'=>'required|max:50',
-           'city'=>'required|max:50',
-           'permanent_address' => 'required|max:200',
+           'state'=>'max:50',
+           'city'=>'max:50',
+           'permanent_address' => 'max:200',
 
 
         ]);

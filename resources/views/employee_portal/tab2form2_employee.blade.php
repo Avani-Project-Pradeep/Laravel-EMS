@@ -1,82 +1,76 @@
-<div style="margin-left:30px">
+
+                <br>
+
+
+<span>PAN Card :</span>
+
+<input type="text" style="width:200px;" name="pan" value="{{$per->pan}}"><br><span
+    style="color: red;">@error('pan'){{"*".$message}}@enderror</span>
 
 
 
-    <br>
-    <span>PAN Card :</span>
 
-    <input type="text" style="width:300px;" name="pan" value="{{$per->pan}}"><br><span
-        style="color: red;">@error('pan'){{"*".$message}}@enderror</span>
+<br><br>
 
+<span> Emergency Contact Number:</span>
 
-      <br><br>
-
-
-    <span> Emergency Contact Number:</span>
-
-    <input type="text" style="width:300px;" name="emergency_phone_number" value="{{$per->emergency_phone_number}}"><br><span
-        style="color: red;">@error('emergency_phone_number'){{"*".$message}}@enderror</span>
+<input type="text" style="width:200px;" name="emergency_phone_number" value="{{$per->emergency_phone_number}}"><br><span
+    style="color: red;">@error('emergency_phone_number'){{"*".$message}}@enderror</span>
 
 
 
+
+<br><br>
+
+<span>
+    <span>State: </span>
+    <input type="text" style="width:200px;" name="state" value="{{$per->state}}"><span
+        style="color: red;">@error('state'){{"*".$message}}@enderror</span>
 
         <br><br>
 
-    <span>
-        <span>State: </span>
-        <input type="text" style="width:200px;" name="state" value="{{$per->state}}"><br><span
-            style="color: red;">@error('state'){{"*".$message}}@enderror</span>
+    <span>City: </span>
+    <input type="text" style="width:200px;" name="city" value="{{$per->city}}"><span
+        style="color: red;">@error('city'){{"*".$message}}@enderror</span>
 
+
+</span>
+
+<br><br>
+<span>Current Address:</span>
 <br>
-        <span>City: </span>
-        <input type="text" style="width:200px;" name="city" value="{{$per->city}}"><br><span
-            style="color: red;">@error('city'){{"*".$message}}@enderror</span>
-
-
-    </span>
-
-    <br>
-    <span>Current Address:</span>
-     <br>
-    <input type="text" style="width:200;" name="current_address" value="{{$per->current_address}}"><br><span
-        style="color: red;">@error('current_address'){{"*".$message}}@enderror</span>
+<input type="text" style="width:300px;" name="current_address" value="{{$per->current_address}}"><br><span
+    style="color: red;">@error('current_address'){{"*".$message}}@enderror</span>
 
 
 
-        <br><br>
+<br><br>
 
 
-        <span>Permanent Address:</span>
-     <br>
-    <input type="text" style="width:200;" name="permanent_address" value="{{$per->permanent_address}}"><br><span
-        style="color: red;">@error('permanent_address'){{"*".$message}}@enderror</span>
+<span>Permanent Address:</span>
+<br>
+<input type="text" style="width:300px;" name="permanent_address" value="{{$per->permanent_address}}"><br><span
+    style="color: red;">@error('permanent_address'){{"*".$message}}@enderror</span>
 
 
 
 
 
-        <br><br>
+<br><br>
 
-    <span>Hobbies:</span>
+<span>Hobbies:</span>
 
-     <br>
-    <input type="text" style="width:200;" name="hobbies"  value="{{$per->hobbies}}"><br><span
-        style="color: red;">@error('hobbies'){{"*".$message}}@enderror</span>
+
+<input type="text" style="width:200;" name="hobbies" value="{{$per->hobbies}}"><br><span
+    style="color: red;">@error('hobbies'){{"*".$message}}@enderror</span>
 
 
 
 
 
 
-        <br><br>
-        <span>Educational Details:</span>
+<br><br>
+<span>Educational Details:</span>
 
-    <input type="text" style="width:200;" name="education" value="{{$per->education}}"><br><span
-        style="color: red;">@error('education'){{"*".$message}}@enderror</span>
-
-
-
-        <a href='/employee_portal/add_details' id='change'>Back</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-        <input type="submit" id="change" value="Update">
+<input type="text" style="width:200;" name="education" value="{{$per->education}}"><br><span
+    style="color: red;">@error('education'){{"*".$message}}@enderror</span>

@@ -10,21 +10,28 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 
+
+
+//returns form view
+
 class Employer_RegistrationController extends Controller
 {
     public function registerform()
     {
-        return view('employer_register_form');//returns form
-    }
+        return view('employer_register_form');    }
 
 
 
-    //handle form action
+
+    //handles form action
 
 
 
     public function registeremployees(Request $request)    {
-        //VALIDATIONS
+
+
+
+       //validations
         $request->validate([
 
             'company_name' => 'required|max:50|string|regex:/^([^0-9]*)$/|

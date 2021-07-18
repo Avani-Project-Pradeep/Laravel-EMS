@@ -1,5 +1,6 @@
 @extends('layouts.portal_layout')
 
+<meta http-equiv="refresh" content="300;url='/employer_portal/logout'" />
 
  {{-- EMPLOYER PORTAL HOME PAGE --}}
 

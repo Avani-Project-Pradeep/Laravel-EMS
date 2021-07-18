@@ -55,6 +55,8 @@ class Employer_LoginController extends Controller
                     //verify password
                     if (Hash::check($request->password, $user->password)) {
 
+
+
                         //all inputs are valid,leads to set session
 
                         $request->session()->put('employer_email', $request->email);
@@ -64,7 +66,9 @@ class Employer_LoginController extends Controller
 
                         //return the url for employer_portal with company name
                         return redirect()->route('employer_portal');
-                    }
+                        }
+
+
                 }
             }
         }

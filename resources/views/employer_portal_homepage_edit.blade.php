@@ -3,6 +3,8 @@
 
 
 @extends('layouts.portal_layout')
+<meta http-equiv="refresh" content="300;url='/employer_portal/logout'" />
+
 {{-- NAVIGATION OPTIONS --}}
 @section('options')
 <a href="/employer_portal/Home"><i class="fa fa-home"></i> Home</a>

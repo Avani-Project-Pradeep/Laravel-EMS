@@ -23,7 +23,7 @@
         @error('email')
 
         {{ "*".$message }}
-        <br> 
+        <br>
 
         @enderror
 </div>
@@ -33,11 +33,15 @@
                 {{-- REGISTER BUTTON --}}
 
                 <input class="button" type="submit" value="Submit" />
-                <i  style="font-size:10px; color:blue" >*Link to reset your password will be sent to your registered Email*</i>
+                <br><br>
+                <em style="font-size:15px; color:blue" >*Link to reset your password will be sent to your registered Email*</em>
 
-                </div>
-    
+                <br><br>
 
+
+                <a href="\Employer\login" style="color:green">Back to Login Page</a>
+
+</div>
             </form>
         </div>
 

@@ -3,8 +3,11 @@
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px; margin-right:400px;  margin-top:80px;">
 
+    <meta http-equiv="refresh" content="300;url='/employer_portal/logout'" />
 
 
+
+  {{-- SESSION MESSAGE DISPLAY --}}
 
     @if ($message = Session::get('fail'))
     <div class="alert alert-info alert-block" style="color:red; font-size:15px;">
@@ -24,7 +27,7 @@
 
 
 
-
+      {{-- EMPLOYEES TABLE --}}
 
     <table class="table table-striped table-hover" >
 
@@ -99,8 +102,8 @@
     </table>
 
     <br><br>
+    {{-- PAGINATION LINKS --}}
     <div>{{$employees->links()}}<br></div>
-
 
 
 </body>

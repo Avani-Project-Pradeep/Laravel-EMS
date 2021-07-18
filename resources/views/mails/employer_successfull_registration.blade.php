@@ -5,12 +5,12 @@ Hi,
 You are successfully registered.
 <br>
 Click  here for Login.
-@component('mail::button', ['url' => 'http://ems/Employer/login'])
+@component('mail::button', ['url' => URL::route('employer_login')])
 Login
 @endcomponent
 
 Register your employees with this link.
-@component('mail::button', ['url' => 'http://ems/Employee/register'])
+@component('mail::button', ['url' => URL::route('employee_register')])
 Register Employees
 @endcomponent
 

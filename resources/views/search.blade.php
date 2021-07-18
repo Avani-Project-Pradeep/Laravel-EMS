@@ -1,5 +1,6 @@
 @include('layouts.manage_layout')
 
+<meta http-equiv="refresh" content="300;url='/employer_portal/logout'" />
 
 
 <div class="w3-main" style="margin-left:300px; margin-right:400px;  margin-top:80px;">

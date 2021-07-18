@@ -7,11 +7,17 @@
 
 <body>
     <br>
+    <meta http-equiv="refresh" content="300;url='/employer_portal/logout'" />
 
+
+    {{-- heading and employee registration link --}}
    <em><span style="margin-left:50px; font-size:30px;color: white">Add Employee</span></em>
     <em><a  style="margin-left:800px; font-size:30px;color:white" href="/Employee/register">Click here to Register Employees </a></em>
 
     <hr style="border: solid green;">
+
+
+    {{-- form started --}}
     <form method="POST" action="/nextaddemployee">
         @csrf
 
@@ -56,6 +62,7 @@
 
         </ul>
     </form>
+    {{-- form end --}}
 </body>
 
 </html>

@@ -4,10 +4,14 @@
 {{-- CONTENT --}}
 
 @section('content')
+<meta http-equiv="refresh" content="300;url='/employee_portal/logout'" />
 
 
 <!--EXTERNAL CSS-->
 <link rel="stylesheet" type="text/css" href="{{ asset('styles/body.css') }}" >
+<link rel="stylesheet" type="text/css" href="{{ asset('styles/messagebox.css') }}" >
+
+
 
 </head>
 
@@ -59,7 +63,7 @@
             >
             @endif
 
-
+            {{$per->first_name." ".$per->last_name}}
 
             <br>
             <div class="input_field">
@@ -75,6 +79,28 @@
                 </div>
 
 
+<br><br>
+
+<button type="button" class="collapsible">Open Message Box</button>
+<div class="content">
+  <p>This message Box Displays Important Information</p>
+</div>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>
 
 
 
@@ -98,11 +124,13 @@
         <label >Designation: </label>
 
 
-        <input  style="width: 100px;" type="text"  readonly placeholder="Designation " value={{ $pd->designation }}>
+        <input  style="width: 100px;" type="text"  readonly placeholder="Designation"
+         value="{{ $pd->designation }}">
       </td>
       <td style="width: 100px;">
         <label >Location: </label>
-        <input  style="width: 100px;" type="text" placeholder="Location" readonly value={{$pd->location}}>
+        <input  style="width: 100px;" type="text" placeholder="Location" readonly
+        value="{{$pd->location}}">
       </td>
       <td style="width: 150px;">
         <label>Company Name:</label>
@@ -110,7 +138,8 @@
       </td>
       <td style="width: 100px;">
         <label>Division: </label>
-        <input  style="width: 100px;"type="text" placeholder="Division" value={{ $pd->division }} readonly>
+        <input  style="width: 100px;"type="text" placeholder="Division"
+         value="{{ $pd->division }}" readonly>
       </td>
      </tr>
      <tr>
@@ -118,7 +147,7 @@
        </td>
        <td>
         <label >Date_Of_Joining: </label>
-       <input type="date" value={{ $pd->doj }} readonly>
+       <input type="date" value="{{ $pd->doj }}" readonly>
        </td>
 
       <td colspan="3">
@@ -140,7 +169,7 @@
   <td></td>
   <td colspan="4">
       <label >Bank Details: </label>
-      <input type="text" placeholder="Bank Details"  readonly value={{ $pd->bank_details  }}  >
+      <input type="text" placeholder="Bank Details"  readonly value="{{ $pd->bank_details}}"  >
      </td>
 </tr>
 
@@ -180,17 +209,18 @@
 
 
 
-           <input  style="width: 150px;" type="text" placeholder="First Name" readonly value={{ $per->first_name }} >
+           <input  style="width: 150px;" type="text" placeholder="First Name" readonly
+            value="{{ $per->first_name }}" >
          </td>
          <td style="width: 150px;">
 
            <label >Last Name: </label>
            <input  style="width: 150px;" type="text" placeholder="Last Name"
-           readonly value={{ $per->last_name }} >
+           readonly value="{{ $per->last_name }}" >
          </td>
          <td>
            <label>DOB:</label>
-           <input  type="date"  readonly value={{ $per->dob }}>
+           <input  type="date"  readonly value="{{ $per->dob }}">
          </td>
           </tr>
         <tr>
@@ -204,7 +234,7 @@
 
          <td>
            <label >Phone Number: </label>
-           <input type="text" placeholder="Phone Number"readonly  value={{ $pd->phone }} >
+           <input type="text" placeholder="Phone Number"readonly  value="{{ $pd->phone }}" >
           </td>
    <td>
    </tr>
@@ -216,16 +246,16 @@
 
 
 
-     <input  style="width: 150px;" type="text" placeholder="City"  readonly value={{ $per->city }}>
+     <input  style="width: 150px;" type="text" placeholder="City"  readonly value="{{ $per->city }}">
    </td>
    <td style="width: 150px;">
 
      <label >State: </label>
-     <input  style="width: 150px;" type="text" placeholder="State"  readonly value={{ $per->state }}>
+     <input  style="width: 150px;" type="text" placeholder="State"  readonly value="{{ $per->state }}">
    </td>
    <td>
      <label>Gender:</label>
-     <input  type="text" placeholder="Gender"  readonly value={{ $per->gender }}>
+     <input  type="text" placeholder="Gender"  readonly value="{{ $per->gender }}">
    </td>
     </tr>
 
@@ -233,12 +263,12 @@
      <td></td>
      <td colspan="2">
          <label >Address: </label>
-         <input type="text" placeholder="Address" readonly  value={{ $per->address }} >
+         <input type="text" placeholder="Address" readonly  value="{{ $per->address }}" >
         </td>
         <td colspan="2">
           <label> Educational Details:</label>
           <input type="text" placeholder="Educational Details" readonly
-           value={{ $per->education }}  >
+           value="{{ $per->education }}"  >
          </td>
 
    </tr>

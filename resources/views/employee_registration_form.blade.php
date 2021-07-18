@@ -2,6 +2,8 @@
 
 @section('content')
 
+<meta http-equiv="refresh" content="300;url='/employer_portal/logout'" />
+
 
 <title>Employee Registration Form</title>
     <div class="form_wrapper">
@@ -210,6 +212,12 @@
 
                 <input class="button" type="submit" value="Register" />
             </form>
+
+            <a href="/employer_portal/manage_employees/view" class="w3-bar-item w3-button w3-padding">Back to Dashboard</a><br>
+
+            <a href="/employer_portal/Home" class="w3-bar-item w3-button w3-padding">Back to Employer Portal-Home</a><br>
+
+
 
 
 

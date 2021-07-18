@@ -4,6 +4,7 @@
 
 {{-- tab headers --}}
 @include('add_employee_tabs_header')
+<meta http-equiv="refresh" content="300;url='/employee_portal/logout'" />
 
 <body>
     <br>
@@ -106,6 +107,11 @@
                             @include('employee_portal.tab2form2_employee')
 
                         </div>
+
+                        <a href='/employee_portal/add_details' id='change'>Back</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <input type="submit" id="change" value="Update">
 
                     </div>
                 </div>

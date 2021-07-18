@@ -12,4 +12,6 @@
 <div class="container">
   <div class="alert alert-success" style="margin-top:150px;border:solid 2px ; border-color:green"  >
     <strong >Please Check Your Mail Inbox.Reset Password Link has been sent to your mail</strong><br>
+    <a href="/">Back to  Home </a>
+
   </div>

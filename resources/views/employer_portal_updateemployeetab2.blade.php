@@ -1,6 +1,7 @@
 {{-- portal layout --}}
 @extends('layouts.portal_layout')
 
+<meta http-equiv="refresh" content="300;url='/employer_portal/logout'" />
 
 {{-- tab headers --}}
 @include('add_employee_tabs_header')

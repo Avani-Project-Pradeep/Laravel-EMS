@@ -147,5 +147,8 @@ class Employer_portalController extends Controller
 
         //REDIRECT TO LOGIN PAGE
         return redirect()->route('employer_login');
+
+
+        //Also there is an auto logout added if the user is inactive for more than 5 mins. This is done using  meta refresh method
     }
 }

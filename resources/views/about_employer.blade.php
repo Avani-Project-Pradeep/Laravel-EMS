@@ -5,6 +5,9 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<meta http-equiv="refresh" content="300;url='/employee_portal/logout'" />
+
+
 <title>About Employer</title>
 </head>
 
