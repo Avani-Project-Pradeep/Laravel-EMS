@@ -1,5 +1,5 @@
 {{-- portal layout --}}
-@extends('layouts.portal_layout')
+@extends('layouts.add_employee')
 
 
 {{-- tab headers --}}

@@ -20,7 +20,6 @@
 
 
 <!--EXTERNAL CSS-->
-<link rel="stylesheet" type="text/css" href="{{ asset('styles/body.css') }}" >
 
 </head>
 

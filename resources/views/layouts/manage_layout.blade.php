@@ -47,7 +47,6 @@ table {
     <div class="w3-col s4">
 
     </div>
-    <div class="w3-col s8 w3-bar">
         <br>
 
       <a href="#" class="w3-bar-item w3-button">
@@ -79,7 +78,6 @@ table {
 
     <a href="/search_employee" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search"></i>Search Employees</a>
 
-  </div>
 </nav>
 
 

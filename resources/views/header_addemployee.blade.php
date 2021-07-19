@@ -11,7 +11,6 @@
 {{-- CONTENT --}}
 @section('content')
 <!--EXTERNAL CSS-->
-<link rel="stylesheet" type="text/css" href="{{ asset('styles/add_employee.css') }}">
 
 </head>
 

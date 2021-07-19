@@ -96,7 +96,7 @@
 
 
 
-            <a href="/Employer/Register" style="color:green;">Not Registered? Click Here to register</a>
+            <a href="/Employer/register" style="color:green;">Not Registered? Click Here to register</a>
 
             <br><br>
 
