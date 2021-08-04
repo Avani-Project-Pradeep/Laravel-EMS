@@ -24,7 +24,7 @@ class UpdateEmployee_Controller extends Controller
 
             'employee_id' => 'required|',
             'designation' => 'required|max:50',
-            'company_name' => 'required|max:50|unique:Employee_Professional_Details,company_name',
+            'company_name' => 'required|max:50|unique:employee_professional_details,company_name',
             'department' => 'required|max:50',
             'reporting_manager' => 'required|max:50',
             'division' => 'required|max:100',

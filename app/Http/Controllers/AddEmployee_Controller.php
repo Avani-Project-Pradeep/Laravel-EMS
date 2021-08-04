@@ -22,7 +22,7 @@ class AddEmployee_Controller extends Controller
      $professional_details=   $request->validate([
 
 
-            'employee_id' => 'required|digits_between:1,10|unique:Employee_Professional_Details,Employee_id',
+            'employee_id' => 'required|digits_between:1,10|unique:employee_professional_details,employee_id',
             'designation' => 'required|max:50',
             'company_name' => 'required|max:50',
             'department' => 'required|max:50',
