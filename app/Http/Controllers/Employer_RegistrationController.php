@@ -48,9 +48,9 @@ class Employer_RegistrationController extends Controller
             'city' => 'required|max:50|regex:/^([^0-9]*)$/',
             'state' => 'required|max:50|regex:/^([^0-9]*)$/',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|max:8|confirmed',
+            'password' => 'required|max:8|confirmed|regex:/^\S*$/',
 
-            'password_confirmation' => 'required|max:8',
+            'password_confirmation' => 'required|max:8|regex:/^\S*$/',
 
 
 
