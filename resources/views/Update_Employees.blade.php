@@ -40,7 +40,7 @@
                                 <select name="employee_id" id="employee_id">
                                  <option value="">Employee_id</option>
 
-                                 {{ $ids = DB::table('Employee_Professional_Details')->pluck('Employee_id');
+                                 {{ $ids = DB::table('employee_professional_details')->pluck('employee_id');
                                 }}
 
 
