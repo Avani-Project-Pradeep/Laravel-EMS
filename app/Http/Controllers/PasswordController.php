@@ -92,8 +92,10 @@ return view('reset_link_msg');
     {
 //Validate input
 $request->validate([
-    'password' => 'required|confirmed|max:8',
-    'password_confirmation'=>'required|'
+    
+            'password' => 'required|max:8|confirmed|regex:/^\S*$/',
+            'password_confirmation' => 'required|max:8|regex:/^\S*$/',
+
  ]);
 $tokenData=$request->token;
 $password = $request->input('password');
