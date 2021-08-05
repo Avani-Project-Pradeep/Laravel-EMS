@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 
 use App\Models\User;
 use App\Models\Employee_Professional_Detail;
 use App\Models\Employee_Personal_Detail;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\DB;
 
 class AddEmployee_Controller extends Controller
 {
@@ -23,12 +20,13 @@ class AddEmployee_Controller extends Controller
 
 
             'employee_id' => 'required|digits_between:1,10|unique:employee_professional_details,employee_id',
-            'designation' => 'required|max:50',
-            'company_name' => 'required|max:50',
-            'department' => 'required|max:50',
-            'reporting_manager' => 'required|max:50',
-            'division' => 'required|max:100',
-            'employee_type' => 'required|max:50',
+            'designation' => 'required|regex:/^[A-Za-z -]+$/i|max:50',
+            'company_name' => 'required|max:50|regex:/^[-A-Za-z .,_!#@&$]+$/i',
+
+            'department' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:50',
+            'reporting_manager' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50',
+            'division' => 'required|regex:/^[A-Za-z0-9 ,.-]+$/i|max:100',
+            'employee_type' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50',
             'employee_status' => 'required|max:50',
             'joining_date'=>'required',
             'company_name' => 'required|max:50',
@@ -87,15 +85,18 @@ class AddEmployee_Controller extends Controller
 
 
         $personal_details = $request->validate([
-            'first_name'=>'required|max:50|regex:/^([^0-9]*)$/',
-           'last_name'=>'required|max:50|regex:/^([^0-9]*)$/',
-           'gender'=>'required',
-           'employee_email' => 'required|email|unique:employee_personal_details,employee_email',
+            'first_name'=>'required|max:50|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i',
+           'last_name'=>'required|max:50|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i',
+           'gender' =>  [
+
+            Rule::in(['male', 'female','Male','Female','MALE','FEMALE','other','OTHER','Other'])
+        ],
+       'employee_email' => 'required|email|unique:employee_personal_details,employee_email',
            'phone'=>'required|digits:10|unique:employee_personal_details,phone',
-           'dob'=>'required',
-           'state'=>'max:50',
-           'city'=>'max:50',
-           'permanent_address' => 'max:200',
+           'dob' => 'required|before:-14 years|nullable',
+           'state'=>'max:50|regex:/^[A-Za-z ]+$/i',
+           'city'=>'max:50|regex:/^[A-Za-z ]+$/i',
+           'permanent_address' => 'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable|max:200',
 
 
         ]);
