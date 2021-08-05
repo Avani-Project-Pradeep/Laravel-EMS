@@ -133,15 +133,15 @@
 
        @foreach ($professional_details as $pd )
 
-       <td style="width: 100px;">
+       <td style="width: 150px;">
         <label >Designation: </label>
 
 
-        <input  style="width: 100px;" type="text"  readonly placeholder="Designation " value="{{ $pd->designation }}">
+        <input  style="width: 150px;" type="text"  readonly placeholder="Designation " value="{{ $pd->designation }}">
       </td>
       <td style="width: 100px;">
         <label >Location: </label>
-        <input  style="width: 150px;" type="text" placeholder="Location" readonly value="{{$pd->location}}">
+        <input  style="width: 150px;" type="text" name="location" placeholder="Location" readonly value="{{$pd->location}}">
       </td>
       <td style="width: 150px;">
         <label>Company Name:</label>

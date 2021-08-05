@@ -11,8 +11,9 @@ use App\Models\Employer_Professional_Detail;
 use App\Models\Employee_Professional_Detail;
 
 use App\Models\Employer_Personal_Detail;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
+
 
 
 
@@ -74,12 +75,60 @@ public function editemployeraction(Request $request)
 
 
 
+        $existing_company=$request->session()->get('company_name');
+        if($request->input('company_name')!=$existing_company)
+        {
+            $request->validate([
+
+                'company_name' => 'required|max:50|string|regex:/[a-zA-Z]/|regex:/^[A-Za-z .,-_]+$/i|unique:employer_professional_details,company_name'
+
+            ]);
+
+        }
 
 
 
-         $request->validate([ 'city' => 'required|max:50|',
-         'state' => 'required|max:50|',
+
+
+
+
+
+         $request->validate([
+
+
+            'designation'=>'regex:/^[A-Za-z -]+$/i|nullable',
+            'location'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
+            'division'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
+            'work_experience'=>'regex:/[a-zA-Z0-9]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
+            'skills' =>'regex:/[a-zA-Z]/|regex:/^[-A-Za-z0-9 ,._]+$/i|nullable',
+            'bank_details' =>'regex:/[a-zA-Z]/|regex:/^[-A-Za-z0-9 ,._]+$/i|nullable',
+            'first_name'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|nullable',
+            'last_name'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|nullable',
+            'city' => 'required|max:50|regex:/^[A-Za-z ]+$/i',
+            'state' => 'required|max:50|regex:/^[A-Za-z ]+$/i',
+            'gender' =>  [
+
+                Rule::in(['male', 'female','Male','Female','MALE','FEMALE','other','OTHER']),
+            ],
+
+            'address'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
+            'education'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
+            'dob' => 'before:-14 years|nullable',
+            'doj' => 'before:tomorrow|nullable',
+
+
+
+
+
+
+
+
+
+
     ]);
+
+
+
 
 
           //EDIT PERSONAL DETAILS
@@ -124,7 +173,7 @@ public function editemployeraction(Request $request)
         'doj'=>$request->input('doj'),
         'work_experience'=>$request->input('work_experience'),
         'skills'=>$request->input('skills'),
-        'bank_details'=>$request->input('bank'),
+        'bank_details'=>$request->input('bank_details'),
 
 
  ]);

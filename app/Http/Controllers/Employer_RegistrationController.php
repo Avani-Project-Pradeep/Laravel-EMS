@@ -34,8 +34,7 @@ class Employer_RegistrationController extends Controller
        //validations
         $request->validate([
 
-            'company_name' => 'required|max:50|string|regex:/^([^0-9]*)$/|
-            unique:employer_professional_details,company_name',
+            'company_name' => 'required|max:50|string|string|regex:/[a-zA-Z]/|regex:/^[A-Za-z .,-,_!#@&$]+$/i| unique:employer_professional_details,company_name',
 
             'company_website' => 'required|url',
 
@@ -45,8 +44,8 @@ class Employer_RegistrationController extends Controller
 
             'phone_number' => 'required|digits:10|unique:employer_personal_details,phone',
 
-            'city' => 'required|max:50|regex:/^([^0-9]*)$/',
-            'state' => 'required|max:50|regex:/^([^0-9]*)$/',
+            'city' => 'required|max:50|regex:/^[A-Za-z ]+$/i',
+            'state' => 'required|max:50|regex:/^[A-Za-z ]+$/i',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|max:8|confirmed|regex:/^\S*$/',
 

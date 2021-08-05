@@ -131,16 +131,50 @@
         <label >Designation: </label>
 
 
-        <input  style="width: 100px;" type="text"  name="designation" placeholder="Designation " value="{{ $pd->designation }}">
+        <input  style="width: 150px;" type="text"  name="designation" placeholder="Designation " value="{{ $pd->designation }}">
+        <br>
+        <span style="color:red; font-size:12px;">
+
+            @error('designation')
+
+            {{ "*".$message }}
+            <br>
+
+            @enderror
+           </span>
+
       </td>
       <td style="width: 100px;">
         <label >Location: </label>
         <input  style="width: 100px;" type="text" placeholder="Location" name="location"  value="{{$pd->location}}">
+        <br>
+        <span style="color:red; font-size:12px;">
+
+            @error('location')
+
+            {{ "*".$message }}
+            <br>
+
+            @enderror
+           </span>
+
       </td>
       <td style="width: 150px;">
         <label>Company Name:</label>
         <input style="width: 150px;" value="{{$pd->company_name}}" type="text"
           name= "company_name"placeholder="Company Name" >
+          <br>
+          <span style="color:red; font-size:12px;">
+
+              @error('company_name')
+
+              {{ "*".$message }}
+              <br>
+
+              @enderror
+             </span>
+
+
       </td>
       <td style="width: 100px;">
         <label>Division: </label>
@@ -153,11 +187,33 @@
        <td>
         <label >Date_Of_Joining: </label>
        <input type="date"  name="doj" value="{{ $pd->doj }}"  >
+       <br>
+       <span style="color:red; font-size:12px;">
+
+           @error('doj')
+
+           {{ "*".$message }}
+           <br>
+
+           @enderror
+          </span>
+
        </td>
 
       <td colspan="3">
         <label >Work_Experience: </label>
         <input type="text" placeholder="Work Experience" name="work_experience" value="{{ $pd->work_experience }}" >
+        <br>
+        <span style="color:red; font-size:12px;">
+
+            @error('work_experience')
+
+            {{ "*".$message }}
+            <br>
+
+            @enderror
+           </span>
+
        </td>
 <td>
 </tr>
@@ -168,6 +224,17 @@
       <br>
       <input  type="text" placeholder="Skills" name="skills" value=
       "{{ $pd->skills }}" >
+      <br>
+      <span style="color:red; font-size:12px;">
+
+          @error('skills')
+
+          {{ "*".$message }}
+          <br>
+
+          @enderror
+         </span>
+
      </td>
 </tr>
 
@@ -175,7 +242,18 @@
   <td></td>
   <td colspan="4">
       <label >Bank Details: </label>
-      <input type="text" placeholder="Bank Details" name="bank"  value="{{ $pd->bank_details  }}"  >
+      <input type="text" placeholder="Bank Details" name="bank_details"  value="{{ $pd->bank_details  }}"  >
+      <br>
+      <span style="color:red; font-size:12px;">
+
+          @error('bank_details')
+
+          {{ "*".$message }}
+          <br>
+
+          @enderror
+         </span>
+
      </td>
 </tr>
 
@@ -215,16 +293,49 @@
 
 
            <input  style="width: 150px;" type="text" name="first_name" placeholder="First Name"  value="{{ $per->first_name }}" >
+           <br>
+           <span style="color:red; font-size:12px;">
+
+               @error('first_name')
+
+               {{ "*".$message }}
+               <br>
+
+               @enderror
+              </span>
+
          </td>
          <td style="width: 150px;">
 
            <label >Last Name: </label>
            <input  style="width: 150px;" type="text"  name="last_name" placeholder="Last Name"
             value="{{ $per->last_name }}" >
+            <br>
+            <span style="color:red; font-size:12px;">
+
+                @error('last_name')
+
+                {{ "*".$message }}
+                <br>
+
+                @enderror
+               </span>
+
          </td>
          <td>
            <label>DOB:</label>
            <input  type="date" name="dob"   value="{{ $per->dob }}">
+           <br>
+           <span style="color:red; font-size:12px;">
+
+               @error('dob')
+
+               {{ "*".$message }}
+               <br>
+
+               @enderror
+              </span>
+
          </td>
           </tr>
         <tr>
@@ -270,16 +381,49 @@
 
 
      <input  style="width: 150px;" type="text" placeholder="City" name="city"   value="{{ $per->city }}">
+     <br>
+     <span style="color:red; font-size:12px;">
+
+         @error('city')
+
+         {{ "*".$message }}
+         <br>
+
+         @enderror
+        </span>
+
    </td>
    <td style="width: 150px;">
 
      <label >State: </label>
      <input  style="width: 150px;" type="text" placeholder="State"  name="state"  value="{{ $per->state }}">
+     <br>
+     <span style="color:red; font-size:12px;">
+
+         @error('state')
+
+         {{ "*".$message }}
+         <br>
+
+         @enderror
+        </span>
+
    </td>
    <td>
      <label>Gender:</label>
      <input  type="text" placeholder="Gender"  name="gender"   value=
      "{{ $per->gender }}">
+     <br>
+     <span style="color:red; font-size:12px;">
+
+         @error('gender')
+
+         {{ "*".$message }}
+         <br>
+
+         @enderror
+        </span>
+
    </td>
     </tr>
 
@@ -289,11 +433,33 @@
      <td colspan="2">
          <label >Address: </label>
          <input type="text" placeholder="Address" name="address"  value="{{ $per->address }}" >
+         <br>
+         <span style="color:red; font-size:12px;">
+
+             @error('address')
+
+             {{ "*".$message }}
+             <br>
+
+             @enderror
+            </span>
+
         </td>
         <td colspan="2">
           <label> Educational Details:</label>
           <input type="text" placeholder="Educational Details" name="education"
            value="{{ $per->education }}"  >
+           <br>
+           <span style="color:red; font-size:12px;">
+
+               @error('education')
+
+               {{ "*".$message }}
+               <br>
+
+               @enderror
+              </span>
+
          </td>
 
    </tr>
