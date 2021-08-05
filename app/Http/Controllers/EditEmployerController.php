@@ -178,6 +178,8 @@ public function editemployeraction(Request $request)
 
  ]);
 
+ $request->session()->put('company_name', $request->input('company_name'));
+
 
 
 //EDIT EMAIL ID IN USERS
