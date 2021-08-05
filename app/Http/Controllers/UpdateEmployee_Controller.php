@@ -23,12 +23,13 @@ class UpdateEmployee_Controller extends Controller
 
 
             'employee_id' => 'required|',
-            'designation' => 'required|max:50',
-            'company_name' => 'required|max:50|unique:employee_professional_details,company_name',
-            'department' => 'required|max:50',
-            'reporting_manager' => 'required|max:50',
-            'division' => 'required|max:100',
-            'employee_type' => 'required|max:50',
+            'designation' => 'required|regex:/^[A-Za-z -]+$/i|max:50',
+            'company_name' => 'required|max:50|regex:/^[-A-Za-z .,_!#@&$]+$/i',
+
+            'department' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:50',
+            'reporting_manager' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50',
+            'division' => 'required|regex:/^[A-Za-z0-9 ,.-]+$/i|max:100',
+            'employee_type' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50',
             'employee_status' => 'required|max:50',
             'joining_date'=>'required',
             'company_name' => 'required|max:50',
@@ -77,34 +78,37 @@ class UpdateEmployee_Controller extends Controller
          $employee_id=$request->input('employee_id');
 
 
-        $personal_details = $request->validate([
-            'first_name'=>'required|max:50',
-           'last_name'=>'required|max:50',
-           'gender'=>'required',
-           'dob'=>'required',
-           'state'=>'required|max:50',
-           'city'=>'required|max:50',
-           'permanent_address' => 'required|max:200',
+         $personal_details = $request->validate([
+            'first_name'=>'required|max:50|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i',
+           'last_name'=>'required|max:50|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i',
+           'gender' =>  [
+
+            Rule::in(['male', 'female','Male','Female','MALE','FEMALE','other','OTHER','Other'])
+        ],
+           'phone'=>'required|digits:10|unique:employee_personal_details,phone',
+           'dob' => 'required|before:-14 years|nullable',
+           'state'=>'max:50|regex:/^[A-Za-z ]+$/i',
+           'city'=>'max:50|regex:/^[A-Za-z ]+$/i',
+           'permanent_address' => 'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable|max:200',
 
 
         ]);
 
-        $existing_email=Employee_Personal_Detail::where('employee_id','=', $employee_id)->value('employee_email');
+
+        $existing_email = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->value('employee_email');
 
 
 
 
 
-        if($request->input('employee_email')!=$existing_email)
-        {
+        if ($request->input('employee_email') != $existing_email) {
             $request->validate([
-            'employee_email' => 'required|email|unique:employee_personal_details,employee_email'
+                'employee_email' => 'required|email|unique:employee_personal_details,employee_email'
 
             ]);
-
         }
 
-        $updated_employee_email=$request->input('employee_email');
+        $updated_employee_email = $request->input('employee_email');
 
 
 
