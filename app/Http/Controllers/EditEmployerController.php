@@ -108,7 +108,7 @@ public function editemployeraction(Request $request)
             'state' => 'required|max:50|regex:/^[A-Za-z ]+$/i',
             'gender' =>  [
 
-                Rule::in(['male', 'female','Male','Female','MALE','FEMALE','other','OTHER']),
+                Rule::in(['male', 'female','Male','Female','MALE','FEMALE','other','OTHER','Other'])
             ],
 
             'address'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
