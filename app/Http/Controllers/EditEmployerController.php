@@ -98,7 +98,7 @@ public function editemployeraction(Request $request)
 
             'designation'=>'regex:/^[A-Za-z -]+$/i|nullable',
             'location'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
-            'division'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
+            'division'=>'regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
             'work_experience'=>'regex:/[a-zA-Z0-9]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
             'skills' =>'regex:/[a-zA-Z]/|regex:/^[-A-Za-z0-9 ,._]+$/i|nullable',
             'bank_details' =>'regex:/[a-zA-Z]/|regex:/^[-A-Za-z0-9 ,._]+$/i|nullable',
