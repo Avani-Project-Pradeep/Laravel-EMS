@@ -164,6 +164,12 @@
                     <label>Work_Experience: </label>
                     <input style="width: 100px;" type="text" name="work_experience" placeholder="Work"
                         value="{{ $pd->work_experience }}">
+                        <span style="color:red; font-size:12px;" >
+                            @error('work_experience')
+                            {{ '*' . $message }}<br>
+                            @enderror
+                        </span>
+
 
                 </div>
 
@@ -243,6 +249,12 @@
 
                             <label>DOB:</label>
                             <input style="width: 300;" name="dob" type="date" value="{{ $per->dob }}">
+                            <span style="color:red; font-size:12px;" >
+                                @error('dob')
+                                {{ '*' . $message }}<br>
+                                @enderror
+                            </span>
+
 
 
                         </div>
@@ -304,7 +316,13 @@
 
 
                             <label>Gender:</label>
-                            <input type="text" placeholder="Gender" value="{{ $per->gender }}">
+                            <input type="text"  name="gender" placeholder="Gender" value="{{ $per->gender }}">
+                            <span style="color:red; font-size:12px;" >
+                                @error('gender')
+                                {{ '*' . $message }}<br>
+                                @enderror
+                            </span>
+
 
                             <br><br>
                             <label>Address: </label>

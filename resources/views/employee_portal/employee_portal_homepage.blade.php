@@ -350,7 +350,10 @@
             >
             @endif
 
-            {{$per->first_name." ".$per->last_name}}
+           <div style="color:blue; font-size:20px;">
+            <p>{{$per->first_name." ".$per->last_name}}</p>
+            <p>Employee ID : {{session('employee_id')}}</p>
+        </div>
 
             <br>
             <div class="input_field">
@@ -364,7 +367,7 @@
 
                     @enderror
                 </div>
-
+                 <br>
 
 <br><br>
 
@@ -415,18 +418,19 @@
          value="{{ $pd->designation }}">
       </td>
       <td style="width: 100px;">
-        <label >Location: </label>
-        <input  style="width: 100px;" type="text" placeholder="Location" readonly
-        value="{{$pd->location}}">
+        <label >Status: </label>
+        <br>
+        <input  style="width: 100px;" type="text" placeholder="Status" readonly
+        @if($pd->employee_status==1)
+        value="Active"
+        @else
+        value="Inactive"
+        @endif
+    >
       </td>
       <td style="width: 150px;">
-        <label>Company Name:</label>
-        <input style="width: 150px;" value="{{$pd->ompany_name}}" type="text" placeholder="Company Name" readonly>
-      </td>
-      <td style="width: 100px;">
-        <label>Division: </label>
-        <input  style="width: 100px;"type="text" placeholder="Division"
-         value="{{ $pd->division }}" readonly>
+        <label>Reporting Manager:</label>
+        <input style="width: 150px;" value="{{$pd->reporting_manager}}" type="text" placeholder="Reporting Manager" readonly>
       </td>
      </tr>
      <tr>
@@ -437,28 +441,36 @@
        <input type="date" value="{{ $pd->doj }}" readonly>
        </td>
 
-      <td colspan="3">
-        <label >Work_Experience: </label>
-        <input type="text" placeholder="Work Experience" value="{{ $pd->work_experience }}" readonly>
+      <td>
+        <label >Department: </label>
+        <input type="text" placeholder="Department" value="{{ $pd->department }}" readonly>
        </td>
-<td>
-</tr>
-<tr>
-  <td></td>
-  <td colspan="4">
-      <label >Skills: </label>
-      <br>
-      <input  type="text" placeholder="Skills" value="{{ $pd->skills }}" readonly>
-     </td>
-</tr>
+       <td style="width: 100px;">
+        <label >Employee Type: </label>
 
-<tr>
-  <td></td>
-  <td colspan="4">
-      <label >Bank Details: </label>
-      <input type="text" placeholder="Bank Details"  readonly value="{{ $pd->bank_details}}"  >
-     </td>
+
+        <input  style="width: 100px;" type="text"  readonly placeholder="Employee Type"
+         value="{{ $pd->employee_type }}">
+      </td>
+
 </tr>
+<td>
+</td>
+  <td style="width: 100px;">
+    <label >Shift: </label><br>
+    <input  style="width: 100px;" type="text" placeholder="Shift" readonly  value="{{ $pd->shift }}">
+
+  </td>
+  <td style="width: 150px;">
+    <label>Company Name:</label>
+    <input style="width: 150px;" value="{{$pd->company_name}}" type="text" placeholder="Company Name" readonly>
+  </td>
+  <td style="width: 100px;">
+    <label>Division: </label>
+    <input  style="width: 100px;"type="text" placeholder="Division"
+     value="{{ $pd->division }}" readonly>
+  </td>
+ </tr>
 
 
    </table>
@@ -521,7 +533,7 @@
 
          <td>
            <label >Phone Number: </label>
-           <input type="text" placeholder="Phone Number"readonly  value="{{ $pd->phone }}" >
+           <input type="text" placeholder="Phone Number"  value="{{ $per->phone }}" readonly >
           </td>
    <td>
    </tr>
@@ -550,7 +562,7 @@
      <td></td>
      <td colspan="2">
          <label >Address: </label>
-         <input type="text" placeholder="Address" readonly  value="{{ $per->address }}" >
+         <input type="text" placeholder="Address" readonly  value="{{ $per->permanent_address }}" >
         </td>
         <td colspan="2">
           <label> Educational Details:</label>

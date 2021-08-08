@@ -50,6 +50,11 @@
 
                                 @endforeach
                                   </select>
+                                  <div style="color:red; font-size:12px;">
+                                    @error('employee_id')
+                                    {{ '*' . $message }}
+                                    @enderror
+                                </div>
 
 
                                   <br><br>

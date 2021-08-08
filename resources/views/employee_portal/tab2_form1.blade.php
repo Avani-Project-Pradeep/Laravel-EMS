@@ -30,7 +30,7 @@
 
         <span>Blood Group: </span>
         <select name="blood_group" >
-            <option>Choose Blood Group</option>
+            <option value=" ">Choose Blood Group</option>
              <option value="O+">O+</option>
             <option value="O-">O-</option>
             <option value="A+">A+</option>

@@ -11,6 +11,8 @@
 
 
 <style>
+
+
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 table {
        counter-reset: tableCount;
@@ -19,14 +21,12 @@ table {
        content: counter(tableCount);
        counter-increment: tableCount;
    }
-
-
    .w-5{
        display: none;
    }
-
-
 </style>
+
+
 <body class="w3-light-grey">
 
 <!-- Top container -->
@@ -53,7 +53,7 @@ table {
       <i class="fa fa-user-circle" style="font-size:20px;"> Welcome</i><br><br>
 
       {{session('employer_first_name')." ".session('employer_last_name')}}
-
+          <br><br>
         <button type="button" class="btn btn-outline-primary">
          Email ID :<br> {{session('employer_email')}}
         </button>
@@ -68,7 +68,7 @@ table {
 
   <div class="w3-bar-block" style="font-size:15px; width:200px">
 
-    <a href="/employer_portal/manage_employees/view" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i> View all Employees</a><br>
+    <a href="/employer_portal/manage_employees/view" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i> View all Employees</a><br>
     <a href="/employer_portal/add_employee" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus-square"></i> Add Employees</a><br>
 
     <a href="/Employee/register" class="w3-bar-item w3-button w3-padding"><i class="fa fa-check-circle"></i> Register Employees</a><br>
@@ -79,6 +79,9 @@ table {
     <a href="/search_employee" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search"></i>Search Employees</a>
 
 </nav>
+
+
+
 
 
 

@@ -11,7 +11,7 @@
 
 <span>Employer Name:<span>
     <br>
-        <input type="text"  name="employer_name" value="{{$pro->employer_name}}">
+        <input type="text"  name="employer_name" value="{{$pro->employer_name}}" readonly>
         <br>
 
         <div style="color:red; font-size:12px;">
