@@ -54,7 +54,7 @@ public function editemployeraction(Request $request)
         if($request->input('phone_number')!=$existing_phone)
         {
             $request->validate([
-                'phone_number' => 'required|digits:10|unique:employer_personal_details,phone'
+                'phone_number' => 'required|digits:10|unique:employer_personal_details,phone|unique:employee_personal_details,phone',
             ]);
 
 
@@ -67,7 +67,7 @@ public function editemployeraction(Request $request)
         if($request->input('email')!=$existing_email)
         {
             $request->validate([
-            'email' => 'required|email|unique:users,email'
+                'email' => 'required|email|unique:users,email|unique:employee_personal_details,employee_email',
 
             ]);
 
@@ -80,7 +80,7 @@ public function editemployeraction(Request $request)
         {
             $request->validate([
 
-                'company_name' => 'required|max:50|string|string|regex:/[a-zA-Z]/|regex:/^[-A-Za-z .,_!#@&$]+$/i| unique:employer_professional_details,company_name',
+                'company_name' => 'required|max:50|string|regex:/[a-zA-Z]/|regex:/^[-A-Za-z .,_!#@&$]+$/i| unique:employer_professional_details,company_name',
 
             ]);
 
@@ -96,9 +96,9 @@ public function editemployeraction(Request $request)
          $request->validate([
 
 
-            'designation'=>'regex:/^[A-Za-z -]+$/i|nullable',
+            'designation'=>'regex:/^[A-Za-z ]+$/i|nullable',
             'location'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
-            'division'=>'regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
+            'division'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
             'work_experience'=>'regex:/[a-zA-Z0-9]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
             'skills' =>'regex:/[a-zA-Z]/|regex:/^[-A-Za-z0-9 ,._]+$/i|nullable',
             'bank_details' =>'regex:/[a-zA-Z]/|regex:/^[-A-Za-z0-9 ,._]+$/i|nullable',
@@ -108,11 +108,11 @@ public function editemployeraction(Request $request)
             'state' => 'required|max:50|regex:/^[A-Za-z ]+$/i',
             'gender' =>  [
 
-                Rule::in(['male', 'female','Male','Female','MALE','FEMALE','other','OTHER','Other'])
+                Rule::in(['','male', 'female','Male','Female','MALE','FEMALE','other','OTHER','Other'])
             ],
 
             'address'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
-            'education'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
+            'education'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.%-]+$/i|nullable',
             'dob' => 'before:-14 years|nullable',
             'doj' => 'before:tomorrow|nullable',
 

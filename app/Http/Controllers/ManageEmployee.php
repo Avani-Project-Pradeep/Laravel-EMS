@@ -12,6 +12,8 @@ use App\Http\Controllers\Employer_portalController;
 use EmployeePersonalDetails;
 use Illuminate\Pagination\LengthAwarePaginator;
 use PHPUnit\Framework\Constraint\IsEmpty;
+use Illuminate\Validation\Rule;
+
 
 class ManageEmployee extends Controller
 {
@@ -111,11 +113,12 @@ class ManageEmployee extends Controller
         $professional_details = $request->validate([
 
 
-            'designation' => 'max:50',
-            'location' => 'max:50',
-            'company_name' => 'max:50',
-            'department' => 'max:50',
-            'division' => 'max:100',
+           'designation' => 'regex:/^[A-Za-z ]+$/i|max:50',
+            'company_name' => 'regex:/[a-zA-Z]/|regex:/^[-A-Za-z .,_!#@&$]+$/i|max:50',
+            'department' => 'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:50',
+            'division' => 'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:100',
+            'work_experience'=>'regex:/[a-zA-Z0-9]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
+            'skills' =>'regex:/[a-zA-Z]/|regex:/^[-A-Za-z0-9 ,._]+$/i|nullable',
 
 
 
@@ -125,11 +128,17 @@ class ManageEmployee extends Controller
 
 
         $personal_details = $request->validate([
-            'first_name' => 'max:50',
-            'last_name' => 'max:50',
-            'state' => 'max:50',
-            'city' => 'max:50',
-            'educational_details' => 'max:200',
+            'first_name' => 'required|max:50|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i',
+            'last_name' => 'required|max:50|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i',
+            'state'=>'nullable|max:50|regex:/^[A-Za-z ]+$/i',
+            'city'=>'nullable|max:50|regex:/^[A-Za-z ]+$/i',
+             'educational_details' => 'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.%-]+$/i|nullable|max:200',
+             'gender' =>  [
+
+                Rule::in(['male', 'female','Male','Female','MALE','FEMALE','other','OTHER','Other'])
+            ],
+            'address'=>'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable',
+            'dob' => 'required|before:-14 years|',
 
 
         ]);
@@ -142,7 +151,7 @@ class ManageEmployee extends Controller
 
         if ($request->input('phone') != $existing_phone) {
             $request->validate([
-                'phone' => 'required|digits:10|unique:employee_personal_details,phone'
+                'phone' => 'required|digits:10|unique:employer_personal_details,phone|unique:employee_personal_details,phone',
             ]);
         }
 
@@ -158,7 +167,7 @@ class ManageEmployee extends Controller
 
         if ($request->input('employee_email') != $existing_email) {
             $request->validate([
-                'employee_email' => 'required|email|unique:employee_personal_details,employee_email'
+                'employee_email' => 'required|email|unique:users,email|unique:employee_personal_details,employee_email',
 
             ]);
         }
@@ -182,7 +191,7 @@ class ManageEmployee extends Controller
                 'state' => $request->input('state'),
                 'gender' => $request->input('gender'),
                 'address' => $request->input('address'),
-                'education' => $request->input('education'),
+                'education' => $request->input('educational_details'),
                 'phone' => $request->input('phone'),
                 'employee_email' => $request->input('employee_email')
 

@@ -9,6 +9,8 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Employee_Professional_Detail;
 use App\Models\Employee_Personal_Detail;
+use App\Models\Employer_Personal_Detail;
+
 
 class AddEmployee_Controller extends Controller
 {
@@ -20,8 +22,8 @@ class AddEmployee_Controller extends Controller
 
 
             'employee_id' => 'required|digits_between:1,10|unique:employee_professional_details,employee_id',
-            'designation' => 'required|regex:/^[A-Za-z -]+$/i|max:50',
-            'company_name' => 'required|max:50|regex:/^[-A-Za-z .,_!#@&$]+$/i',
+            'designation' => 'required|regex:/^[A-Za-z ]+$/i|max:50',
+            'company_name' => 'required|max:50|regex:/[a-zA-Z]/|regex:/^[-A-Za-z .,_!#@&$]+$/i|',
 
             'department' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:50',
             'reporting_manager' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50',
@@ -29,7 +31,6 @@ class AddEmployee_Controller extends Controller
             'employee_type' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50',
             'employee_status' => 'required|max:50',
             'joining_date'=>'required',
-            'company_name' => 'required|max:50',
             'shift' => 'required|max:50',
              'employee_status'=>'required|max:50',
 
@@ -45,6 +46,14 @@ class AddEmployee_Controller extends Controller
 
         $employee = new Employee_Professional_Detail ;
         $employee->employer_email=$request->session()->get('employer_email');
+
+        $employer_email=$request->session()->get('employer_email');
+
+    $employer_firstname=Employer_Personal_Detail::where('employer_email','=',$employer_email)->value('first_name');
+
+    $employer_lastname=Employer_Personal_Detail::where('employer_email','=',$employer_email)->value('last_name');
+
+    $employee->employer_name=$employer_firstname." ".$employer_lastname;
         $employee->employee_id = $request->employee_id;
         $employee->designation = $request->designation;
         $employee->department = $request->department;
@@ -91,11 +100,13 @@ class AddEmployee_Controller extends Controller
 
             Rule::in(['male', 'female','Male','Female','MALE','FEMALE','other','OTHER','Other'])
         ],
-       'employee_email' => 'required|email|unique:employee_personal_details,employee_email',
-           'phone'=>'required|digits:10|unique:employee_personal_details,phone',
-           'dob' => 'required|before:-14 years|nullable',
-           'state'=>'max:50|regex:/^[A-Za-z ]+$/i',
-           'city'=>'max:50|regex:/^[A-Za-z ]+$/i',
+
+       'employee_email' => 'required|email|unique:employer_professional_details,employer_email|unique:employee_personal_details,employee_email',
+
+       'phone' => 'required|digits:10|unique:employer_personal_details,phone|unique:employee_personal_details,phone',
+       'dob' => 'required|before:-14 years|',
+           'state'=>'max:50|regex:/^[A-Za-z ]+$/i|nullable',
+           'city'=>'max:50|regex:/^[A-Za-z ]+$/i|nullable',
            'permanent_address' => 'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable|max:200',
 
 

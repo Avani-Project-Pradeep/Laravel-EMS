@@ -22,9 +22,9 @@ class UpdateEmployee_Controller extends Controller
      $professional_details=   $request->validate([
 
 
-            'employee_id' => 'required|',
+            'employee_id' => 'required',
             'designation' => 'required|regex:/^[A-Za-z -]+$/i|max:50',
-            'company_name' => 'required|max:50|regex:/^[-A-Za-z .,_!#@&$]+$/i',
+            'company_name' => 'required|max:50|regex:/[a-zA-Z]/|regex:/^[-A-Za-z .,_!#@&$]+$/i',
 
             'department' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:50',
             'reporting_manager' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50',
@@ -32,7 +32,6 @@ class UpdateEmployee_Controller extends Controller
             'employee_type' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50',
             'employee_status' => 'required|max:50',
             'joining_date'=>'required',
-            'company_name' => 'required|max:50',
             'shift' => 'required|max:50',
              'employee_status'=>'required|max:50',
 
@@ -85,10 +84,11 @@ class UpdateEmployee_Controller extends Controller
 
             Rule::in(['male', 'female','Male','Female','MALE','FEMALE','other','OTHER','Other'])
         ],
-           'phone'=>'required|digits:10|unique:employee_personal_details,phone',
-           'dob' => 'required|before:-14 years|nullable',
-           'state'=>'max:50|regex:/^[A-Za-z ]+$/i',
-           'city'=>'max:50|regex:/^[A-Za-z ]+$/i',
+
+
+            'dob' => 'required|before:-14 years',
+           'state'=>'max:50|regex:/^[A-Za-z ]+$/i|nullable',
+           'city'=>'max:50|regex:/^[A-Za-z ]+$/i|nullable',
            'permanent_address' => 'regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|nullable|max:200',
 
 
@@ -100,15 +100,44 @@ class UpdateEmployee_Controller extends Controller
 
 
 
+        if ($request->input('employee_email')!= $existing_email) {
 
-        if ($request->input('employee_email') != $existing_email) {
             $request->validate([
-                'employee_email' => 'required|email|unique:employee_personal_details,employee_email'
+                'employee_email' => 'required|email|unique:users,email|unique:employee_personal_details,employee_email',
 
             ]);
+
+            $updated_employee_email = $request->input('employee_email');
+
+            DB::table('users')
+            ->where('email', $existing_email)
+            ->update([
+                'email' => $updated_employee_email
+
+            ]);
+
+
+            Employee_Personal_Detail::where('employee_id', $employee_id)->update([
+                'employee_email' => $request->input('employee_email')]);
+
+
+
         }
 
-        $updated_employee_email = $request->input('employee_email');
+
+        $existing_phone = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->value('phone');
+
+
+
+        if ($request->input('phone') != $existing_phone) {
+            $request->validate([
+                'phone' => 'required|digits:10|unique:employer_personal_details,phone|unique:employee_personal_details,phone',
+            ]);
+
+            Employee_Personal_Detail::where('employee_id', $employee_id)->update([
+                'phone' => $request->input('phone')]);
+
+        }
 
 
 
@@ -128,8 +157,6 @@ class UpdateEmployee_Controller extends Controller
                 'gender' => $request->input('gender'),
                 'address' => $request->input('address'),
                 'education' => $request->input('education'),
-                'phone' => $request->input('phone'),
-                'employee_email' => $request->input('employee_email')
 
 
 
@@ -137,12 +164,6 @@ class UpdateEmployee_Controller extends Controller
 
             ]);
 
- DB::table('users')
- ->where('email', $existing_email)
- ->update([
-     'email' => $updated_employee_email
-
- ]);
 
 
 

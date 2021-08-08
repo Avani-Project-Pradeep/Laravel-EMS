@@ -26,14 +26,15 @@ class Employee_RegistrationController extends Controller
 
       $validate=  $request->validate([
 
-            "first_name" => 'required|max:50|string|regex:/^([^0-9]*)$/',
-            "last_name"=> 'required|max:50|string|regex:/^([^0-9]*)$/',
-            "phone_number"=>'required|digits:10|unique:employee_registration,phone_number',
-            "city"=>'required|max:50|regex:/^([^0-9]*)$/',
-            "state"=>'required|max:50|regex:/^([^0-9]*)$/',
-            "image"=>'nullable|image|mimes:jpg,png,jpeg|max:5000',
-            "address"=>'required|max:200',
-            "email"=>'required|email|unique:users,email',
+        'first_name' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50|',
+        'last_name' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50',
+
+        'phone_number' => 'required|digits:10|unique:employer_personal_details,phone|unique:employee_registration',
+        'state'=>'required|max:50|regex:/^[A-Za-z ]+$/i',
+        'city'=>'required|max:50|regex:/^[A-Za-z ]+$/i',
+       'image'=>'nullable|image|mimes:jpg,png,jpeg|max:5000',
+        "address"=>'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:200',
+        'email' => 'required|email|unique:users,email',
 
 
         ]);

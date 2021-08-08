@@ -10,6 +10,7 @@ use App\Models\Employee_Professional_Detail;
 use App\Models\Employee_Personal_Detail;
 use App\Models\Employer_Professional_Detail;
 use App\Models\Employer_Personal_Detail;
+use Illuminate\Validation\Rule;
 
 
 class Employee_portalController extends Controller
@@ -94,18 +95,17 @@ class Employee_portalController extends Controller
         $professional_details =   $request->validate([
 
 
-            'designation' => 'required|max:50',
-            'department' => 'required|max:50',
-            'reporting_manager' => 'required|max:50',
-            'division' => 'required|max:50',
-            'employee_type' => 'required|max:50',
+            'designation'=>'required|regex:/^[A-Za-z -]+$/i|max:50',
+            'department' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:50',
+            'reporting_manager' => 'required|regex:/^[A-Za-z -]+$/i|max:50',
+            'division' => 'required|regex:/^[A-Za-z0-9 ,.-]+$/i|max:50',
+            'employee_type' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50',
             'employee_status' => 'required|max:50',
             'doj' => 'required',
-            'employer_name' => 'required|max:100',
             'shift' => 'required|max:50',
             'employee_status' => 'required|max:50',
-            'project' => 'required|max:500',
-            'work_experience' => 'required|max:200'
+            'project' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:500',
+            'work_experience'=>'regex:/[a-zA-Z0-9]/|regex:/^[A-Za-z0-9 ,.-]+$/i|required|max:200',
 
 
 
@@ -131,7 +131,6 @@ class Employee_portalController extends Controller
                 'shift' => $request->shift,
                 'project' => $request->project,
                 'work_experience' => $request->work_experience,
-                'employer_name' => $request->employer_name,
 
 
 
@@ -172,23 +171,23 @@ class Employee_portalController extends Controller
 
 
         $personal_details = $request->validate([
-            'first_name' => 'required|regex:/^([^0-9]*)$/|max:50|',
-            'last_name' => 'required|regex:/^([^0-9]*)$/|max:50',
-            'gender' => 'required',
-            'dob' => 'required',
-            'state' => 'required|max:50',
-            'city' => 'required|max:50',
-            'current_address' => 'required|max:200',
+            'first_name' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50|',
+            'last_name' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50',
+            'gender' =>  [
+
+                Rule::in(['male', 'female','Male','Female','MALE','FEMALE','other','OTHER','Other'])
+            ],
+            'dob' => 'required|before:-14 years',
+            'state'=>'required|max:50|regex:/^[A-Za-z ]+$/i',
+            'city'=>'required|max:50|regex:/^[A-Za-z ]+$/i',
+            'current_address' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:200',
             'blood_group' => 'required',
-            'phone' => 'required',
-            'emergency_phone_number' => 'required|digits:10|different:phone',
             'pan' => 'required|size:12',
             'aadhar' => 'required|digits:12',
-            'employee_email' => 'required',
-            'education' => 'required',
-            'hobbies' => 'required',
+            'education'=>'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.%-]+$/i|',
+            'hobbies' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i',
             'image' => 'required',
-            'permanent_address' => 'required|max:200',
+            'permanent_address' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:200',
 
 
         ]);
@@ -201,36 +200,71 @@ class Employee_portalController extends Controller
 
         if ($request->input('phone') != $existing_phone) {
             $request->validate([
-                'phone' => 'required|digits:10|unique:employee_personal_details,phone'
+                'phone' => 'required|digits:10|unique:employer_personal_details,phone|unique:employee_personal_details,phone',
             ]);
+
+            Employee_Personal_Detail::where('employee_id', $employee_id)->update([
+                'phone' => $request->input('phone')]);
+
+
+         DB::table('employee_registration')->where('phone_number','=',$existing_phone)->update(['phone_number'=>$request->input('phone')]);
+
+
         }
 
 
+        $emergency_phone_valid=$request->validate([
+        'emergency_phone_number' => 'required|digits:10|different:phone']);
 
+
+
+        if($emergency_phone_valid)
+        {
+            Employee_Personal_Detail::where('employee_id', $employee_id)->update([
+                'emergency_phone_number' => $request->input('emergency_phone_number')]);
+
+        }
 
 
         $existing_email = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->value('employee_email');
 
 
+        if ($request->input('employee_email')!= $existing_email) {
 
-
-
-        if ($request->input('employee_email') != $existing_email) {
             $request->validate([
-                'employee_email' => 'required|email|unique:employee_personal_details,employee_email'
+                'employee_email' => 'required|email|unique:users,email|unique:employee_personal_details,employee_email',
 
             ]);
+
+            $updated_employee_email = $request->input('employee_email');
+
+            DB::table('users')
+            ->where('email', $existing_email)
+            ->update([
+                'email' => $updated_employee_email
+
+            ]);
+
+
+            Employee_Personal_Detail::where('employee_id', $employee_id)->update([
+                'employee_email' => $request->input('employee_email')]);
+
+
+
+
+                $request->session()->put('employee_email', $updated_employee_email);
+
+
         }
 
 
 
-        $updated_employee_email = $request->input('employee_email');
 
 
 
-        Employee_Personal_Detail::where('employee_id', $employee_id)
-            ->update($personal_details);
 
+
+         Employee_Personal_Detail::where('employee_id', $employee_id)->update($personal_details);
 
 
 

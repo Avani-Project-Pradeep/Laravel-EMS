@@ -285,6 +285,10 @@ Route::get('employer_portal/logout',[Employer_portalController::class,'employer_
     Route::post('/Employee/loginverify',[Employee_LoginController::class,'loginverify']);
 
 
+    //if employee not added yet,but registered first
+    Route::get('/employee_portal_notadded',function () {
+        return view('employee_not_added');
+    })->name('no_employee_added');
 
 
     Route::group(['middleware'=>['EmployeeCheck']],function()
