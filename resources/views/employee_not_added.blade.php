@@ -52,7 +52,7 @@ footer{
         <h3>Employee has been registered successfully to use Employee Portal!</h3>
            <p>All the required details of the employee has not been added by employer. <br> Please contact to the employer to  add all the required details so that employee can use employee portal.</p>
            <h3>
-               <a href="/employee_portal/logout" style="color:white"><i class="fa fa-power-off"></i> Logout</a>
+            <a href="/Employee/login" style="color:white"><i class="fa fa-power-off"></i>Exit</a>
         </h3>
 
 
