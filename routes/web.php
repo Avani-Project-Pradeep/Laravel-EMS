@@ -16,7 +16,7 @@ use App\Http\Controllers\Employee_RegistrationController;
 use App\Http\Controllers\Employee_LoginController;
 use App\Http\Controllers\ManageEmployee;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\Employee_PortalController;
+use App\Http\Controllers\Employee_portalController;
 use App\Http\Controllers\PasswordController;
 
 
