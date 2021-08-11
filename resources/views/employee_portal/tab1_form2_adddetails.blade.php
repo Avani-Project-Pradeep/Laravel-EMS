@@ -55,6 +55,16 @@
                                 <br>
 
 
+                                <span>Skills:<span>
+                                    <br>
+                                    <input type="text" name="skills" value="{{$pro->skills}}">
+
+                                    <div style="color:red; font-size:12px;">
+                                        @error('skills')
+                                        {{ '*' . $message }}
+                                        @enderror
+                                    </div>
+                                    <br>
 
 
 

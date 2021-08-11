@@ -29,7 +29,7 @@
 
 
         <span>Blood Group: </span>
-        <select name="blood_group" >
+        <select name="employee_bloodgroup" >
             <option value=" ">Choose Blood Group</option>
              <option value="O+">O+</option>
             <option value="O-">O-</option>
@@ -43,8 +43,8 @@
 
         </select>
 
-
-        <span style="color: red;">@error('blood_group'){{"*".$message}}@enderror</span>
+<br>
+        <span style="color: red;">@error('employee_bloodgroup'){{"*".$message}}@enderror</span>
 
 
         <br><br>

@@ -39,7 +39,7 @@
                 <br><br>
 
 
-                <a href="\Employer\login" style="color:green">Back to Login Page</a>
+                <a href="/" style="color:green;">Cancel</a>
 
 </div>
             </form>

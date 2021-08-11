@@ -15,7 +15,7 @@
 <style>
     .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
+  max-width: 500px;
   margin: auto;
   text-align: center;
   font-family: arial;
@@ -59,18 +59,25 @@ button:hover, a:hover {
     @foreach ($professional_details as $pro )
 
     @if( $per->image==NULL)
-    <img  style="height:200px; width:200px" src="{{asset("images")}}/{{"blank.png"}}">
+    <img  style="height:500px; width:500px" src="{{asset("images")}}/{{"blank.png"}}">
     @else
     <img src= "{{asset("images")}}/{{$per->image}}"
     >
     @endif
 
   <h1>{{$per->first_name}}.{{$per->last_name}}</h1>
-  <h3 >{{$pro->designation}}</h3>
-  <h3 >{{$pro->designation}}</h3>
-    <h3>{{$pro->company_name}}</h3>
+  <br>
+  <h4 >Designation:{{$pro->designation}}</h4>  <br>
+
+  <h4>Division:{{$pro->division}}</h4>  <br>
+
+    <h4>Company:{{$pro->company_name}}</h4>  <br>
+
   <div style="margin: 24px 0;">
-<h4>Email:{{$pro->employer_email}}
+<h4>Email:<br>{{$pro->employer_email}}</h4>
+
+<h4>Contact:<br>{{$per->phone}}</h4>
+
   </div>
   <p><button></button></p>
 </div>

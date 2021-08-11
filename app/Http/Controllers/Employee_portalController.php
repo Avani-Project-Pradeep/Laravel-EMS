@@ -39,7 +39,7 @@ class Employee_portalController extends Controller
         return view('employee_portal.employee_portal_homepage', ['professional_details' => $professional_details, 'personal_details' => $personal_details]);
     }
 
-//aboutemployer
+    //aboutemployer
     public function aboutemployer(Request $request)
     {
 
@@ -50,7 +50,7 @@ class Employee_portalController extends Controller
 
 
 
-        $professional_details = DB::table('employer_professional_details')->where('employer_email','=',$email)->get();
+        $professional_details = DB::table('employer_professional_details')->where('employer_email', '=', $email)->get();
 
 
 
@@ -64,7 +64,7 @@ class Employee_portalController extends Controller
 
 
 
-//add details
+    //add details
 
     public function add_details(Request $request)
     {
@@ -95,7 +95,7 @@ class Employee_portalController extends Controller
         $professional_details =   $request->validate([
 
 
-            'designation'=>'required|regex:/^[A-Za-z -]+$/i|max:50',
+            'designation' => 'required|regex:/^[A-Za-z -]+$/i|max:50',
             'department' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:50',
             'reporting_manager' => 'required|regex:/^[A-Za-z -]+$/i|max:50',
             'division' => 'required|regex:/^[A-Za-z0-9 ,.-]+$/i|max:50',
@@ -105,7 +105,7 @@ class Employee_portalController extends Controller
             'shift' => 'required|max:50',
             'employee_status' => 'required|max:50',
             'project' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:500',
-            'work_experience'=>'regex:/[a-zA-Z0-9]/|regex:/^[A-Za-z0-9 ,.-]+$/i|required|max:200',
+            'work_experience' => 'regex:/[a-zA-Z0-9]/|regex:/^[A-Za-z0-9 ,.-]+$/i|required|max:200',
 
 
 
@@ -117,20 +117,22 @@ class Employee_portalController extends Controller
         $employee_id = $request->input('employee_id');
 
         $employee = Employee_Professional_Detail::where('employee_id', $employee_id)
-            ->update([
-                'designation' => $request->designation,
-                'department' => $request->department,
-                'division' => $request->division,
-                'employee_type' => $request->employee_type,
-                'doj' => $request->doj,
-                'reporting_manager' => $request->reporting_manager,
-                'shift' => $request->shift,
-                'employee_status' => $request->employee_status,
-                'reporting_manager' => $request->reporting_manager,
-                'employee_type' => $request->employee_type,
-                'shift' => $request->shift,
-                'project' => $request->project,
-                'work_experience' => $request->work_experience,
+            ->update(
+                [
+                    'designation' => $request->designation,
+                    'department' => $request->department,
+                    'division' => $request->division,
+                    'employee_type' => $request->employee_type,
+                    'doj' => $request->doj,
+                    'reporting_manager' => $request->reporting_manager,
+                    'shift' => $request->shift,
+                    'employee_status' => $request->employee_status,
+                    'reporting_manager' => $request->reporting_manager,
+                    'employee_type' => $request->employee_type,
+                    'shift' => $request->shift,
+                    'project' => $request->project,
+                    'work_experience' => $request->work_experience,
+                    'skills' => $request->skills,
 
 
 
@@ -175,22 +177,76 @@ class Employee_portalController extends Controller
             'last_name' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z -.]+$/i|max:50',
             'gender' =>  [
 
-                Rule::in(['male', 'female','Male','Female','MALE','FEMALE','other','OTHER','Other'])
+                Rule::in(['male', 'female', 'Male', 'Female', 'MALE', 'FEMALE', 'other', 'OTHER', 'Other'])
             ],
             'dob' => 'required|before:-14 years',
-            'state'=>'required|max:50|regex:/^[A-Za-z ]+$/i',
-            'city'=>'required|max:50|regex:/^[A-Za-z ]+$/i',
+            'state' => 'required|max:50|regex:/^[A-Za-z ]+$/i',
+            'city' => 'required|max:50|regex:/^[A-Za-z ]+$/i',
             'current_address' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:200',
-            'blood_group' => 'required',
-            'pan' => 'required|size:12',
-            'aadhar' => 'required|digits:12',
-            'education'=>'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.%-]+$/i|',
-            'hobbies' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i',
+            'employee_bloodgroup' => 'required',
+            'education' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.%-]+$/i|',
+            'employee_hobbies' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i',
             'image' => 'required',
             'permanent_address' => 'required|regex:/[a-zA-Z]/|regex:/^[A-Za-z0-9 ,.-]+$/i|max:200',
 
 
         ]);
+
+
+
+
+
+        $existing_pan = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->value('pan');
+
+
+
+        if ($request->input('pan') != $existing_pan) {
+            $request->validate([
+                'pan' => 'required|regex: /[A-Z]{5}[0-9]{4}[A-Z]{1}$/|size:10|unique:employee_personal_details,pan',
+            ]);
+
+            Employee_Personal_Detail::where('employee_id', $employee_id)->update([
+                'pan' => $request->input('pan')
+            ]);
+        }
+
+
+
+
+
+        $existing_pan = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->value('pan');
+
+
+
+        if ($request->input('pan') != $existing_pan) {
+            $request->validate([
+                'pan' => 'required|regex: /[A-Z]{5}[0-9]{4}[A-Z]{1}$/|size:10|unique:employee_personal_details,pan',
+            ]);
+
+            Employee_Personal_Detail::where('employee_id', $employee_id)->update([
+                'pan' => $request->input('pan')
+            ]);
+        }
+
+
+
+        $existing_aadhar = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->value('aadhar');
+
+
+
+        if ($request->input('aadhar') != $existing_aadhar) {
+            $request->validate([
+                'aadhar' => 'required|digits:12|unique:employee_personal_details,aadhar',
+            ]);
+
+            Employee_Personal_Detail::where('employee_id', $employee_id)->update([
+                'aadhar' => $request->input('aadhar')
+            ]);
+        }
+
+
+
+
 
 
 
@@ -204,32 +260,31 @@ class Employee_portalController extends Controller
             ]);
 
             Employee_Personal_Detail::where('employee_id', $employee_id)->update([
-                'phone' => $request->input('phone')]);
+                'phone' => $request->input('phone')
+            ]);
 
 
-         DB::table('employee_registration')->where('phone_number','=',$existing_phone)->update(['phone_number'=>$request->input('phone')]);
-
-
+            DB::table('employee_registration')->where('phone_number', '=', $existing_phone)->update(['phone_number' => $request->input('phone')]);
         }
 
 
-        $emergency_phone_valid=$request->validate([
-        'emergency_phone_number' => 'required|digits:10|different:phone']);
+        $emergency_phone_valid = $request->validate([
+            'emergency_phone_number' => 'required|digits:10|different:phone'
+        ]);
 
 
 
-        if($emergency_phone_valid)
-        {
+        if ($emergency_phone_valid) {
             Employee_Personal_Detail::where('employee_id', $employee_id)->update([
-                'emergency_phone_number' => $request->input('emergency_phone_number')]);
-
+                'emergency_phone_number' => $request->input('emergency_phone_number')
+            ]);
         }
 
 
         $existing_email = Employee_Personal_Detail::where('employee_id', '=', $employee_id)->value('employee_email');
 
 
-        if ($request->input('employee_email')!= $existing_email) {
+        if ($request->input('employee_email') != $existing_email) {
 
             $request->validate([
                 'employee_email' => 'required|email|unique:users,email|unique:employee_personal_details,employee_email',
@@ -239,22 +294,21 @@ class Employee_portalController extends Controller
             $updated_employee_email = $request->input('employee_email');
 
             DB::table('users')
-            ->where('email', $existing_email)
-            ->update([
-                'email' => $updated_employee_email
+                ->where('email', $existing_email)
+                ->update([
+                    'email' => $updated_employee_email
 
-            ]);
+                ]);
 
 
             Employee_Personal_Detail::where('employee_id', $employee_id)->update([
-                'employee_email' => $request->input('employee_email')]);
+                'employee_email' => $request->input('employee_email')
+            ]);
 
 
 
 
-                $request->session()->put('employee_email', $updated_employee_email);
-
-
+            $request->session()->put('employee_email', $updated_employee_email);
         }
 
 
@@ -264,7 +318,7 @@ class Employee_portalController extends Controller
 
 
 
-         Employee_Personal_Detail::where('employee_id', $employee_id)->update($personal_details);
+        Employee_Personal_Detail::where('employee_id', $employee_id)->update($personal_details);
 
 
 
@@ -317,20 +371,17 @@ class Employee_portalController extends Controller
 
 
 
-        //Logout
-        public function employee_portal_logout(Request $request)
-        {
+    //Logout
+    public function employee_portal_logout(Request $request)
+    {
 
-            //deleting all session values
+        //deleting all session values
 
-            $request->session()->flush();
+        $request->session()->flush();
 
-            //REDIRECT TO LOGIN PAGE
-            return redirect()->route('employee_login');
-                    //Also there is an auto logout added if the user is inactive for more than 5 mins. This is done using  meta refresh method
+        //REDIRECT TO LOGIN PAGE
+        return redirect()->route('employee_login');
+        //Also there is an auto logout added if the user is inactive for more than 5 mins. This is done using  meta refresh method
 
-        }
     }
-
-
-
+}

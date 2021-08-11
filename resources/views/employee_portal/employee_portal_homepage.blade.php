@@ -471,6 +471,16 @@
      value="{{ $pd->division }}" readonly>
   </td>
  </tr>
+ <tr>
+    <td>
+    </td>
+    <td colspan="3">
+     <label >Skills: </label>
+    <input type="text" value="{{ $pd->skills }}" placeholder="Skills"
+    readonly>
+    </td>
+ </tr>
+
 
 
    </table>
@@ -522,19 +532,63 @@
            <input  type="date"  readonly value="{{ $per->dob }}">
          </td>
           </tr>
-        <tr>
+
+
+          <tr>
+            <td>
+            </td>
+            <td style="width: 150px;">
+             <label >Aadhar Number: </label>
+
+
+             <input  style="width: 150px;" type="text" placeholder="Aadhar number" readonly
+              value="{{ $per->aadhar }}" >
+           </td>
+           <td style="width: 150px;">
+
+             <label >PAN Number: </label>
+             <input  style="width: 150px;" type="text" placeholder="PAN Number"
+             readonly value="{{ $per->pan }}" >
+           </td>
+           <td>
+             <label>Blood Type:</label>
+             <input  type="text"  placeholder="Blood Type"readonly value="{{ $per->employee_bloodgroup }}">
+           </td>
+            </tr>
+
+
+
+
+
+
+
+          <tr>
+
+
+
+
+
+
           <td>
           </td>
-          <td colspan="2">
+          <td>
            <label >Email: </label>
           <input type="email" placeholder="Email" readonly
            value={{ session('employee_email') }} >
           </td>
 
          <td>
-           <label >Phone Number: </label>
-           <input type="text" placeholder="Phone Number"  value="{{ $per->phone }}" readonly >
+           <label >Contact Number: </label>
+           <input type="text" placeholder="Contact Number"  value="{{ $per->phone }}" readonly >
           </td>
+
+          <td>
+            <label >Emergency Contact Number: </label>
+            <input type="text" placeholder="Emergency Contact Number"  value="{{ $per->emergency_phone_number }}" readonly >
+           </td>
+
+
+
    <td>
    </tr>
    <tr>
@@ -560,17 +614,44 @@
 
    <tr>
      <td></td>
-     <td colspan="2">
-         <label >Address: </label>
-         <input type="text" placeholder="Address" readonly  value="{{ $per->permanent_address }}" >
+     <td colspan="3">
+         <label >Permanent Address: </label>
+         <input type="text" placeholder="Permanent Address" readonly  value="{{ $per->permanent_address }}" >
         </td>
-        <td colspan="2">
+
+   </tr>
+
+   <tr>
+        <td></td>
+        <td colspan="3">
+
+            <label >Current Address: </label>
+            <input type="text" placeholder="Current Address" readonly  value="{{ $per->current_address }}" >
+           </td>
+   </tr>
+   <tr>
+       <td></td>
+       <td colspan="3">
+
           <label> Educational Details:</label>
           <input type="text" placeholder="Educational Details" readonly
            value="{{ $per->education }}"  >
          </td>
 
    </tr>
+
+
+   <tr>
+    <td></td>
+    <td colspan="3">
+
+       <label> Hobbies:</label>
+       <input type="text" placeholder="Hobbies" readonly
+        value="{{ $per->employee_hobbies }}"  >
+      </td>
+
+</tr>
+
 
 
       </table>
